@@ -1,0 +1,62 @@
+---
+author: shellbye
+comments: true
+date: 2013-09-22 09:29:52+00:00
+layout: post
+slug: git-proxy
+title: Git 代理设置 proxy
+wordpress_id: 672
+categories:
+- 技术世界
+tags:
+- git
+- proxy
+- 代理
+---
+
+当然，这里的代理肯定不是为了翻墙。为了省钱，我在宿舍里上网的时候使用的是实验室的电脑的代理，之给浏览器和QQ设置了代理，最近做的项目要用到Git，为了能在寝室办公，所以Google了一下Git代理（proxy）的设置方法，来来回回切换之前还是一直没有搞懂，今天仔细又整理了一下，几个命令如下：
+
+设置代理（假设代理服务器地址为112.112.112.112，端口号为7070）：
+
+
+    
+    $ git config --global http.proxy %12.12.12.12:80%
+
+
+或
+    
+    $ git config --global http.proxy 12.12.12.12:80
+
+
+
+这个时候可以用以下的命令查看git的设置：
+
+
+    
+    $ git config --list
+
+
+
+显示的内容中会有这样一行：
+
+
+    
+    http.proxy=%112.112.112.112:7070%
+
+
+
+当不再需要代理的时候，使用如下命令可以取消Git的代理设置：
+
+
+    
+    $ git config --global --unset http.proxy
+
+
+(注：有时候不知为何，这句无法取消，那就试试这句：
+
+    
+    git config --system (or --global or --local) --unset http.proxy
+
+
+)
+然后再使用查看设置的命令会发现代理那行消失了！
