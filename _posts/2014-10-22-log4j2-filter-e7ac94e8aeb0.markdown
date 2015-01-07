@@ -16,70 +16,70 @@ tags:
 
 log4j2.xml文件：
 
+{% highlight YAML %}
+
+
     
-    
-    <configuration status="error">
-        <appenders>
-            <console name="Console" target="SYSTEM_OUT">
-                <patternlayout>
-                    <pattern>%d %p %logger{36} %msg%n</pattern>
-                </patternlayout>
-            </console>
+        
             
-            <file name="File" filename="../webapps/your_project.log">
-                
-                
-                
-                
-                
-                
-                <patternlayout>
-                    <pattern>%date %p %logger{36} %line %method %msg%n</pattern>
-                </patternlayout>
-            </file>
-        </appenders>
-        <loggers>
-            <logger name="admin" level="info">
-                <appenderref ref="File"></appenderref>
-            </logger>
-            <root level="error">
-                <appenderref ref="Console"></appenderref>
-            </root>
-        </loggers>
-    </configuration>
+                %d %p %logger{36} %msg%n
+            
+        
+        
+        
+            
+            
+            
+            
+            
+            
+            
+                %date %p %logger{36} %line %method %msg%n
+            
+        
+    
+    
+        
+            
+        
+        
+            
+        
     
 
+
+{% endhighlight %}
 
 
 注释中的：
 第一个filter，ThresholdFilter比较容易理解，即level大于等于ERROR才会记录，比如下面的代码，只有222会记录在日志中：
 
-    
-    Logger logger = LogManager.getLogger("admin");
-    loggor.debug("111");
-    logger.error("222");
-    logger.info("333");
-
+{% highlight java %}
+Logger logger = LogManager.getLogger("admin");
+loggor.debug("111");
+logger.error("222");
+logger.info("333");
+{% endhighlight %}
 
 
 第二个filter，RegexFilter也比较容易理解，就是日志内容匹配了正则才会记录，比如如下代码，只有333 test 333会被记录：
 
-    
-    Logger logger = LogManager.getLogger("admin");
-    loggor.debug("111444");
-    logger.error("222333");
-    logger.info("333 test 333");
-
+{% highlight java %}
+Logger logger = LogManager.getLogger("admin");
+loggor.debug("111444");
+logger.error("222333");
+logger.info("333 test 333");
+{% endhighlight %}
 
 
 第三个filter， MarkerFilter比较不容易理解，因为Marker是log4j2里面的一个类型，咋看之下确实摸不着头脑，看过Maker的[文档](http://logging.apache.org/log4j/2.0/manual/markers.html)之后就懂了, 下面的代码，只有有SQL这个Maker的日志才会被记录：
 
-    
-    Logger logger = LogManager.getLogger("admin");
-    Marker SQL_MARKER = MarkerManager.getMarker("SQL");
-    logger.info("222222222222");
-            logger.fatal(SQL_MARKER, "333333333");
-
+{% highlight java %}
+Logger logger = LogManager.getLogger("admin");
+Marker SQL_MARKER = MarkerManager.getMarker("SQL");
+logger.info("222222222222");
+        logger.fatal(SQL_MARKER, "333333333");
+{% endhighlight %}
 
 
 其余filter可以参考[官方文档](http://logging.apache.org/log4j/2.0/manual/filters.html)。

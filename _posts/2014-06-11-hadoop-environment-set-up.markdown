@@ -37,9 +37,9 @@ tags:
 
 下载命令：
 
-    
-    wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz
-
+{% highlight YAML %}
+wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz
+{% endhighlight %}
 
 下载成功如图所示：
 
@@ -52,9 +52,9 @@ tags:
 
 
 
-    
-     tar -xzvf hadoop-2.2.0.tar.gz
-
+{% highlight YAML %}
+ tar -xzvf hadoop-2.2.0.tar.gz
+{% endhighlight %}
 
 
 
@@ -83,9 +83,9 @@ tags:
 
 
 
-    
-    sudo apt-get install openjdk-7-jdk
-
+{% highlight YAML %}
+sudo apt-get install openjdk-7-jdk
+{% endhighlight %}
 
 
 
@@ -93,24 +93,24 @@ tags:
 
 
 
-    
-    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac 1
+{% highlight YAML %}
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac 1
+{% endhighlight %}
 
 
-
-    
-    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-7-openjdk-i386/bin/java 1
-
-
-
-    
-    sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac
+{% highlight YAML %}
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-7-openjdk-i386/bin/java 1
+{% endhighlight %}
 
 
+{% highlight YAML %}
+sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac
+{% endhighlight %}
 
-    
-    sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-i386/bin/java
 
+{% highlight YAML %}
+sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-i386/bin/java
+{% endhighlight %}
 
 
 
@@ -118,9 +118,9 @@ tags:
 
 
 
-    
-    java -version
-
+{% highlight YAML %}
+java -version
+{% endhighlight %}
 
 
 
@@ -138,9 +138,9 @@ tags:
 
 
 
-    
-    sudo apt-get install openssh-server
-
+{% highlight YAML %}
+sudo apt-get install openssh-server
+{% endhighlight %}
 
 
 
@@ -159,19 +159,19 @@ tags:
 
 
 
-    
-    sudo addgroup hadoop
+{% highlight YAML %}
+sudo addgroup hadoop
+{% endhighlight %}
 
 
+{% highlight YAML %}
+sudo adduser --ingroup hadoop hduser
+{% endhighlight %}
 
-    
-    sudo adduser --ingroup hadoop hduser
 
-
-
-    
-    sudo adduser hduser sudo
-
+{% highlight YAML %}
+sudo adduser hduser sudo
+{% endhighlight %}
 
 
 
@@ -185,19 +185,19 @@ tags:
 
 
 
-    
-    mv hadoop-2.2.0 /usr/local/
+{% highlight YAML %}
+mv hadoop-2.2.0 /usr/local/
+{% endhighlight %}
 
 
+{% highlight YAML %}
+cd /usr/local/
+{% endhighlight %}
 
-    
-    cd /usr/local/
 
-
-
-    
-    mv hadoop-2.2.0 hadoop
-
+{% highlight YAML %}
+mv hadoop-2.2.0 hadoop
+{% endhighlight %}
 
 
 
@@ -205,9 +205,9 @@ tags:
 
 
 
-    
-    sudo chown -R hduser:hadoop hadoop
-
+{% highlight YAML %}
+sudo chown -R hduser:hadoop hadoop
+{% endhighlight %}
 
 
 
@@ -280,9 +280,9 @@ export JAVA_HOME=/usr/lib/jvm/jdk/
 
 
 
-    
-    hadoop version
-
+{% highlight YAML %}
+hadoop version
+{% endhighlight %}
 
 
 
@@ -290,9 +290,9 @@ export JAVA_HOME=/usr/lib/jvm/jdk/
 
 
 
-    
-    /usr/local/hadoop/bin/hadoop version
-
+{% highlight YAML %}
+/usr/local/hadoop/bin/hadoop version
+{% endhighlight %}
 
 
 
@@ -300,9 +300,9 @@ export JAVA_HOME=/usr/lib/jvm/jdk/
 
 
 
-    
-    export PATH=$PATH:/usr/local/hadoop/bin/
-
+{% highlight YAML %}
+export PATH=$PATH:/usr/local/hadoop/bin/
+{% endhighlight %}
 
 
 
@@ -511,9 +511,9 @@ mydata/hdfs/datanode
 
 
 
-    
-    hdfs namenode -format
-
+{% highlight YAML %}
+hdfs namenode -format
+{% endhighlight %}
 
 
 
@@ -547,9 +547,9 @@ mydata/hdfs/datanode
 
 
 
-    
-    ./start-dfs.sh
-
+{% highlight YAML %}
+./start-dfs.sh
+{% endhighlight %}
 
 
 
@@ -567,9 +567,9 @@ mydata/hdfs/datanode
 
 
 
-    
-    ./start-yarn.sh
-
+{% highlight YAML %}
+./start-yarn.sh
+{% endhighlight %}
 
 
 
@@ -613,9 +613,9 @@ HDFS和YARN的关系可以简要的由下图概况：
 
 
 
-    
-    hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 5
-
+{% highlight YAML %}
+hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 5
+{% endhighlight %}
 
 
 

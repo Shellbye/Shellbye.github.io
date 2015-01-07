@@ -16,12 +16,12 @@ tags:
 
 大部分时间的浪费都是因为对Graphics中的方法的fillRect参数理解错误，在java文档中，是这样写的
 
-    
-    public abstract void fillRect(int x,
-                int y,
-                int width,
-                int height)
-
+{% highlight java %}
+public abstract void fillRect(int x,
+            int y,
+            int width,
+            int height)
+{% endhighlight %}
 
 于是我以为height就是要填充长方形区域的右下角的顶点位置，于是出来的图整个下半部分都是几乎全黑。后来自己用imageHelper.darkerImageBy()才发现原来用错了，在仔细读官方文档，看到是这样解释参数的：
 
@@ -50,81 +50,83 @@ tags:
 下面是全部的实现代码
 
 
-    
-    
-    
-    import javax.imageio.ImageIO;
-    import java.awt.*;
-    import java.awt.image.BufferedImage;
-    import java.io.File;
-    import java.io.IOException;
-    
-    /**
-     * User: shellbye.com@gmail.com
-     */
-    public class ImageHelper {
-        BufferedImage img;
-        Graphics graphics;
-        String orginalFileName;
-        String orginalFileExt;
-        String fileSaveToTemp;
-        float percentage = 0.5f;
-    
-        public ImageHelper() {
-        }
-    
-        public ImageHelper(File inputImage) throws IOException {
-            init(inputImage);
-        }
-    
-        public void init(File image) throws IOException {
-            img = ImageIO.read(image);
-            orginalFileName = image.getName();
-            String[] temp = orginalFileName.split("\\.");
-            orginalFileExt = temp[temp.length - 1];
-            graphics = img.createGraphics();
-        }
-    
-        public void getImage(String imageDir) throws IOException {
-            File inputImage = new File(imageDir);
-            init(inputImage);
-        }
-    
-        public void darkerImageBy(float percentage) throws IOException {
-            percentage = 1 - percentage;
-            int brightness = (int) (256 - 256 * percentage);
-            graphics.setColor(new Color(0, 0, 0, brightness));
-            graphics.fillRect(0, 0, img.getWidth(), img.getHeight());
-        }
-    
-        public void darkerImage2By(float percentage) throws IOException {
-            percentage = 1 - percentage;
-            int brightness = (int) (256 - 256 * percentage);
-    
-            // 图像切割粒度，每fineness行划分为一个小块
-            int fineness = 2;
-            int degree = img.getHeight() / fineness;
-            int lastHeight = 0;
-            for (int i = 0; i < degree; i++) {
-                int tempBrightness = brightness * i / degree;
-                int tempHeight = img.getHeight() * i / degree;
-                graphics.setColor(new Color(0, 0, 0, tempBrightness));
-                graphics.fillRect(0, lastHeight, img.getWidth(), img.getHeight() / degree);
-                lastHeight = tempHeight + 1;
-            }
-        }
-    
-        public void saveImageTo(String saveToDir) throws IOException {
-            File file = new File(saveToDir + System.currentTimeMillis() + "." + orginalFileExt);
-            ImageIO.write(img, orginalFileExt, file);
-        }
-    
-        public static void main(String[] args) throws IOException {
-            ImageHelper imageHelper = new ImageHelper();
-            imageHelper.getImage("C://Users/Administrator/Desktop/1.png");
-    //        imageHelper.darkerImageBy(0.50f);
-            imageHelper.darkerImage2By(0.80f);
-            imageHelper.saveImageTo("C://Users/Administrator/Desktop/");
-    
+{% highlight java %}
+
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * User: shellbye.com@gmail.com
+ */
+public class ImageHelper {
+    BufferedImage img;
+    Graphics graphics;
+    String orginalFileName;
+    String orginalFileExt;
+    String fileSaveToTemp;
+    float percentage = 0.5f;
+
+    public ImageHelper() {
+    }
+
+    public ImageHelper(File inputImage) throws IOException {
+        init(inputImage);
+    }
+
+    public void init(File image) throws IOException {
+        img = ImageIO.read(image);
+        orginalFileName = image.getName();
+        String[] temp = orginalFileName.split("\\.");
+        orginalFileExt = temp[temp.length - 1];
+        graphics = img.createGraphics();
+    }
+
+    public void getImage(String imageDir) throws IOException {
+        File inputImage = new File(imageDir);
+        init(inputImage);
+    }
+
+    public void darkerImageBy(float percentage) throws IOException {
+        percentage = 1 - percentage;
+        int brightness = (int) (256 - 256 * percentage);
+        graphics.setColor(new Color(0, 0, 0, brightness));
+        graphics.fillRect(0, 0, img.getWidth(), img.getHeight());
+    }
+
+    public void darkerImage2By(float percentage) throws IOException {
+        percentage = 1 - percentage;
+        int brightness = (int) (256 - 256 * percentage);
+
+        // 图像切割粒度，每fineness行划分为一个小块
+        int fineness = 2;
+        int degree = img.getHeight() / fineness;
+        int lastHeight = 0;
+        for (int i = 0; i < degree; i++) {
+            int tempBrightness = brightness * i / degree;
+            int tempHeight = img.getHeight() * i / degree;
+            graphics.setColor(new Color(0, 0, 0, tempBrightness));
+            graphics.fillRect(0, lastHeight, img.getWidth(), img.getHeight() / degree);
+            lastHeight = tempHeight + 1;
         }
     }
+
+    public void saveImageTo(String saveToDir) throws IOException {
+        File file = new File(saveToDir + System.currentTimeMillis() + "." + orginalFileExt);
+        ImageIO.write(img, orginalFileExt, file);
+    }
+
+    public static void main(String[] args) throws IOException {
+        ImageHelper imageHelper = new ImageHelper();
+        imageHelper.getImage("C://Users/Administrator/Desktop/1.png");
+//        imageHelper.darkerImageBy(0.50f);
+        imageHelper.darkerImage2By(0.80f);
+        imageHelper.saveImageTo("C://Users/Administrator/Desktop/");
+
+    }
+}
+{% endhighlight %}
+

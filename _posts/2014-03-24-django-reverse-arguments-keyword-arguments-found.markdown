@@ -17,56 +17,64 @@ tags:
 
 在我的ROOT_URLCONF中，有如下一行配置：
 
-    
-    url(r'^django_databrowse/(.*)', django_databrowse.site.root, name="check_data"),
-    )
-
+{% highlight python %}
+url(r'^django_databrowse/(.*)', django_databrowse.site.root, name="check_data"),
+)
+{% endhighlight %}
 
 然后在前端的页面中，有如下的类似引用
 
-    
-    {% raw <a href="{% url 'check_data' %}">查看数据</a> %}
-
+{% highlight YAML %}
+{% raw %}
+[查看数据]({% url 'check_data' %})
+{% endraw %}
+{% endhighlight %}
 
 这时报错如下：
 
-    
-    Reverse for 'check_data' with arguments '()' and keyword arguments '{}' not found.
-
+{% highlight YAML %}
+Reverse for 'check_data' with arguments '()' and keyword arguments '{}' not found.
+{% endhighlight %}
 
 也就是服务器没有找到check_data对应的内容，在stackoverflow上找到[这样一个](http://stackoverflow.com/questions/9649587/reverse-for-with-arguments-and-keyword-arguments-not-found)解决方案，
 
 于是将前端修改为这样：
 
-    
-    <a href="{% url check_data %}">查看数据</a>
-
+{% highlight YAML %}
+{% raw %}
+[查看数据]({% url check_data %})
+{% endraw %}
+{% endhighlight %}
 
 报错变成了
 
-    
-    'url' requires a non-empty first argument. The syntax changed in Django 1.5, see the docs.
-
+{% highlight YAML %}
+'url' requires a non-empty first argument. The syntax changed in Django 1.5, see the docs.
+{% endhighlight %}
 
 果然Django的1.5版本中有变化，但是查看了一下文档，也依然没有找到解决方案。继续在stackoverflow上找，发现了[这样一个](http://stackoverflow.com/questions/14882491/django-release-1-5-url-requires-a-non-empty-first-argument-the-syntax-change)解决方案，但是他的解决办法太复杂，就连作者自己都说这样的方法很危险，容易破坏一些设计，但是他回答中的这两句提醒了我：
 
-    
-    {% raw {% url "something.else" foo bar %} %}
-    )
-
+{% highlight python %}
+{% raw %}
+{% url "something.else" foo bar %}
+)
+{% endraw %}
+{% endhighlight %}
 
 这里的url构造是需要传入参数的，因为后台的
 
-    
-    url(r'^django_databrowse/(.*)', django_databrowse.site.root, name="check_data"),
-    )
-
+{% highlight python %}
+url(r'^django_databrowse/(.*)', django_databrowse.site.root, name="check_data"),
+)
+{% endhighlight %}
 
 中，明显不是一个url的结尾，它后面还需要东西，即是从url上看它没有参数也能访问（根目录），但是传参还是必要的，至少要是一个空字符串，于是我把前端改成了：
 
-    
-    {% raw <a href="{% url 'check_data' ''%}">查看数据</a> %}
-
+{% highlight YAML %}
+{% raw %}
+[查看数据]({% url 'check_data' ''%})
+{% endraw %}
+{% endhighlight %}
 
 即在后面添加了空串作为参数传入，于是一切OK.
 

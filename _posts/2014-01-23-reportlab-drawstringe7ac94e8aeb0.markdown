@@ -17,28 +17,28 @@ tags:
 
 
 
-    
-    def hello_pdf(request):
-        # Create the HttpResponse object with the appropriate PDF headers.
-        response = HttpResponse(mimetype='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename=hello4.pdf'
-    
-        # Create the PDF object, using the response object as its "file."
-        p = canvas.Canvas(response)
-    
-        # Draw things on the PDF. Here's where the PDF generation happens.
-        # See the ReportLab documentation for the full list of functionality.
-        p.drawString(550, 800, "(550, 800).")
-        p.drawString(300, 400, "(300, 400).")
-        p.drawString(100, 100, "(100,100).")
-        p.drawString(100, 50, "(100,50).")
-        p.drawString(0, 0, "(0,0).")
-    
-        # Close the PDF object cleanly, and we're done.
-        p.showPage()
-        p.save()
-        return response
+{% highlight python %}
+def hello_pdf(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(mimetype='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=hello4.pdf'
 
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(550, 800, "(550, 800).")
+    p.drawString(300, 400, "(300, 400).")
+    p.drawString(100, 100, "(100,100).")
+    p.drawString(100, 50, "(100,50).")
+    p.drawString(0, 0, "(0,0).")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
+{% endhighlight %}
 
 经过这样一些简单的设置，发现drawString 是以当前页面的左下角为原点，页面为第一象限绘制图形，并且绘制的图形大小大约为x = 600, y = 800左右，并且单位可选。
 

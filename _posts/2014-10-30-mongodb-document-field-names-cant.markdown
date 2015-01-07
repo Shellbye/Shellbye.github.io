@@ -16,21 +16,21 @@ tags:
 在用JAVA往MongoDB里面插入数据时，当以域名作为field的时，报如下错误：
 
 
-    
-    java.lang.IllegalArgumentException: Document field names can't have a . in them
-
+{% highlight YAML %}
+java.lang.IllegalArgumentException: Document field names can't have a . in them
+{% endhighlight %}
 
 
 查找了一些资料（见文末）之后，发现解决办法如下：
 
 
-    
-    if (tag.contains(".")) {
-        tagsInfo.put(tag.replace(".", "\\u002e"), "1");
-    } else {
-        tagsInfo.put(tag, "1");
-    }
-
+{% highlight java %}
+if (tag.contains(".")) {
+    tagsInfo.put(tag.replace(".", "\\u002e"), "1");
+} else {
+    tagsInfo.put(tag, "1");
+}
+{% endhighlight %}
 
 
 参考资料：

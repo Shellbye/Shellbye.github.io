@@ -12,21 +12,24 @@ tags:
 - java
 ---
 
+
+{% highlight java %}
 import org.apache.http.HttpResponse;
-    import org.apache.http.client.HttpClient;
-    import org.apache.http.client.methods.HttpGet;
-    import org.apache.http.impl.client.BasicResponseHandler;
-    import org.apache.http.impl.client.HttpClients;
-    
-    public class Main {
-    
-        public static void main(String[] args) throws Exception {
-            HttpClient httpclient = HttpClients.createDefault();
-            String location = "http://shellbye.com";
-            HttpGet httpget = new HttpGet(location);
-            HttpResponse getResponse2 = httpclient.execute(httpget);
-            String responseString = new BasicResponseHandler()
-                    .handleResponse(getResponse2);
-            System.out.println(responseString);
-        }
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.HttpClients;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        HttpClient httpclient = HttpClients.createDefault();
+        String location = "http://shellbye.com";
+        HttpGet httpget = new HttpGet(location);
+        HttpResponse getResponse2 = httpclient.execute(httpget);
+        String responseString = new BasicResponseHandler()
+                .handleResponse(getResponse2);
+        System.out.println(responseString);
     }
+}
+{% endhighlight %}

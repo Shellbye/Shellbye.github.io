@@ -12,22 +12,26 @@ tags:
 - java
 ---
 
+
+{% highlight java %}
 import java.io.BufferedReader;
-    import java.io.InputStreamReader;
-    
-    public class Main {
-    
-        public static void main(String[] args) throws Exception {
-            String line;
-            String cmd = "java -jar xxxx.1.0.jar parameter1 parameter2";
-            Process proc = Runtime.getRuntime().exec(cmd);
-            BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-            if ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
-            if ((line = br2.readLine()) != null) {
-                System.out.println(line);
-            }
+import java.io.InputStreamReader;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        String line;
+        String cmd = "java -jar xxxx.1.0.jar parameter1 parameter2";
+        Process proc = Runtime.getRuntime().exec(cmd);
+        BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+        if ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        BufferedReader br2 = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+        if ((line = br2.readLine()) != null) {
+            System.out.println(line);
         }
     }
+}
+{% endhighlight %}
+

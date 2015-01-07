@@ -15,66 +15,66 @@ tags:
 新建可执行jar文件
 1.Main.java
 
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
-            String a = "aaaaaaa";
-            System.out.println(a);
-        }
+{% highlight java %}
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String a = "aaaaaaa";
+        System.out.println(a);
     }
-
+}
+{% endhighlight %}
 
 
 2.manifest.txt
 
-    
-    
-    Main-Class: Main
-    
+{% highlight YAML %}
 
+Main-Class: Main
+
+{% endhighlight %}
 
 注意，manifest.txt最后要以空行结尾，且Main-Class:之后要有一个空格，不然就会报错如下：
 
-    
-    java.io.IOException: invalid header field
-
+{% highlight YAML %}
+java.io.IOException: invalid header field
+{% endhighlight %}
 
 
 3.编译生成Main.class文件
 
-    
-    javac Main.java
-
+{% highlight YAML %}
+javac Main.java
+{% endhighlight %}
 
 生成Main.class文件，目录此时如下：
 
-    
-    Main.java
-    Main.class
-    manifest.txt
-
+{% highlight YAML %}
+Main.java
+Main.class
+manifest.txt
+{% endhighlight %}
 
 
 4.生成Main.jar文件
 
-    
-    jar -cvfm Main.jar manifest.txt Main.class
-
+{% highlight YAML %}
+jar -cvfm Main.jar manifest.txt Main.class
+{% endhighlight %}
 
 
 5.修改Main.jar文件执行权限
 
-    
-    sudo chmod u+x Main.jar
-
+{% highlight YAML %}
+sudo chmod u+x Main.jar
+{% endhighlight %}
 
 
 6.执行jar文件
 
-    
-    ./Main.jar
-    # output: aaaaaaa
-
+{% highlight YAML %}
+./Main.jar
+# output: aaaaaaa
+{% endhighlight %}
 
 参考：
 [0].[http://www.skylit.com/javamethods/faqs/javaindos.html](http://www.skylit.com/javamethods/faqs/javaindos.html)

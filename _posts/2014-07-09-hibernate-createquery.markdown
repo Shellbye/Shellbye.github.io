@@ -16,9 +16,9 @@ categories:
 
 我是在试错了很多次之后才知道原来session.createQuery()里面的HQL语句里不是使用表名，而是使用类名的。比如你的MySQL数据里有表叫social_friend，它对应的类是SocialFriend，那么，你得这样用：
 
-    
-    session.createQuery("from SocialAccount where userId= :id ").setParameter("id", id);
-
+{% highlight java %}
+session.createQuery("from SocialAccount where userId= :id ").setParameter("id", id);
+{% endhighlight %}
 
 不得不说这个东西还是折腾了我很久了，因为我一直以为是其他地方的错（事实证明其他地方也也确实有错，详见后文）。
 
@@ -26,16 +26,16 @@ categories:
 
 我还没有找到具体的证据，不过下面的错误信息多少已经说明了问题：
 
-    
-    org.hibernate.InstantiationException: No default constructor for entity: com.shellbye.XXXX.SocialAccount
-
+{% highlight YAML %}
+org.hibernate.InstantiationException: No default constructor for entity: com.shellbye.XXXX.SocialAccount
+{% endhighlight %}
 
 是的，createQuery()看起来是需要一个默认的空构造方法的，于是在SocialAccount.java里面添加如下构造方法：
 
-    
-    	
-    public SocialAccount() {}
-
+{% highlight java %}
+	
+public SocialAccount() {}
+{% endhighlight %}
 
 于是问题就这样解决了。
 
@@ -43,9 +43,9 @@ categories:
 
 更新：session.createSQLQuery()也可以取出model，只是需要加一个参数如下：
 
-    
-    session.createSQLQuery(
-    "select * from social_account").addEntity(SocialAccount.class);
-
+{% highlight java %}
+session.createSQLQuery(
+"select * from social_account").addEntity(SocialAccount.class);
+{% endhighlight %}
 
 这样就相当于告诉了Hibernate把取回来的东西封装一下。

@@ -15,49 +15,49 @@ tags:
 
 首先是pom.xml文件添加如下依赖(其他包管理方式参考[这里](http://logging.apache.org/log4j/2.x/maven-artifacts.html))：
 
-    
-    
-    <dependency>
-        <groupid>org.apache.logging.log4j</groupid>
-        <artifactid>log4j-api</artifactid>
-        <version>2.0.2</version>
-    </dependency>
-    <dependency>
-        <groupid>org.apache.logging.log4j</groupid>
-        <artifactid>log4j-core</artifactid>
-        <version>2.0.2</version>
-    </dependency>
+{% highlight YAML %}
 
+
+    org.apache.logging.log4j
+    log4j-api
+    2.0.2
+
+
+    org.apache.logging.log4j
+    log4j-core
+    2.0.2
+
+{% endhighlight %}
 
 
 然后是log4j2的配置文件log4j2.xml(其他文件格式参考[这里](http://logging.apache.org/log4j/2.x/manual/configuration.html#AutomaticConfiguration))如下：
 
-    
-    
-    <configuration status="error">
-        <appenders>
-            <console name="Console" target="SYSTEM_OUT">
-                <patternlayout>
-                    <pattern>%d %p %logger{36} %msg%n</pattern>
-                </patternlayout>
-            </console>
-            
-            <file name="File" filename="../webapps/your_project.log">
-                <patternlayout>
-                    <pattern>%date %p %logger{36} %line %method %msg%n</pattern>
-                </patternlayout>
-            </file>
-        </appenders>
-        <loggers>
-            <logger name="admin" level="info">
-                <appenderref ref="File"></appenderref>
-            </logger>
-            <root level="error">
-                <appenderref ref="Console"></appenderref>
-            </root>
-        </loggers>
-    </configuration>
+{% highlight YAML %}
 
+
+    
+        
+            
+                %d %p %logger{36} %msg%n
+            
+        
+        
+        
+            
+                %date %p %logger{36} %line %method %msg%n
+            
+        
+    
+    
+        
+            
+        
+        
+            
+        
+    
+
+{% endhighlight %}
 
 
 这里需要注意
@@ -67,12 +67,12 @@ tags:
 
 接着就可以在controller或者其他需要日志功能的地方使用了，如下：
 
-    
-    
-    Logger logger = LogManager.getLogger("admin");
-    logger.error("this is a test!");
-    
+{% highlight java %}
 
+Logger logger = LogManager.getLogger("admin");
+logger.error("this is a test!");
+
+{% endhighlight %}
 
 
 参考文档

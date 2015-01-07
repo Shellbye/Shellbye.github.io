@@ -17,27 +17,27 @@ tags:
 仍然接着之前的工作，这次想要给网站添加静态页面，也就是Django自带的flatpages模块，需要在setting.py的INSTALLED_APPS中，添加如下一行：
 
 
-    
-    
-    'django.contrib.flatpages',
-    
+{% highlight python %}
 
+'django.contrib.flatpages',
+
+{% endhighlight %}
 
 
 注：因为
 
 
-    
-    'django.contrib.flatpages',
-
+{% highlight python %}
+'django.contrib.flatpages',
+{% endhighlight %}
 
 
 依赖于
 
 
-    
-    'django.contrib.sites',
-
+{% highlight python %}
+'django.contrib.sites',
+{% endhighlight %}
 
 
 所以一定要确保后者也要添加在INSTALLED_APPS中，
@@ -45,11 +45,11 @@ tags:
 然后在MIDDLEWARE_CLASSES中添加
 
 
-    
-    
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
-    
+{% highlight python %}
 
+'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+
+{% endhighlight %}
 
 
 最后运行manage.py syncdb新建两张表之后就可以在/admin/中看到效果了：
@@ -62,18 +62,18 @@ tags:
 
 以上操作完成之后，运行应该会出现
 
-    
+    {% highlight YAML %}
     
     TemplateDoesNotExist at /about/contact/
     flatpages/default.html
     
-
-
-
-因为我们还没有添加模板，当然这个就很简单了，只要在templates里面添加flatpages/default.html，基本的模板如下：
-
-
+    {% endhighlight %}
     
+    
+    因为我们还没有添加模板，当然这个就很简单了，只要在templates里面添加flatpages/default.html，基本的模板如下：
+    
+    
+    {% highlight YAML %}
     
     
     <html>
@@ -85,11 +85,11 @@ tags:
     </body>
     </html>
     
-
-
-
-这样就全部OK了。
-
-参考：
-[1] https://docs.djangoproject.com/en/dev/ref/contrib/flatpages/
-[2] http://www.djangobook.com/en/2.0/chapter16.html#flatpages
+    {% endhighlight %}
+    
+    
+    这样就全部OK了。
+    
+    参考：
+    [1] https://docs.djangoproject.com/en/dev/ref/contrib/flatpages/
+    [2] http://www.djangobook.com/en/2.0/chapter16.html#flatpages

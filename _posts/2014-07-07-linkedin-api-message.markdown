@@ -19,91 +19,93 @@ tags:
 
 2.尽信书不如无书 上面提到的第一份文档，里面给出了需要传入参数的一个json格式，如下：
 
-    
+{% highlight YAML %}
+{
+  "recipients": {
+    "values": [
     {
-      "recipients": {
-        "values": [
-        {
-          "person": {
-            "_path": "/people/~",
-           }
-        },
-        {
-          "person": {
-            "_path": "/people/abcdefg",
-           }
-        }]
-      },
-      "subject": "You did it.",
-      "body": "This is a test from wwww.shellbye.com!"
-    }
-
+      "person": {
+        "_path": "/people/~",
+       }
+    },
+    {
+      "person": {
+        "_path": "/people/abcdefg",
+       }
+    }]
+  },
+  "subject": "You did it.",
+  "body": "This is a test from wwww.shellbye.com!"
+}
+{% endhighlight %}
 
 为了防止有什么拼写错误（或者就是比较懒而已），相信大家大多和我一样，会直接从这里copy出来json数据，然后修改，不好意思，这次你完蛋了，因为上面给出的json格式是有错误的，你可以自己在[这个网站](http://www.bejson.com/)上测试，这里json数据的两个"_path"所在行都有错误，都多了结尾的逗号“,”，导致当你把这份json传回去时，linkedin会告诉你bad request，无语。。。 注：经过测试发现"/people/~"存在的意义就是把发给用户abcdefg的私信给发送者本人也发一份，所以我的demo代码里就去掉了那一个person。 以下是剪短的代码：
 
-    
-    import org.scribe.model.OAuthRequest;
-    import org.scribe.model.Response;
-    import org.scribe.model.Verb;
-    
-    public class Main {
-    
-        public static void main(String[] args) {
-            Verb type = Verb.POST;
-            String url = "https://api.linkedin.com/v1/people/~/mailbox";
-            String token = "thisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusually";
-            String params = "{\n" +
-                    "  \"recipients\": {\n" +
-                    "    \"values\": [\n" +
-                    "    {\n" +
-                    "      \"person\": {\n" +
-                    "        \"_path\": \"/people/d3oL9OfED3\"\n" +
-                    "       }\n" +
-                    "    }]\n" +
-                    "  },\n" +
-                    "  \"subject\": \"This is a test.\",\n" +
-                    "  \"body\": \"This is a test from www.shellbye.com!\"\n" +
-                    "}";
-            OAuthRequest request = new OAuthRequest(type, url);
-            request.addQuerystringParameter("oauth2_access_token", token);
-            request.addHeader("Content-Type","application/json");//因为参数的传递方式有xml和json两种，所以这一行的作用是告诉linkedin你传来的是json的数据格式
-            request.addPayload(params);
-            Response response = request.send();
-            int code = response.getCode();
-            System.out.println(code);
-        }
-    }
+{% highlight java %}
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Verb;
 
+public class Main {
+
+    public static void main(String[] args) {
+        Verb type = Verb.POST;
+        String url = "https://api.linkedin.com/v1/people/~/mailbox";
+        String token = "thisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusually";
+        String params = "{\n" +
+                "  \"recipients\": {\n" +
+                "    \"values\": [\n" +
+                "    {\n" +
+                "      \"person\": {\n" +
+                "        \"_path\": \"/people/d3oL9OfED3\"\n" +
+                "       }\n" +
+                "    }]\n" +
+                "  },\n" +
+                "  \"subject\": \"This is a test.\",\n" +
+                "  \"body\": \"This is a test from www.shellbye.com!\"\n" +
+                "}";
+        OAuthRequest request = new OAuthRequest(type, url);
+        request.addQuerystringParameter("oauth2_access_token", token);
+        request.addHeader("Content-Type","application/json");//因为参数的传递方式有xml和json两种，所以这一行的作用是告诉linkedin你传来的是json的数据格式
+        request.addPayload(params);
+        Response response = request.send();
+        int code = response.getCode();
+        System.out.println(code);
+    }
+}
+{% endhighlight %}
 
 maven文件pom.xml
 
+{% highlight YAML %}
+
+ 
+  4.0.0
+  linkedInMailBox
+  war
+  1.0-SNAPSHOT
+  http://maven.apache.org
+
+
+  
+		
+            org.scribe
+            scribe
+            1.3.5
+        
+  
     
+   	    compile
+        test
+        
+            
+                org.apache.maven.plugins
+                maven-war-plugin
+                2.4
+            
+        
     
-     <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-      <modelversion>4.0.0</modelversion>
-      <artifactid>linkedInMailBox</artifactid>
-      <packaging>war</packaging>
-      <version>1.0-SNAPSHOT</version>
-      <url>http://maven.apache.org</url>
-    
-    
-      <dependencies>
-    		<dependency>
-                <groupid>org.scribe</groupid>
-                <artifactid>scribe</artifactid>
-                <version>1.3.5</version>
-            </dependency>
-      </dependencies>
-        <build>
-       	    <defaultgoal>compile</defaultgoal>
-            <finalname>test</finalname>
-            <plugins>
-                <plugin>
-                    <groupid>org.apache.maven.plugins</groupid>
-                    <artifactid>maven-war-plugin</artifactid>
-                    <version>2.4</version>
-                </plugin>
-            </plugins>
-        </build>
-    </project>
-    
+
+
+{% endhighlight %}
+

@@ -13,9 +13,9 @@ categories:
 在linux中，切换svn，使用命令
 
 
-    
-    $ rm -r ~/.subversion/auth/
-
+{% highlight YAML %}
+$ rm -r ~/.subversion/auth/
+{% endhighlight %}
 
 
 下次登录IDE时就会提示输入用户名和密码

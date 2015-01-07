@@ -19,44 +19,44 @@ tags:
 设置代理（假设代理服务器地址为112.112.112.112，端口号为7070）：
 
 
-    
-    $ git config --global http.proxy %12.12.12.12:80%
-
+{% highlight YAML %}
+$ git config --global http.proxy %12.12.12.12:80%
+{% endhighlight %}
 
 或
-    
-    $ git config --global http.proxy 12.12.12.12:80
-
+{% highlight YAML %}
+$ git config --global http.proxy 12.12.12.12:80
+{% endhighlight %}
 
 
 这个时候可以用以下的命令查看git的设置：
 
 
-    
-    $ git config --list
-
+{% highlight YAML %}
+$ git config --list
+{% endhighlight %}
 
 
 显示的内容中会有这样一行：
 
 
-    
-    http.proxy=%112.112.112.112:7070%
-
+{% highlight YAML %}
+http.proxy=%112.112.112.112:7070%
+{% endhighlight %}
 
 
 当不再需要代理的时候，使用如下命令可以取消Git的代理设置：
 
 
-    
-    $ git config --global --unset http.proxy
-
+{% highlight YAML %}
+$ git config --global --unset http.proxy
+{% endhighlight %}
 
 (注：有时候不知为何，这句无法取消，那就试试这句：
 
-    
-    git config --system (or --global or --local) --unset http.proxy
-
+{% highlight YAML %}
+git config --system (or --global or --local) --unset http.proxy
+{% endhighlight %}
 
 )
 然后再使用查看设置的命令会发现代理那行消失了！

@@ -19,10 +19,10 @@ tags:
 1.socket file
 在这篇文档讲到socket文件的[时候](http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html#using-unix-sockets-instead-of-ports)，他只是简单的说在mysite_nginx.conf配置文件里修改下面这行：
 
-    
-    server unix:///path/to/your/mysite/mysite.sock; # for a file socket
-    # server 127.0.0.1:8001; # for a web port socket (we'll use this first)
-
+{% highlight python %}
+server unix:///path/to/your/mysite/mysite.sock; # for a file socket
+# server 127.0.0.1:8001; # for a web port socket (we'll use this first)
+{% endhighlight %}
 
 当我看到这里的时候，我就在想需要往mysite.sock里写什么呢？这个.sock文件需要什么格式吗？花了不少时间，甚至在stackoverflow上[问了一个问题](http://stackoverflow.com/questions/23148082/in-django-nginx-wsgi-what-is-a-mysite-sock)，终于得到了一个可行的解答，那就是：这是一个什么都不需要的空文件。。。
 

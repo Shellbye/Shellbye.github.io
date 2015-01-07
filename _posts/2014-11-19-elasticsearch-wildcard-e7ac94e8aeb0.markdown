@@ -19,57 +19,57 @@ url地址：http://localhost:9200/shellbye/user/_search
 请求方法：post
 参数（raw）：
 
-    
-    {
-      "query": {
-        "wildcard": {
-          "name": "jack"
-        }
-      }
+{% highlight YAML %}
+{
+  "query": {
+    "wildcard": {
+      "name": "jack"
     }
-
+  }
+}
+{% endhighlight %}
 
 返回结果：
 
-    
-    {
-        "took": 3,
-        "timed_out": false,
-        "_shards": {
-            "total": 5,
-            "successful": 5,
-            "failed": 0
-        },
-        "hits": {
-            "total": 2,
-            "max_score": 1,
-            "hits": [
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "1",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack",
-                        "age": 30,
-                        "addr": "Sichuang"
-                    }
-                },
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "2",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack jack",
-                        "age": 31,
-                        "addr": "Sichuang"
-                    }
+{% highlight YAML %}
+{
+    "took": 3,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
                 }
-            ]
-        }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
     }
-
+}
+{% endhighlight %}
 
 你会发现jackson这个应该也是要返回却没有返回，这个感觉不符合我对wildcard的理解哦，是不是呢？要返回所有包含（不仅仅是匹配）jack的user应该怎么做呢？那就是使用通配符“*”和“?”。
 2.带通配符“*”的请求：
@@ -77,79 +77,79 @@ url地址：http://localhost:9200/shellbye/user/_search
 请求方法：post
 参数（raw）：
 
-    
-    {
-      "query": {
-        "wildcard": {
-          "name": "*jack*"
-        }
-      }
+{% highlight YAML %}
+{
+  "query": {
+    "wildcard": {
+      "name": "*jack*"
     }
-
+  }
+}
+{% endhighlight %}
 
 返回结果：
 
-    
-    {
-        "took": 8,
-        "timed_out": false,
-        "_shards": {
-            "total": 5,
-            "successful": 5,
-            "failed": 0
-        },
-        "hits": {
-            "total": 4,
-            "max_score": 1,
-            "hits": [
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "4",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jackson jackson",
-                        "age": 33,
-                        "addr": "Sichuang"
-                    }
-                },
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "1",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack",
-                        "age": 30,
-                        "addr": "Sichuang"
-                    }
-                },
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "2",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack jack",
-                        "age": 31,
-                        "addr": "Sichuang"
-                    }
-                },
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "3",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jackson",
-                        "age": 32,
-                        "addr": "Sichuang"
-                    }
+{% highlight YAML %}
+{
+    "took": 8,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 4,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "4",
+                "_score": 1,
+                "_source": {
+                    "name": "jackson jackson",
+                    "age": 33,
+                    "addr": "Sichuang"
                 }
-            ]
-        }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "3",
+                "_score": 1,
+                "_source": {
+                    "name": "jackson",
+                    "age": 32,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
     }
-
+}
+{% endhighlight %}
 
 这下就所有包含jack的user就都返回了，但是官方文档也说了，不建议在wildcard的开头加通配符。所以如果不是必须要，最好就不要在开头加通配符。
 3.带通配符“?”的请求：
@@ -157,59 +157,60 @@ url地址：http://localhost:9200/shellbye/user/_search
 请求方法：post
 参数（raw）：
 
-    
-    {
-      "query": {
-        "wildcard": {
-          "name": "jac?"
-        }
-      }
+{% highlight YAML %}
+{
+  "query": {
+    "wildcard": {
+      "name": "jac?"
     }
-
+  }
+}
+{% endhighlight %}
 
 返回结果：
 
-    
-    {
-        "took": 1,
-        "timed_out": false,
-        "_shards": {
-            "total": 5,
-            "successful": 5,
-            "failed": 0
-        },
-        "hits": {
-            "total": 2,
-            "max_score": 1,
-            "hits": [
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "1",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack",
-                        "age": 30,
-                        "addr": "Sichuang"
-                    }
-                },
-                {
-                    "_index": "shellbye",
-                    "_type": "user",
-                    "_id": "2",
-                    "_score": 1,
-                    "_source": {
-                        "name": "jack jack",
-                        "age": 31,
-                        "addr": "Sichuang"
-                    }
+{% highlight YAML %}
+{
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
                 }
-            ]
-        }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
     }
-
+}
+{% endhighlight %}
 
 注：“*”通配任何个（一个或多个）字符，“?”通配一个字符。
 
 参考资料：
 [1].[http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
+

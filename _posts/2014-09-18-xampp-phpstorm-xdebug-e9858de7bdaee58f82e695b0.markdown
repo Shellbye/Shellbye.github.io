@@ -20,9 +20,9 @@ tags:
 1.安装xdebug
 
 先运行
-    
-    php -i > a.txt
-
+{% highlight YAML %}
+php -i > a.txt
+{% endhighlight %}
 把当前php的版本信息等获取到，并将a.txt的内容全部复制到[xdebug的官网检测网页](http://xdebug.org/wizard.php)，官网会告诉你你需要安装的是哪个版本，以及具体的安装信息，如下图：
 
 [![xdebug](http://www.shellbye.com/blog/wp-content/uploads/2014/09/QQ截图20140918162042-300x111.jpg)](http://www.shellbye.com/blog/wp-content/uploads/2014/09/QQ截图20140918162042.jpg)
@@ -36,19 +36,19 @@ tags:
 这里需要说明的是，不需要新建什么PHP Webapplicant，这个和Pycharm不一样，PhpStorm不需要在IDE里启动服务器，直接使用XAMPP的Apache服务就可以了。
 
 依次打开
-    
-    File-->Settings-->Php-->Debug
-
+{% highlight YAML %}
+File-->Settings-->Php-->Debug
+{% endhighlight %}
 然后Debug port填写9000（默认值），并勾选
-    
-    Can accept external connections 
-
+{% highlight YAML %}
+Can accept external connections 
+{% endhighlight %}
 
 
 然后再在
-    
-    Debug-->DBGP Proxy
-
+{% highlight YAML %}
+Debug-->DBGP Proxy
+{% endhighlight %}
 里面，IDE key 填写PhpStorm，Host填写localhost，Port填写80.
 
 保存退出

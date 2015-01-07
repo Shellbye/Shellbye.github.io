@@ -20,56 +20,56 @@ tags:
 
 1.关闭MySQL服务：
 
-    
-    sudo service mysql stop
-
+{% highlight YAML %}
+sudo service mysql stop
+{% endhighlight %}
 
 
 2.确保关闭了所有的MySQL服务
 
-    
-    sudo killall mysql
-
+{% highlight YAML %}
+sudo killall mysql
+{% endhighlight %}
 
 
 3.用安全模式开启MySQL，此时可以不用密码登录MySQL
 
-    
-    sudo mysqld_safe --safe-grant-tables
-
+{% highlight YAML %}
+sudo mysqld_safe --safe-grant-tables
+{% endhighlight %}
 
 
 4.安全模式下用root身份登录MySQL
 
-    
-    sudo mysql -u root -p
-
+{% highlight YAML %}
+sudo mysql -u root -p
+{% endhighlight %}
 
 
 5.重置密码
 
-    
-    mysql> use mysql;
+{% highlight YAML %}
+mysql> use mysql;
+{% endhighlight %}
 
 
-
-    
-    mysql> UPDATE user SET password = PASSWORD("new_password") WHERE User = 'root';
-
+{% highlight YAML %}
+mysql> UPDATE user SET password = PASSWORD("new_password") WHERE User = 'root';
+{% endhighlight %}
 
 
 6.关闭安全模式
 
-    
-    sudo killall mysqld_safe
-
+{% highlight YAML %}
+sudo killall mysqld_safe
+{% endhighlight %}
 
 
 7.重启MySQL
 
-    
-    sudo service mysql start
-
+{% highlight YAML %}
+sudo service mysql start
+{% endhighlight %}
 
 
 All Done!
