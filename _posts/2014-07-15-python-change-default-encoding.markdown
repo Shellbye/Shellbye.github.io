@@ -15,21 +15,21 @@ tags:
 
 写Python 时遇到这个问题：
 
-{% highlight YAML %}
- 'ascii' codec can't encode characters in position 156-159: ordinal not in range(128)
-{% endhighlight %}
+    
+     'ascii' codec can't encode characters in position 156-159: ordinal not in range(128)
+
 
 在找了一堆资料并尝试了：
 
-{% highlight python %}
-reload(sys)
-sys.setdefaultencoding("utf-8")
-{% endhighlight %}
+    
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
+
 
 之后，无奈还是没有用，最后不得已修改文件Python27\Lib\site.py 并对#479行做了如下修改：
 
-{% highlight python %}
-encoding = "utf-8" # Default value set by _PyUnicode_Init()
-{% endhighlight %}
+    
+    encoding = "utf-8" # Default value set by _PyUnicode_Init()
+
 
 然后就OK了

@@ -37,9 +37,9 @@ tags:
 
 下载命令：
 
-{% highlight YAML %}
-wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz
-{% endhighlight %}
+    
+    wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz
+
 
 下载成功如图所示：
 
@@ -52,9 +52,9 @@ wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.
 
 
 
-{% highlight YAML %}
- tar -xzvf hadoop-2.2.0.tar.gz
-{% endhighlight %}
+    
+     tar -xzvf hadoop-2.2.0.tar.gz
+
 
 
 
@@ -83,9 +83,9 @@ wget http://mirror.esocc.com/apache/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.
 
 
 
-{% highlight YAML %}
-sudo apt-get install openjdk-7-jdk
-{% endhighlight %}
+    
+    sudo apt-get install openjdk-7-jdk
+
 
 
 
@@ -93,24 +93,24 @@ sudo apt-get install openjdk-7-jdk
 
 
 
-{% highlight YAML %}
-sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac 1
-{% endhighlight %}
+    
+    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac 1
 
 
-{% highlight YAML %}
-sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-7-openjdk-i386/bin/java 1
-{% endhighlight %}
+
+    
+    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-7-openjdk-i386/bin/java 1
 
 
-{% highlight YAML %}
-sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac
-{% endhighlight %}
+
+    
+    sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-i386/bin/javac
 
 
-{% highlight YAML %}
-sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-i386/bin/java
-{% endhighlight %}
+
+    
+    sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-i386/bin/java
+
 
 
 
@@ -118,9 +118,9 @@ sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-i386/bin/java
 
 
 
-{% highlight YAML %}
-java -version
-{% endhighlight %}
+    
+    java -version
+
 
 
 
@@ -138,9 +138,9 @@ java -version
 
 
 
-{% highlight YAML %}
-sudo apt-get install openssh-server
-{% endhighlight %}
+    
+    sudo apt-get install openssh-server
+
 
 
 
@@ -159,19 +159,19 @@ sudo apt-get install openssh-server
 
 
 
-{% highlight YAML %}
-sudo addgroup hadoop
-{% endhighlight %}
+    
+    sudo addgroup hadoop
 
 
-{% highlight YAML %}
-sudo adduser --ingroup hadoop hduser
-{% endhighlight %}
+
+    
+    sudo adduser --ingroup hadoop hduser
 
 
-{% highlight YAML %}
-sudo adduser hduser sudo
-{% endhighlight %}
+
+    
+    sudo adduser hduser sudo
+
 
 
 
@@ -185,19 +185,19 @@ sudo adduser hduser sudo
 
 
 
-{% highlight YAML %}
-mv hadoop-2.2.0 /usr/local/
-{% endhighlight %}
+    
+    mv hadoop-2.2.0 /usr/local/
 
 
-{% highlight YAML %}
-cd /usr/local/
-{% endhighlight %}
+
+    
+    cd /usr/local/
 
 
-{% highlight YAML %}
-mv hadoop-2.2.0 hadoop
-{% endhighlight %}
+
+    
+    mv hadoop-2.2.0 hadoop
+
 
 
 
@@ -205,9 +205,9 @@ mv hadoop-2.2.0 hadoop
 
 
 
-{% highlight YAML %}
-sudo chown -R hduser:hadoop hadoop
-{% endhighlight %}
+    
+    sudo chown -R hduser:hadoop hadoop
+
 
 
 
@@ -280,9 +280,9 @@ export JAVA_HOME=/usr/lib/jvm/jdk/
 
 
 
-{% highlight YAML %}
-hadoop version
-{% endhighlight %}
+    
+    hadoop version
+
 
 
 
@@ -290,9 +290,9 @@ hadoop version
 
 
 
-{% highlight YAML %}
-/usr/local/hadoop/bin/hadoop version
-{% endhighlight %}
+    
+    /usr/local/hadoop/bin/hadoop version
+
 
 
 
@@ -300,9 +300,9 @@ hadoop version
 
 
 
-{% highlight YAML %}
-export PATH=$PATH:/usr/local/hadoop/bin/
-{% endhighlight %}
+    
+    export PATH=$PATH:/usr/local/hadoop/bin/
+
 
 
 
@@ -511,9 +511,9 @@ mydata/hdfs/datanode
 
 
 
-{% highlight YAML %}
-hdfs namenode -format
-{% endhighlight %}
+    
+    hdfs namenode -format
+
 
 
 
@@ -547,9 +547,9 @@ hdfs namenode -format
 
 
 
-{% highlight YAML %}
-./start-dfs.sh
-{% endhighlight %}
+    
+    ./start-dfs.sh
+
 
 
 
@@ -567,9 +567,9 @@ hdfs namenode -format
 
 
 
-{% highlight YAML %}
-./start-yarn.sh
-{% endhighlight %}
+    
+    ./start-yarn.sh
+
 
 
 
@@ -613,9 +613,9 @@ HDFS和YARN的关系可以简要的由下图概况：
 
 
 
-{% highlight YAML %}
-hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 5
-{% endhighlight %}
+    
+    hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 5
+
 
 
 

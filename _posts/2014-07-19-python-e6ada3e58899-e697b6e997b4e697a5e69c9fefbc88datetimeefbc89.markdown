@@ -19,9 +19,9 @@ tags:
 
 1.0版本
 
-{% highlight python %}
-pattern = re.compile(r"\d\d\d\d-\d\d \d\d:\d\d:\d\d")
-{% endhighlight %}
+    
+    pattern = re.compile(r"\d\d\d\d-\d\d \d\d:\d\d:\d\d")
+
 
 其中，开头的r表示里面的所有字符都使用最原始意义，主要是指反斜杠“\”，具体参考[这里](http://stackoverflow.com/questions/2081640/what-exactly-do-u-and-r-string-flags-do-in-python-and-what-are-raw-string-l)。
 
@@ -29,16 +29,16 @@ pattern = re.compile(r"\d\d\d\d-\d\d \d\d:\d\d:\d\d")
 
 2.0版本
 
-{% highlight python %}
-pattern = re.compile(r"\d{4}(-\d\d){2} \d\d:\d\d:\d\d")
-{% endhighlight %}
+    
+    pattern = re.compile(r"\d{4}(-\d\d){2} \d\d:\d\d:\d\d")
+
 
 其中的{m}，表示前面的字符（或分组）匹配m次。注意到最后的时间其实是不太方便统一用{m}的方式来处理的，因为它有一个冒号（:），所以不得不把第一个拿出来，只对后面两个分组并重复匹配：
 
 3.0版本
 
-{% highlight python %}
-pattern = re.compile(r"^\d{4}(-\d\d){2} \d\d(:\d\d){2}")
-{% endhighlight %}
+    
+    pattern = re.compile(r"^\d{4}(-\d\d){2} \d\d(:\d\d){2}")
+
 
 关于分组（即圆括号内的东西）的东西，还没有搞清楚，但是我感觉所有的两个数字其实是可以分成一个组，然后不断的引用的，比如月份、日期、时、分和秒，等什么时候研究好了在更新吧。

@@ -18,80 +18,80 @@ tags:
 
 无密码登录：
 
-{% highlight YAML %}
-$ mysql
-{% endhighlight %}
+    
+    $ mysql
+
 
 用户名密码登陆：
 
-{% highlight YAML %}
-$ mysql -u username -p
-{% endhighlight %}
+    
+    $ mysql -u username -p
+
 
 回车后输入密码即可
 
 2.查看所有数据库
 
-{% highlight YAML %}
-mysql> show databases;
-{% endhighlight %}
+    
+    mysql> show databases;
+
 
 需要注意最后的分号，我曾经就因为没有加分号折腾了很久。
 
 3.选择要使用的数据库
 假设要选择mysql这个数据库（MySQL里默认有的）
 
-{% highlight YAML %}
-mysql> use mysql;
-{% endhighlight %}
+    
+    mysql> use mysql;
+
 
 4.[删除数据库表记录](http://dev.mysql.com/doc/refman/4.1/en/delete.html)
 假设要删除user表中id为6的记录
 
-{% highlight YAML %}
-mysql> delete from user where id = 6;
-{% endhighlight %}
+    
+    mysql> delete from user where id = 6;
+
 
 5.[插入数据库表记录](http://dev.mysql.com/doc/refman/5.6/en/insert.html)
 假设要在表user中添加一条记录
 
-{% highlight YAML %}
-mysql> INSERT INTO user(`name`,`password`) VALUES("shellbye","you_will_never_guess");
-{% endhighlight %}
+    
+    mysql> INSERT INTO user(`name`,`password`) VALUES("shellbye","you_will_never_guess");
+
 
 6.[更新数据库表记录](http://dev.mysql.com/doc/refman/5.0/en/update.html)
 假设要更新表user中id为9的用户的名字
 
-{% highlight YAML %}
-mysql> UPDATE user set name="shellbye2" where id=9;
-{% endhighlight %}
+    
+    mysql> UPDATE user set name="shellbye2" where id=9;
+
 
 7.执行sql文件
 登录并选择数据库后：
 
-{% highlight YAML %}
-mysql> source path/to/your/file.sql
-{% endhighlight %}
+    
+    mysql> source path/to/your/file.sql
+
 
 或
 
-{% highlight YAML %}
-mysql -u yourusername -p yourpassword yourdatabase < file.sql
-{% endhighlight %}
+    
+    mysql -u yourusername -p yourpassword yourdatabase < file.sql
+
 
 8.在新建表的时候指明编码
 假设新建表user，并使用utf-8编码
 
-{% highlight YAML %}
-mysql> CREATE DATABASE user CHARACTER SET utf8 COLLATE utf8_general_ci;
-{% endhighlight %}
+    
+    mysql> CREATE DATABASE user CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 
 9.删除数据库
 假设删除数据库my_test_db
 
-{% highlight YAML %}
-mysql> drop database my_test_db;
-{% endhighlight %}
+    
+    mysql> drop database my_test_db;
+
 
 10.数据库终极解决方案
 请点击[这里](http://www.adminer.org/en/)

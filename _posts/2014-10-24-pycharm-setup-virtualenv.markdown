@@ -22,31 +22,31 @@ tags:
 1.安装virtualenv
 
 
-{% highlight YAML %}
-pip install virtualenv
-{% endhighlight %}
+    
+    pip install virtualenv
+
 
 
 2.新建虚拟环境ENV
 
 
-{% highlight YAML %}
-virtualenv ENV
-{% endhighlight %}
+    
+    virtualenv ENV
+
 
 
 3.切换至虚拟环境并激活之
 
 
-{% highlight YAML %}
-cd ENV
-{% endhighlight %}
+    
+    cd ENV
 
 
 
-{% highlight YAML %}
-source bin/activate
-{% endhighlight %}
+
+    
+    source bin/activate
+
 
 
 至此即可使用完全与系统python的环境隔离的虚拟环境
@@ -54,17 +54,17 @@ source bin/activate
 4.退出虚拟环境
 
 
-{% highlight YAML %}
-deactivate
-{% endhighlight %}
+    
+    deactivate
+
 
 
 5.在Pycharm中配置虚拟环境
 
 
-{% highlight YAML %}
-File-->Settings-->Project Interpreters-->Python Interpreters-->点击右侧绿色加号-->local-->然后选择/path/to/ENV/bin/python2.7
-{% endhighlight %}
+    
+    File-->Settings-->Project Interpreters-->Python Interpreters-->点击右侧绿色加号-->local-->然后选择/path/to/ENV/bin/python2.7
+
 
 
 至此pycharm中配置virtualenv完成，而且亲测打开pycharm对应的项目就直接可以在不同的环境中切换，甚至不需要激活虚拟环境

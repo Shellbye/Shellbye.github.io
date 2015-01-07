@@ -19,23 +19,23 @@ tags:
 在网上查了一些资料，都说直接在文件 /etc/rc.local 的 exit 0 之前添加要启动的程序即可。现在假设我的custom.sh在/root/mydir/里面，即/root/mydir/custom.sh。那么，是不是把 /etc/rc.local 改成如下这样就可以了呢？
 
 
-{% highlight YAML %}
-#!/bin/sh -e
-#
-# rc.local
-#
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
-/root/mydir/custom.sh
-exit 0
+    
+    #!/bin/sh -e
+    #
+    # rc.local
+    #
+    # This script is executed at the end of each multiuser runlevel.
+    # Make sure that the script will "exit 0" on success or any other
+    # value on error.
+    #
+    # In order to enable or disable this script just change the execution
+    # bits.
+    #
+    # By default this script does nothing.
+    /root/mydir/custom.sh
+    exit 0
+    
 
-{% endhighlight %}
 
 
 一般情况下是的。但是由于我的custom.sh的特殊性，导致这样是无法启动程序的。那么最标准的做法是什么呢？最标准（也是对我的起作用的）就是把custom.sh放到/usr/bin/下面，如果custom里有很多用到当前目录里的东西怎么办呢？很简单，在写一个run.sh在里面cd并调用/root/mydir/custom.sh就可以了。记得，要把run.sh放到/usr/bin/下面

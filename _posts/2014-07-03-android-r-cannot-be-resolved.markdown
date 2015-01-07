@@ -24,8 +24,8 @@ tags:
 
 试过了各种办法，很多资料都说是xml文件出错了，但是我左看友看没有看到哪里有xml文件的报错，最后在[这个问题](http://stackoverflow.com/questions/885009/r-cannot-be-resolved-android-error)的评论中找到了答案：原来真的是因为xml文件出错了，只是不是语法错误，而是xml文件中所引用的文件不存在。在上面提到的官方教程中，如果按照它的指示一步一步来，那么你会创建一个文件res/menu/main_activity_actions.xml，并且在其中有如下易行代码：
 
-{% highlight YAML %}
-android:icon="@drawable/ic_action_search"
-{% endhighlight %}
+    
+    android:icon="@drawable/ic_action_search"
+
 
 就是这里，drawable里面并没有ic_action_search这个图片，所以导致这个xml文件出错，但是奇葩的地方是它并没有提示你，也没有出现熟悉的红线，而是悄悄的就这样错了。。。还好我当时在贴代码的时候就想过一下，这个搜索的图片哪里来的？后来我懒了一下，心想官方教程嘛，里面一定有，结果悲剧了一晚上，不能迷信权威哦。

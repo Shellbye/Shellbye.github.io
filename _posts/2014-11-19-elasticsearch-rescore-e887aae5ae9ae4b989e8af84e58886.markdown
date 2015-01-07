@@ -16,16 +16,16 @@ tags:
 0.测试数据：
 user.json
 
-{% highlight YAML %}
-{"index": {"_index": "shellbye","_type": "user","_id": "1"}}
-{"name":"jack","age":30,"addr":"Sichuang"}
-{"index": {"_index": "shellbye","_type": "user","_id": "2"}}
-{"name":"jack jack","age":31,"addr":"Sichuang"}
-{"index": {"_index": "shellbye","_type": "user","_id": "3"}}
-{"name":"jackson","age":32,"addr":"Sichuang"}
-{"index": {"_index": "shellbye","_type": "user","_id": "4"}}
-{"name":"jackson jackson","age":33,"addr":"Sichuang"}
-{% endhighlight %}
+    
+    {"index": {"_index": "shellbye","_type": "user","_id": "1"}}
+    {"name":"jack","age":30,"addr":"Sichuang"}
+    {"index": {"_index": "shellbye","_type": "user","_id": "2"}}
+    {"name":"jack jack","age":31,"addr":"Sichuang"}
+    {"index": {"_index": "shellbye","_type": "user","_id": "3"}}
+    {"name":"jackson","age":32,"addr":"Sichuang"}
+    {"index": {"_index": "shellbye","_type": "user","_id": "4"}}
+    {"name":"jackson jackson","age":33,"addr":"Sichuang"}
+
 
 
 将以上文本保存到本地，命名为user.json，然后开启ES，cd到user.json所在目录并使用如下命令将数据添加到ES中。
@@ -37,57 +37,57 @@ url地址：http://localhost:9200/shellbye/user/_search
 请求方法：post
 参数（raw）：
 
-{% highlight YAML %}
-{
-  "query": {
-    "match": {
-      "name": "jackson"
+    
+    {
+      "query": {
+        "match": {
+          "name": "jackson"
+        }
+      }
     }
-  }
-}
-{% endhighlight %}
+
 
 返回结果如下：
 
-{% highlight YAML %}
-{
-    "took": 1,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "failed": 0
-    },
-    "hits": {
-        "total": 2,
-        "max_score": 0.30685282,
-        "hits": [
-            {
-                "_index": "shellbye",
-                "_type": "user",
-                "_id": "3",
-                "_score": 0.30685282,
-                "_source": {
-                    "name": "jackson",
-                    "age": 32,
-                    "addr": "Sichuang"
+    
+    {
+        "took": 1,
+        "timed_out": false,
+        "_shards": {
+            "total": 5,
+            "successful": 5,
+            "failed": 0
+        },
+        "hits": {
+            "total": 2,
+            "max_score": 0.30685282,
+            "hits": [
+                {
+                    "_index": "shellbye",
+                    "_type": "user",
+                    "_id": "3",
+                    "_score": 0.30685282,
+                    "_source": {
+                        "name": "jackson",
+                        "age": 32,
+                        "addr": "Sichuang"
+                    }
+                },
+                {
+                    "_index": "shellbye",
+                    "_type": "user",
+                    "_id": "4",
+                    "_score": 0.2712221,
+                    "_source": {
+                        "name": "jackson jackson",
+                        "age": 33,
+                        "addr": "Sichuang"
+                    }
                 }
-            },
-            {
-                "_index": "shellbye",
-                "_type": "user",
-                "_id": "4",
-                "_score": 0.2712221,
-                "_source": {
-                    "name": "jackson jackson",
-                    "age": 33,
-                    "addr": "Sichuang"
-                }
-            }
-        ]
+            ]
+        }
     }
-}
-{% endhighlight %}
+
 
 
 2.rescore
@@ -96,73 +96,73 @@ url地址：http://localhost:9200/shellbye/user/_search
 请求方法：post
 参数（raw）：
 
-{% highlight YAML %}
-{
-  "query": {
-    "match": {
-      "name": "jackson"
-    }
-  },
-  "rescore": {
-    "query": {
-      "rescore_query": {
-        "function_score": {
-          "query": {
-            "match_all": {}
-          },
-          "script_score": {
-            "script": "doc['age'].value"
+    
+    {
+      "query": {
+        "match": {
+          "name": "jackson"
+        }
+      },
+      "rescore": {
+        "query": {
+          "rescore_query": {
+            "function_score": {
+              "query": {
+                "match_all": {}
+              },
+              "script_score": {
+                "script": "doc['age'].value"
+              }
+            }
           }
         }
       }
     }
-  }
-}
-{% endhighlight %}
+
 
 
 返回结果如下：
 
 
-{% highlight YAML %}
-{
-    "took": 2,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "failed": 0
-    },
-    "hits": {
-        "total": 2,
-        "max_score": 33.27122,
-        "hits": [
-            {
-                "_index": "shellbye",
-                "_type": "user",
-                "_id": "4",
-                "_score": 33.27122,
-                "_source": {
-                    "name": "jackson jackson",
-                    "age": 33,
-                    "addr": "Sichuang"
+    
+    {
+        "took": 2,
+        "timed_out": false,
+        "_shards": {
+            "total": 5,
+            "successful": 5,
+            "failed": 0
+        },
+        "hits": {
+            "total": 2,
+            "max_score": 33.27122,
+            "hits": [
+                {
+                    "_index": "shellbye",
+                    "_type": "user",
+                    "_id": "4",
+                    "_score": 33.27122,
+                    "_source": {
+                        "name": "jackson jackson",
+                        "age": 33,
+                        "addr": "Sichuang"
+                    }
+                },
+                {
+                    "_index": "shellbye",
+                    "_type": "user",
+                    "_id": "3",
+                    "_score": 32.306854,
+                    "_source": {
+                        "name": "jackson",
+                        "age": 32,
+                        "addr": "Sichuang"
+                    }
                 }
-            },
-            {
-                "_index": "shellbye",
-                "_type": "user",
-                "_id": "3",
-                "_score": 32.306854,
-                "_source": {
-                    "name": "jackson",
-                    "age": 32,
-                    "addr": "Sichuang"
-                }
-            }
-        ]
+            ]
+        }
     }
-}
-{% endhighlight %}
+
 
 
 参考资料：

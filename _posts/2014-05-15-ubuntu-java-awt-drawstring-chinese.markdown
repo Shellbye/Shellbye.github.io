@@ -19,58 +19,58 @@ tags:
 
 1.首先猜想大概是缺一些包，所有按照[这篇文章](http://publib.boulder.ibm.com/infocenter/javasdk/v5r0/index.jsp?topic=%2Fcom.ibm.java.doc.user.lnx.50%2Fuser%2Flimitations.html)使用了如下命令安装包：
 
-{% highlight YAML %}
-sudo apt-get install ia32-libs
-{% endhighlight %}
+    
+    sudo apt-get install ia32-libs
+
 
 2.然后又按照[这篇文档](http://wiki.debian.org.hk/w/Make_Debian_support_Chinese_(eng)#Installing_Free_Chinese_Fonts)安装了一些中文字体，命令如下：
 
-{% highlight YAML %}
-apt-get install ttf-arphic-ukai ttf-arphic-uming ttf-arphic-gbsn00lp ttf-arphic-bkai00mp ttf-arphic-bsmi00lp
-{% endhighlight %}
+    
+    apt-get install ttf-arphic-ukai ttf-arphic-uming ttf-arphic-gbsn00lp ttf-arphic-bkai00mp ttf-arphic-bsmi00lp
+
 
 3.最后按照[这篇文章](http://ccode.diandian.com/post/2012-07-04/40030629720)（它本身参考[这篇文章](http://askubuntu.com/questions/149876/how-can-i-install-one-language-by-command-line)）安装了中文语言支持包：
 
 先是使用如下命令查看有哪些需要安装的：
 
-{% highlight YAML %}
-check-language-support -l zh
-{% endhighlight %}
+    
+    check-language-support -l zh
+
 
 我的输出是：
 
-{% highlight YAML %}
-language-pack-gnome-zh-hant language-pack-zh-hant
-{% endhighlight %}
+    
+    language-pack-gnome-zh-hant language-pack-zh-hant
+
 
 所以我使用如下命令安装了这两个包：
 
-{% highlight YAML %}
-sudo apt-get install language-pack-gnome-zh-hant language-pack-zh-hant
-{% endhighlight %}
+    
+    sudo apt-get install language-pack-gnome-zh-hant language-pack-zh-hant
+
 
 完成这步之后，原文说只能显示繁体，于是又使用如下命令查看并安装了相应包：
 
-{% highlight YAML %}
-check-language-support -l zh-hans
-{% endhighlight %}
+    
+    check-language-support -l zh-hans
 
 
-{% highlight YAML %}
-sudo apt-get install fonts-arphic-uming language-pack-gnome-zh-hans language-pack-zh-hans ttf-arphic-ukai ttf-wqy-zenhei
-{% endhighlight %}
+
+    
+    sudo apt-get install fonts-arphic-uming language-pack-gnome-zh-hans language-pack-zh-hans ttf-arphic-ukai ttf-wqy-zenhei
+
 
 4.整个过程中因为我以为是缺乏awt的东西导致的问题，所有先使用了如下命令查看了下ubuntu下有哪写awt包：
 
-{% highlight YAML %}
-apt-cache search awt
-{% endhighlight %}
+    
+    apt-cache search awt
+
 
 然后有选择性的安装了如下几个：
 
-{% highlight YAML %}
-sudo apt-get install libdrawtk-dev libdrawtk0 libdrawtk0-dbg
+    
+    sudo apt-get install libdrawtk-dev libdrawtk0 libdrawtk0-dbg
+    
 
-{% endhighlight %}
 
 就是这些了

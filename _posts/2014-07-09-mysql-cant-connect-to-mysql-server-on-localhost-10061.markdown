@@ -15,17 +15,17 @@ tags:
 
 在根据[这个提问](http://stackoverflow.com/questions/372885/how-do-i-connect-to-a-mysql-database-in-python)尝试使用python连接MySQL时，使用如下连接配置：
 
-{% highlight python %}
-import MySQLdb
+    
+    import MySQLdb
+    
+    db = MySQLdb.connect(host="localhost", user="root", passwd="", db="student")
 
-db = MySQLdb.connect(host="localhost", user="root", passwd="", db="student")
-{% endhighlight %}
 
 但是在尝试连接的时候报错如下：
 
-{% highlight YAML %}
-_mysql_exceptions.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' (10061)")
-{% endhighlight %}
+    
+    _mysql_exceptions.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' (10061)")
+
 
 查阅了一些资料，有很多中解释，概况起来大概可以这样理解：
 
@@ -37,11 +37,11 @@ _mysql_exceptions.OperationalError: (2003, "Can't connect to MySQL server on 'lo
 
 所以，上面的代码改为这样就没有问题了：
 
-{% highlight python %}
-import MySQLdb
+    
+    import MySQLdb
+    
+    db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="", db="student")
 
-db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="", db="student")
-{% endhighlight %}
 
 其他参考资料：
 

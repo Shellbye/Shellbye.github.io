@@ -63,9 +63,9 @@ tags:
 
 制作好的图标一般名字都是favicon.png或者是favicon.ico，那么最后一步就是在你的网站的<head>标签之间插入如下语句：
 
-{% highlight YAML %}
+    
+    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon"></link>
 
-{% endhighlight %}
 
 需要注意的是这里假设你把ico文件放在了根目录（一般情况下），所以href的值直接就是文件名，如果你放在其他地方，那么这个是需要你自己修改的。
 

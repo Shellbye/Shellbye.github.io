@@ -12,71 +12,69 @@ categories:
 
 假设现在有这样一个字符串：
 
-{% highlight java %}
-String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
-{% endhighlight %}
+    
+    String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
+
 
 然后现在你想要PositionExtID的值，即CC637609929J90250014000，有以下两种方法：
 
 1.String substring()
 
-{% highlight java %}
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-/**
- * User: shellbye.com@gmail.com
- */
-public class RegexMain {
-    public static void main(String[] arg){
-        String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
-        System.out.println(s.substring(s.indexOf("=") + 1, s.indexOf("&")));
-        //output：
-        //CC637609929J90250014000
+    
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
+    
+    /**
+     * User: shellbye.com@gmail.com
+     */
+    public class RegexMain {
+        public static void main(String[] arg){
+            String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
+            System.out.println(s.substring(s.indexOf("=") + 1, s.indexOf("&")));
+            //output：
+            //CC637609929J90250014000
+        }
     }
-}
-{% endhighlight %}
+
 
 2.正则表达式
 正则表达式不是万能的，而且很多时候也不是最佳选择。我最初就是用正则表达式解决这个问题的，但是下面的代码却达不到效果：
 
-{% highlight java %}
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-/**
- * User: shellbye.com@gmail.com
- */
-public class RegexMain {
-    public static void main(String[] arg){
-        String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
-        Pattern pattern = Pattern.compile("PositionExtID=(.*)&");
-        Matcher matcher = pattern.matcher(s);
-        System.out.println(matcher.group());
-        //output：
-        //PositionExtID=CC637609929J90250014000&
+    
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
+    
+    /**
+     * User: shellbye.com@gmail.com
+     */
+    public class RegexMain {
+        public static void main(String[] arg){
+            String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
+            Pattern pattern = Pattern.compile("PositionExtID=(.*)&");
+            Matcher matcher = pattern.matcher(s);
+            System.out.println(matcher.group());
+            //output：
+            //PositionExtID=CC637609929J90250014000&
+        }
     }
-}
-{% endhighlight %}
+
 
 这里是因为matcher.group()默认是group(0)，参考[这里](http://stackoverflow.com/questions/17969436/java-regex-capturing-groups#answer-17969618)也就是符合正则的整个字符串，而matcher.group(1)才是我们需要的值CC637609929J90250014000，所以上面的代码改过之后就对了：
 
-{% highlight java %}
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-/**
- * User: shellbye.com@gmail.com
- */
-public class RegexMain {
-    public static void main(String[] arg){
-        String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
-        Pattern pattern = Pattern.compile("PositionExtID=(.*)&");
-        Matcher matcher = pattern.matcher(s);
-        System.out.println(matcher.group(1));
-        //output：
-        //CC637609929J90250014000
+    
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
+    
+    /**
+     * User: shellbye.com@gmail.com
+     */
+    public class RegexMain {
+        public static void main(String[] arg){
+            String s = "PositionCheck.asp?PositionExtID=CC637609929J90250014000&Version=1";
+            Pattern pattern = Pattern.compile("PositionExtID=(.*)&");
+            Matcher matcher = pattern.matcher(s);
+            System.out.println(matcher.group(1));
+            //output：
+            //CC637609929J90250014000
+        }
     }
-}
-{% endhighlight %}
-
