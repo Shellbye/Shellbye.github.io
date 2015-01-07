@@ -51,7 +51,7 @@ tags:
 
     
     
-    {% extends "base.html" %}
+    {% raw {% extends "base.html" %} %}
     
 
 

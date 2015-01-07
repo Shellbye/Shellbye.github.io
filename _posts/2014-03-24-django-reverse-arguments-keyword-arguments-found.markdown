@@ -25,7 +25,7 @@ tags:
 然后在前端的页面中，有如下的类似引用
 
     
-    <a href="{% url 'check_data' %}">查看数据</a>
+    {% raw <a href="{% url 'check_data' %}">查看数据</a> %}
 
 
 这时报错如下：
@@ -51,7 +51,7 @@ tags:
 果然Django的1.5版本中有变化，但是查看了一下文档，也依然没有找到解决方案。继续在stackoverflow上找，发现了[这样一个](http://stackoverflow.com/questions/14882491/django-release-1-5-url-requires-a-non-empty-first-argument-the-syntax-change)解决方案，但是他的解决办法太复杂，就连作者自己都说这样的方法很危险，容易破坏一些设计，但是他回答中的这两句提醒了我：
 
     
-    {% url "something.else" foo bar %}
+    {% raw {% url "something.else" foo bar %} %}
     )
 
 
@@ -65,7 +65,7 @@ tags:
 中，明显不是一个url的结尾，它后面还需要东西，即是从url上看它没有参数也能访问（根目录），但是传参还是必要的，至少要是一个空字符串，于是我把前端改成了：
 
     
-    <a href="{% url 'check_data' ''%}">查看数据</a>
+    {% raw <a href="{% url 'check_data' ''%}">查看数据</a> %}
 
 
 即在后面添加了空串作为参数传入，于是一切OK.
