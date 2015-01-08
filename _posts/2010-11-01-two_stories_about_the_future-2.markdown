@@ -7,7 +7,7 @@ slug: two_stories_about_the_future-2
 title: 两个关于未来的故事
 wordpress_id: 155
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 

@@ -7,7 +7,7 @@ slug: one_of_paradise_one_meter_from_the_sea
 title: 距离天堂一米之一    大海
 wordpress_id: 236
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我听到了大海的声音

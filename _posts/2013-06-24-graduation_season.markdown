@@ -7,7 +7,7 @@ slug: graduation_season
 title: 毕业季
 wordpress_id: 275
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 毕业季里的每一场雨  

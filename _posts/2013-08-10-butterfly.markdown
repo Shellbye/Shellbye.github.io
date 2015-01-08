@@ -7,7 +7,7 @@ slug: butterfly
 title: 蝴蝶
 wordpress_id: 280
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我飞的慢  

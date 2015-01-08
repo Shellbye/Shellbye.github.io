@@ -7,7 +7,7 @@ slug: lets_slow_down
 title: Let's slow down
 wordpress_id: 169
 categories:
-- 个人日记
+- personal_diary
 ---
 
 First of all, let me ask you all a question, “why are you here? ” “I am here to take part in the competition! ” Don’t anwser me like that, that’s not what I want. My question is why are you here in this world. well, someone may say “Ask my mom, she gave birth to me. ” No, you have to figure out this all by yourselves.

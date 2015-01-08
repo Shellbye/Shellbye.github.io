@@ -7,7 +7,7 @@ slug: skin_and_veil
 title: 皮与面纱
 wordpress_id: 261
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 皮，包裹着丑陋的身躯

@@ -7,7 +7,7 @@ slug: alone
 title: 独自
 wordpress_id: 175
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 为什么你要独自在街道上漫步，

@@ -7,7 +7,7 @@ slug: about_this_journey_of_life
 title: 关于人生这场旅途
 wordpress_id: 64
 categories:
-- 个人日记
+- personal_diary
 ---
 
 很多人愿意把人生比作一场旅途，我觉得这个比喻是很恰当的，这是一场没有回程的旅行，所以，就显得弥足珍贵。  

@@ -7,7 +7,7 @@ slug: a_date_in_the_future
 title: A Date In the Future
 wordpress_id: 211
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 I shall not feel lonely  

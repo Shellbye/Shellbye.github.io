@@ -7,7 +7,7 @@ slug: hear_your_name_i_think_is_beautiful
 title: 听到你的名字我就觉得很美
 wordpress_id: 273
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 听到你的名字  

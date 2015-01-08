@@ -7,7 +7,7 @@ slug: university_gave_me_the_first_lesson_life_lesson
 title: 大学给我上的第一堂人生课
 wordpress_id: 62
 categories:
-- 个人日记
+- personal_diary
 ---
 
 开学一个半月了，终于学到了点经验，和大家分享。  

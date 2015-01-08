@@ -7,7 +7,7 @@ slug: hurried_visit_sad_to_leave
 title: 匆匆的来访，伤心的离开
 wordpress_id: 65
 categories:
-- 个人日记
+- personal_diary
 ---
 
 几个小时之前，我还在寝室里和室友在一起，他们为我践行，几个小时之后，我来到了这个万里之外的城市……  

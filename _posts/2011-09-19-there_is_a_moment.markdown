@@ -7,7 +7,7 @@ slug: there_is_a_moment
 title: There is a moment
 wordpress_id: 199
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 To my dear parents, to the one I loved, and to myself.  

@@ -7,7 +7,7 @@ slug: havent_see_you_since_yesterday
 title: Haven't see you since yesterday
 wordpress_id: 208
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 Haven't see you since yesterday  

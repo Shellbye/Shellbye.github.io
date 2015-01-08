@@ -7,7 +7,7 @@ slug: thinking_about_the_future
 title: 关于未来的思考
 wordpress_id: 61
 categories:
-- 个人日记
+- personal_diary
 ---
 
 这几天真的很忙，忙的我有点撑不住的感觉，所以，今天下午，我没有去参加运动员筛选，去图书馆呆了一会儿，想了很多问题。  

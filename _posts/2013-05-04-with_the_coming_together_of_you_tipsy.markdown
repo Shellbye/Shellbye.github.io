@@ -7,7 +7,7 @@ slug: with_the_coming_together_of_you_tipsy
 title: 随着醉意一起涌来的你
 wordpress_id: 274
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 随着醉意一起涌来的你

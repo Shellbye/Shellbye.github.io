@@ -7,7 +7,7 @@ slug: i_love_you-2
 title: 我爱你
 wordpress_id: 32
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我爱你，在你面前我没有自己，每次站在你的附近，我感觉自己仿佛溶解了，溶解在了空气中，溶解在了对你的迷恋中，然后围绕着你旋转。  

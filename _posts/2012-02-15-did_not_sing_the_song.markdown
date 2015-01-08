@@ -7,7 +7,7 @@ slug: did_not_sing_the_song
 title: 再唱不出那样的歌曲
 wordpress_id: 225
 categories:
-- 个人日记
+- personal_diary
 ---
 
 2012-02-01

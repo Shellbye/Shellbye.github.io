@@ -7,7 +7,7 @@ slug: in_the_plum_side
 title: 在梅边
 wordpress_id: 11
 categories:
-- 个人日记
+- personal_diary
 ---
 
 在梅边落花似雪纷纷绵绵谁人怜   

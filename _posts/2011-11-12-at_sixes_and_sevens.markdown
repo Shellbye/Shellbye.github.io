@@ -7,7 +7,7 @@ slug: at_sixes_and_sevens
 title: 乱七八糟
 wordpress_id: 212
 categories:
-- 个人日记
+- personal_diary
 ---
 
 终于可以听着音乐，用中文输入法在电脑上写点东西了。

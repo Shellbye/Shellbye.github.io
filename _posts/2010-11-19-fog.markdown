@@ -7,7 +7,7 @@ slug: fog
 title: 雾
 wordpress_id: 164
 categories:
-- 诗词歌赋
+- poetry
 ---
 
    在她纯洁外表的掩盖之下  

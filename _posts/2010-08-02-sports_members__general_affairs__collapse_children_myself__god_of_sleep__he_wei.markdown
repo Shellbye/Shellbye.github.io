@@ -7,7 +7,7 @@ slug: sports_members__general_affairs__collapse_children_myself__god_of_sleep__h
 title: （体育委员+内务总管）×（崩儿喽+睡神）=贺伟
 wordpress_id: 133
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 本来没打算这么快就又写的，但是由于上一篇写的是一个女同学，貌似被很多人误会了，但是我又懒得解释，所以干脆再写一篇，大家就都明白我想做什么了~~~嘿嘿，崩儿喽在这里就扮演个消防员的角色吧，谁叫他是班里的内务总管——生活委员呢~~~  

@@ -7,7 +7,7 @@ slug: i_made_a_big_mistake
 title: I made a big mistake
 wordpress_id: 166
 categories:
-- 个人日记
+- personal_diary
 ---
 
    Well, after have tried so many things and always want to do something different, now I realized that I have made a big mistake. If you want to be the manager without have the right technology, then you have to be the God, that means impossible!  

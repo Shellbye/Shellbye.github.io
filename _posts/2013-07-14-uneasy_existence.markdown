@@ -7,7 +7,7 @@ slug: uneasy_existence
 title: 不安的存在
 wordpress_id: 276
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 下雨了

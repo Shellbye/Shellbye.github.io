@@ -7,7 +7,7 @@ slug: basketball_floor
 title: 篮球落地
 wordpress_id: 165
 categories:
-- 个人日记
+- personal_diary
 ---
 
 只有遇见过去的自己，你才知道自己变化有多大，而要想遇见过去的自己，只有遇见过去的人。

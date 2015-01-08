@@ -7,7 +7,7 @@ slug: quotnorthern_irelandquot_people_psychological_analysis_-_shen_bing_spoiler
 title: 《北爱》人物心理分析——沈冰（剧透慎入）
 wordpress_id: 248
 categories:
-- 个人日记
+- personal_diary
 ---
 
 作为剧中的女一号，却迟迟没有露面，终于在做足了铺垫露面时，马上就在他们的小圈子中掀起了阵阵波澜，或许，这就是女一号的魅力吧。沈冰绝对是在鲜花与掌声中登场的，几乎是集万千宠爱于一身。来自人杰地灵的云南，如冬日里的一支梅花，“清新冷艳”。但是，这一切，却有那么多背后的故事，这些故事在揭开后，却充满了讽刺，无情的讽刺。

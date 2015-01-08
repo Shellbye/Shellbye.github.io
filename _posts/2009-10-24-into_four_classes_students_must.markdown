@@ -7,7 +7,7 @@ slug: into_four_classes_students_must
 title: 四班同学一定要进
 wordpress_id: 66
 categories:
-- 个人日记
+- personal_diary
 ---
 
 又看了一遍《歌舞青春》第一部，在宿舍里和大学同学。没有当时第一次看的兴奋了，因为已经知道了所有的结局，唯一还像第一次看时的场景是女主角忧伤的独唱《When there was me and you》，高中很长一段时间里这是我的手机铃声。  

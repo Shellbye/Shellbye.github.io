@@ -7,7 +7,7 @@ slug: when_i_think_about_you
 title: 当我想你的时候
 wordpress_id: 253
 categories:
-- 个人日记
+- personal_diary
 ---
 
 《[当我想你的时候](http://box.zhangmen.baidu.com/m?word=mp3,,,%5B%B5%B1%CE%D2%CF%EB%C4%E3%B5%C4%CA%B1%BA%F2%5D&gate=1&ct=134217728&tn=baidumt,%B5%B1%CE%D2%CF%EB%C4%E3%B5%C4%CA%B1%BA%F2&si=%B5%B1%CE%D2%CF%EB%C4%E3%B5%C4%CA%B1%BA%F2;;%CD%F4%B7%E5;;793427;;793427&lm=-1&attr=0,0&rf=zb&size=4194304&mtype=1)》

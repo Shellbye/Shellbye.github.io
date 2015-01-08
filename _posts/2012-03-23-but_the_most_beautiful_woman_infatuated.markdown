@@ -7,7 +7,7 @@ slug: but_the_most_beautiful_woman_infatuated
 title: 最美不过痴情女子
 wordpress_id: 230
 categories:
-- 个人日记
+- personal_diary
 ---
 
 //这题目文艺的我自己都不好意思了，不过每周也就文艺这么一次，何不文艺个痛快？  

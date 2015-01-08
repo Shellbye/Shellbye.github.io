@@ -7,7 +7,7 @@ slug: '%e5%8d%9c%e7%ae%97%e5%ad%90%c2%b7%e7%a7%8b%e9%9b%a8'
 title: 卜算子·秋雨
 wordpress_id: 704
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 盛夏常思秋，怎奈热难消。

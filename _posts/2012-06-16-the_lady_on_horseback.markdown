@@ -7,7 +7,7 @@ slug: the_lady_on_horseback
 title: The lady on horseback
 wordpress_id: 239
 categories:
-- 个人日记
+- personal_diary
 ---
 
 The lady on horseback

@@ -7,7 +7,7 @@ slug: innocent_sui_hou_chu_-_yin_chao
 title: 天真烂漫、隋侯之珠——殷超
 wordpress_id: 137
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 最近有点忙，好多天都没有写新的同学，昨天意外听说有人关注我写的东西，顿时有了信心，再怎么忙，也得继续写。  

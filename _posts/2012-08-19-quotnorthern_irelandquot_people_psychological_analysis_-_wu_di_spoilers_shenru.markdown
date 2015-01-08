@@ -7,7 +7,7 @@ slug: quotnorthern_irelandquot_people_psychological_analysis_-_wu_di_spoilers_sh
 title: 《北爱》人物心理分析——吴狄（剧透慎入）
 wordpress_id: 249
 categories:
-- 个人日记
+- personal_diary
 ---
 
 看到了第29集，感觉唯一没有重大的无逻辑的基因突变的人物就是吴狄了，这个来自不完整的家庭的、缺乏父爱的大男生，一直很符合剧情设定，没有基因突变（杨子曦就基因突变了，后面解释）。像吴狄这样来自不健全的家庭的孩子是最容易心智不健全的（比如沈冰、程锋、Andy）。吴狄，因为缺乏父亲的影响，再加上有一个“看不起”自己的“哥哥”，所以性格中阳刚的一面相对较少，一直是一个文弱书生的样子，老好人。

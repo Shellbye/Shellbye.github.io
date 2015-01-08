@@ -7,7 +7,7 @@ slug: a_smiling_distance
 title: 一个微笑的距离
 wordpress_id: 163
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我想在你面前说话

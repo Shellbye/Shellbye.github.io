@@ -7,7 +7,7 @@ slug: unconsciously
 title: 不知不觉
 wordpress_id: 147
 categories:
-- 个人日记
+- personal_diary
 ---
 
 把妈妈送上火车，我才发现，很多事都已悄然发生了变化。。。。。。  

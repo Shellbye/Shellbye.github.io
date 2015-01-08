@@ -7,7 +7,7 @@ slug: will_evoke_memories_of_taste_hearing_can_do
 title: 味觉会唤起回忆，听觉也可以吗？
 wordpress_id: 196
 categories:
-- 个人日记
+- personal_diary
 ---
 
 这是一篇绝对的随笔  

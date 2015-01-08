@@ -7,7 +7,7 @@ slug: quotwestward_journeyquot
 title: 《大话西游》
 wordpress_id: 69
 categories:
-- 个人日记
+- personal_diary
 ---
 
 至尊宝以为他很爱白晶晶，屡次用月光宝盒穿越时空回去拯救已经自杀的她，然而每次都晚一点点，在最后一次念完咒语后，月光宝盒出了问题，至尊宝回到了五百年前，遇到了紫霞，拔出了紫霞不离身的宝剑……  

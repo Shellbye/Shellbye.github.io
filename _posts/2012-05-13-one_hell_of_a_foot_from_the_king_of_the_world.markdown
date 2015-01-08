@@ -7,7 +7,7 @@ slug: one_hell_of_a_foot_from_the_king_of_the_world
 title: 距离地狱一尺之一   世界之王
 wordpress_id: 234
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我在黑暗中醒来

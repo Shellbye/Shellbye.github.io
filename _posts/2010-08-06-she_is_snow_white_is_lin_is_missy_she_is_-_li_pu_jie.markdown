@@ -7,7 +7,7 @@ slug: she_is_snow_white_is_lin_is_missy_she_is_-_li_pu_jie
 title: 她是白雪公主，是林黛玉，是小乔，她是——李璞洁
 wordpress_id: 136
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]2026795715|1|http://www.hoym.cn/Article/UploadFiles/200708/20070821072421661.mp3|爱江山更爱美人|0|李丽芬|0[/music]  

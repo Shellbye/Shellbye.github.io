@@ -7,7 +7,7 @@ slug: women39s_poem
 title: 诗中的女子
 wordpress_id: 260
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 诗人把女子写入诗中

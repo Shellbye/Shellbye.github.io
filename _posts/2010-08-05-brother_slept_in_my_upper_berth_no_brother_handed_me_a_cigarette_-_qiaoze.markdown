@@ -7,7 +7,7 @@ slug: brother_slept_in_my_upper_berth_no_brother_handed_me_a_cigarette_-_qiaoze
 title: 睡在我上铺的兄弟，没有递给我烟抽的兄弟——乔泽
 wordpress_id: 135
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]3332369108|1|http://office.bitss.com.cn/uploadFile/app_upload/Music/老狼-睡在我上铺的兄弟.wma|睡在我上铺的兄弟|0|老狼|0[/music]  

@@ -7,7 +7,7 @@ slug: i_love_you
 title: 我爱你
 wordpress_id: 29
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我爱你，爱的不是你的容貌，所以不会因为你渐渐老去而抹去对你的爱；   

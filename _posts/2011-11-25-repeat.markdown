@@ -7,7 +7,7 @@ slug: repeat
 title: 单曲循环
 wordpress_id: 217
 categories:
-- 个人日记
+- personal_diary
 ---
 
 为什么，单曲循环

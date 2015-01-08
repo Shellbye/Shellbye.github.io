@@ -7,7 +7,7 @@ slug: streamer_is_easy_to_throw_red_cherry_green_banana_-_ulan_buh
 title: 流光容易把人抛，红了樱桃，绿了芭蕉——乌兰布和
 wordpress_id: 144
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]1791625366|1|http://www.zzstep.com/bbs/eWebEditor/uploadfile/20100831084020149.mp3|我的未来不是梦|0|张雨生|0[/music]  

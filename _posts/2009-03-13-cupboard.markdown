@@ -7,7 +7,7 @@ slug: cupboard
 title: 难念的经
 wordpress_id: 26
 categories:
-- 个人日记
+- personal_diary
 ---
 
 笑你我枉花光心计  

@@ -7,7 +7,7 @@ slug: high_school_reunions
 title: 高中同学聚会
 wordpress_id: 82
 categories:
-- 个人日记
+- personal_diary
 ---
 
 昨天晚上终于聚会了，熟悉的高中同学，再大变化也认得出，只是，所能认出的，也只是熟悉的外表，大家内在的改变，也许永远都没有机会出细细辨认了。  

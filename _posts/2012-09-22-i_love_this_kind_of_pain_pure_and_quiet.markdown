@@ -7,7 +7,7 @@ slug: i_love_this_kind_of_pain_pure_and_quiet
 title: I love this kind of pain, pure and quiet
 wordpress_id: 257
 categories:
-- 个人日记
+- personal_diary
 ---
 
 I love this kind of pain, pure and quiet. You can not enjoy it if you did not devote into it. The funny part of this is that when you do devote into it, the most unwanted thing is to get out which will bring the pain in your chest, pure and quiet. Sophisticated, right? Well, let me put it this way, it can make it much easier: they say no pains, no gains, and what i mean up there is no gains, no pains.

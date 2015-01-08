@@ -7,7 +7,7 @@ slug: reading_and_intellectuals
 title: 读书与知识分子
 wordpress_id: 271
 categories:
-- 个人日记
+- personal_diary
 ---
 
   

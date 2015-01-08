@@ -7,7 +7,7 @@ slug: appeared
 title: 现身
 wordpress_id: 210
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我是黑暗中的因纽特人  

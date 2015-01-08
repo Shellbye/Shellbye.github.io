@@ -7,7 +7,7 @@ slug: since_the_start_of_writing_code
 title: 自从开始写代码
 wordpress_id: 215
 categories:
-- 个人日记
+- personal_diary
 ---
 
 自从开始写代码，已经变成真正的除了吃饭不离寝室的宅男了。。。

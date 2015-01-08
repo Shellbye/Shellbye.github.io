@@ -7,7 +7,7 @@ slug: she_just_stands_there
 title: She just stands there
 wordpress_id: 214
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 **  

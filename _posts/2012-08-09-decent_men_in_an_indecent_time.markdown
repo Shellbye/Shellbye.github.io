@@ -7,7 +7,7 @@ slug: decent_men_in_an_indecent_time
 title: Decent Men In An Indecent Time
 wordpress_id: 245
 categories:
-- 个人日记
+- personal_diary
 ---
 
 You thought we could be decent men in an indecent time.But you were wrong.  ——Two-Face

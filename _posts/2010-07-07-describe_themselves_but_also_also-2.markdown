@@ -7,7 +7,7 @@ slug: describe_themselves_but_also_also-2
 title: 描述自己，却，也，还
 wordpress_id: 124
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 

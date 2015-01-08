@@ -7,7 +7,7 @@ slug: 98_individuals_42_m_graduation_wall
 title: 98个人，4.2米的毕业墙
 wordpress_id: 207
 categories:
-- 个人日记
+- personal_diary
 ---
 
 归途的路很长，但我已不是去时的自己。  

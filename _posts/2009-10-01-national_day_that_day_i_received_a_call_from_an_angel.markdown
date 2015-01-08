@@ -7,7 +7,7 @@ slug: national_day_that_day_i_received_a_call_from_an_angel
 title: 国庆那天，我接到了天使打来的电话
 wordpress_id: 57
 categories:
-- 个人日记
+- personal_diary
 ---
 
 2009年10月1日，这绝对是一个值得纪念的日子，不仅仅是因为今天是新中国成立六十周年，对我而言，更重要的是，就在国庆阅兵结束后，在回宿舍的路上，我接到了天使打来的电话。  

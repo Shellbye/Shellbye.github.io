@@ -7,7 +7,7 @@ slug: you_know_what_i39m_waiting_for_you_
 title: 你知道我在等你吗？2
 wordpress_id: 160
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我娇羞地低着头

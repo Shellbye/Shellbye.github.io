@@ -7,7 +7,7 @@ slug: envelope
 title: 信封
 wordpress_id: 281
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 有时候我不想被拆开  

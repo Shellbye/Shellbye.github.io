@@ -7,7 +7,7 @@ slug: last-yea-this-day
 title: 去年今日此门中
 wordpress_id: 841
 categories:
-- 个人日记
+- personal_diary
 post_format:
 - 日志
 ---

@@ -7,7 +7,7 @@ slug: lest_sungai_zemeng_boat_zaibu_dong_many_worry_-_lan_yu
 title: 只恐双溪舴艋舟，载不动，许多愁——兰宇
 wordpress_id: 140
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]3517231551|1|http://www.fly-eagle.com.cn/chinese/eWebEditor/UploadFile/20072117149245.mp3|women&#32;of&#32;Ireland|0|Joanie&#32;Madden|0[/music]  

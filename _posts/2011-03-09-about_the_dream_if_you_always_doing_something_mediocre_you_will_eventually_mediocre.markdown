@@ -7,7 +7,7 @@ slug: about_the_dream_if_you_always_doing_something_mediocre_you_will_eventually
 title: 关于梦想：如果你总是做着平庸的事，你终将平庸
 wordpress_id: 191
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 看完《The Social Network》，我又重新燃起了自己搁浅已久的梦想。很多人关注它是因为它是关于Facebook的，但是，我更愿意认为它是一部不普通的励志电影。这 部电影让我想起了陈奕迅的《浮夸》，我觉得它们有一样的地方，就是会激起我们的梦想的涟漪。  

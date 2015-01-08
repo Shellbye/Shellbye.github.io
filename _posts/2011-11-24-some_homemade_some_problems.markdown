@@ -7,7 +7,7 @@ slug: some_homemade_some_problems
 title: 一些家常，一些问题
 wordpress_id: 216
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 我还说终于得空了，可以坐下来写点东西，可是一坐下来才发现好像不怎么会写了，这段时间都忙于搞技术，没什么输入，于是也就没什么输出了。不过，随意扯几句家常还是可以的，于是鼓起了勇气。  

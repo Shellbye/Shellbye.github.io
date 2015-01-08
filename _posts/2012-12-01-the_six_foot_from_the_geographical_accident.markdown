@@ -7,7 +7,7 @@ slug: the_six_foot_from_the_geographical_accident
 title: 距离地域一尺之六  车祸
 wordpress_id: 268
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 街道转角  

@@ -7,7 +7,7 @@ slug: my_reflections_decade
 title: 我的十年感言
 wordpress_id: 641
 categories:
-- 个人日记
+- personal_diary
 ---
 
 【回忆1998年】   

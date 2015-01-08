@@ -7,7 +7,7 @@ slug: recall
 title: 回忆
 wordpress_id: 38
 categories:
-- 个人日记
+- personal_diary
 ---
 
 芸芸众生，我急驶而过  

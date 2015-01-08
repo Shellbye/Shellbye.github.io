@@ -7,7 +7,7 @@ slug: naive_man_would_sacrifice_everything_for_a_dream_magnificent_mature_man_wi
 title: 幼稚的男人会为了梦想壮丽地牺牲，成熟的男人会为了梦想屈辱地活着
 wordpress_id: 200
 categories:
-- 个人日记
+- personal_diary
 ---
 
 2009.9.25   

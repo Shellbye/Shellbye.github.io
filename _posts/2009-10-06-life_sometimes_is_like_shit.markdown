@@ -7,7 +7,7 @@ slug: life_sometimes_is_like_shit
 title: 人生，有时候就像拉屎
 wordpress_id: 59
 categories:
-- 个人日记
+- personal_diary
 ---
 
   

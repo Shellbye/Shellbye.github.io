@@ -7,7 +7,7 @@ slug: i_wake_up_from_a_nice_dream
 title: I wake up from a nice dream
 wordpress_id: 238
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 I wake up from a nice dream  

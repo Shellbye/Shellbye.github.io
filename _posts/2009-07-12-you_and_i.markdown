@@ -7,7 +7,7 @@ slug: you_and_i
 title: 你和我
 wordpress_id: 42
 categories:
-- 个人日记
+- personal_diary
 ---
 
 亲爱的听众朋友我是你的代班dj 想找你陪我一起聊聊这世界  

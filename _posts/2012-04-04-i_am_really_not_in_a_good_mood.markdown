@@ -7,7 +7,7 @@ slug: i_am_really_not_in_a_good_mood
 title: I am really not in a good mood
 wordpress_id: 231
 categories:
-- 个人日记
+- personal_diary
 ---
 
 Each time I don't have a good mood, I write it away in English. I really hope it will help this time because it's killing me now. In the classroom, I tried my best to stop thinking and focus on the maths tests but it turned out to be in vain.  

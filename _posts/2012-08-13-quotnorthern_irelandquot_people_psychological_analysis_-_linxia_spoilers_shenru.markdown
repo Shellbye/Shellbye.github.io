@@ -7,7 +7,7 @@ slug: quotnorthern_irelandquot_people_psychological_analysis_-_linxia_spoilers_s
 title: 《北爱》人物心理分析--林夏（剧透慎入）
 wordpress_id: 247
 categories:
-- 个人日记
+- personal_diary
 ---
 
 林夏是目前我最喜欢的一个角色（17集之前），她一出场时那那次为了逼出疯子而威胁跳楼，就给我留下了很深的映像，让我觉得这是一个敢爱敢恨的女子，后来的诸多事件，也充分体现了她对爱情的理解——不是占有，而是分享——她对疯子的那些极低的“要求”，也无一不体现她对疯子的爱的卑微和坚持。

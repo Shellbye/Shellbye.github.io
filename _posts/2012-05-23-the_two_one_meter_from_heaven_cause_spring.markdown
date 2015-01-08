@@ -7,7 +7,7 @@ slug: the_two_one_meter_from_heaven_cause_spring
 title: 距离天堂一米之二   致春天
 wordpress_id: 237
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我才刚从寒冷的冬夜醒来

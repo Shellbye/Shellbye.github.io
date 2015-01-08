@@ -7,7 +7,7 @@ slug: university_first_cut_class
 title: 大学第一次翘课
 wordpress_id: 54
 categories:
-- 个人日记
+- personal_diary
 ---
 
 真讽刺，很多高中同学今天第一次上课，我却已经开始翘课，又是英语，记得初中上课第一次趴在桌子上，是英语课，高中第一次睡觉，是英语课，如今，大学第一次翘课，又是英语…  

@@ -7,7 +7,7 @@ slug: days_gentleman_to_self-improvement_-_wang_hao
 title: 天行健，君子以自强不息——王浩
 wordpress_id: 141
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]11733667|1|http://bgl.sz.net.cn/bgl/2007-05/10/../../../images/2007-05/10/20050410145920329117.mp3|被风吹过的夏天|0|林俊杰&#32;金莎|0[/music]  

@@ -7,7 +7,7 @@ slug: the_three_authentic_foot_from_hell
 title: 距离地狱一尺之三 地道
 wordpress_id: 262
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 黑暗无孔不入的渗了进来  

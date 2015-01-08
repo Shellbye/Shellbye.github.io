@@ -7,7 +7,7 @@ slug: the_two_resigned_from_hell_foot
 title: 距离地狱一尺之二   认输
 wordpress_id: 235
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我躬着身

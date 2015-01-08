@@ -7,7 +7,7 @@ slug: moon
 title: 圆月
 wordpress_id: 243
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我静坐在江南的竹椅上

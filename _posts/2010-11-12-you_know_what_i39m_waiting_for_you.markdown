@@ -7,7 +7,7 @@ slug: you_know_what_i39m_waiting_for_you
 title: 你知道我在等你吗？
 wordpress_id: 159
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 你在等待着什么

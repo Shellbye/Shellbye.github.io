@@ -7,7 +7,7 @@ slug: loved_ones_-_like_this_document_to_my_beloved_sister
 title: 亲人——谨以此文献给我深爱的姐姐
 wordpress_id: 111
 categories:
-- 个人日记
+- personal_diary
 ---
 
 [music]633931|3|http://stream8.qqmusic.qq.com/633931.wma|亲人|11979|丁当|0[/music]  

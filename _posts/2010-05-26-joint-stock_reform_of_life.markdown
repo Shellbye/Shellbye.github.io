@@ -7,7 +7,7 @@ slug: joint-stock_reform_of_life
 title: 对生活进行股份制改革
 wordpress_id: 108
 categories:
-- 个人日记
+- personal_diary
 ---
 
 看了点关于联想发展史的东西，发现股份制改革成就了这个中国IT龙头，于是，我也在构思着对我的生活进行一次颠覆的股份制改革~~~  

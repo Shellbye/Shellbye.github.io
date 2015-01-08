@@ -7,7 +7,7 @@ slug: check_in
 title: 报到
 wordpress_id: 48
 categories:
-- 个人日记
+- personal_diary
 ---
 
 写在前面：应该是在2006年8月19号报道吧，是通知军训，我是最后一个到的，迟到了的样子，一个老师正在讲台上讲话，就是杜哥啦。  

@@ -7,7 +7,7 @@ slug: everyone_has_the_death_impulse_a_parallel_with_the_sexual_impulse_instinct
 title: 人人都有的死亡冲动，一种与性冲动并行的本能冲动——《北京科技报》
 wordpress_id: 106
 categories:
-- 个人日记
+- personal_diary
 ---
 
 瞬间出现跳楼、溺水、刀割等意向并不可怕  

@@ -7,7 +7,7 @@ slug: the_call
 title: the call
 wordpress_id: 115
 categories:
-- 个人日记
+- personal_diary
 ---
 
 [music]1029867303|1|http://michu.mlab.net/music/the_call.mp3|the&#32;call|0|unknown|0[/music]   

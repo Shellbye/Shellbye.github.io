@@ -7,7 +7,7 @@ slug: english_class-say_goodbye
 title: 英语课－say goodbye
 wordpress_id: 74
 categories:
-- 个人日记
+- personal_diary
 ---
 
 上次例会，我就和辅导员说，英语课是收获最多的课…  

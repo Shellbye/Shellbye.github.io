@@ -7,7 +7,7 @@ slug: hell_foot_from_the_four_corners
 title: 距离地狱一尺之四 角落
 wordpress_id: 263
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 光明到来了  

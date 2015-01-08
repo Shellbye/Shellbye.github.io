@@ -7,7 +7,7 @@ slug: tonight_the_moon
 title: Tonight, the Moon
 wordpress_id: 222
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 I thought I was dead already  

@@ -7,7 +7,7 @@ slug: at_the_moment_i39m_your_eyes_scenery_looks_very_funny_actually_very_sad
 title: 此刻，我是你眼里的风景，看起来很搞笑，其实很伤感
 wordpress_id: 103
 categories:
-- 个人日记
+- personal_diary
 ---
 
 你永远也不会知道，你在我心里曾经是那么重要。我曾对自己说，为了你我可以放弃很多东西，甚至是我的信仰、我的梦想。  

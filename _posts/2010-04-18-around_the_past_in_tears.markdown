@@ -7,7 +7,7 @@ slug: around_the_past_in_tears
 title: 细数往事中的眼泪
 wordpress_id: 102
 categories:
-- 个人日记
+- personal_diary
 ---
 
 人的感情就是这么的有意思，会突然在某个清晨，刷牙的时候，想起过去的很多很多，越想越多，越想越深，最后竟对着镜子看到了自己的眼泪。  

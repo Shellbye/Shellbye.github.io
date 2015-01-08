@@ -7,7 +7,7 @@ slug: past_poem_poetic_memories
 title: 往事如诗，如诗往事
 wordpress_id: 194
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 青青子衿，悠悠我心。  

@@ -7,7 +7,7 @@ slug: summer
 title: 消夏
 wordpress_id: 282
 categories:
-- 个人日记
+- personal_diary
 ---
 
 夏热炎热，不适合劳作，应该好好休息。——我  

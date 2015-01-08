@@ -7,7 +7,7 @@ slug: seek_and_find
 title: Seek and find
 wordpress_id: 255
 categories:
-- 个人日记
+- personal_diary
 ---
 
 by Shellbye

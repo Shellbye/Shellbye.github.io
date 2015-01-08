@@ -7,7 +7,7 @@ slug: friend_and_foe
 title: 敌友
 wordpress_id: 630
 categories:
-- 个人日记
+- personal_diary
 ---
 
 如果敌人让你生气，那说明你还没有胜他的把握。   

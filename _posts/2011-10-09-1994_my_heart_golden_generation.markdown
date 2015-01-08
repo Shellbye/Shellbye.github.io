@@ -7,7 +7,7 @@ slug: 1994_my_heart_golden_generation
 title: 1994，我心中的黄金一代
 wordpress_id: 202
 categories:
-- 个人日记
+- personal_diary
 ---
 
 1994年，在我眼里是很特殊的一年——当然，当年我并没有意识到，因为我当年才4岁——因为在这一年，诞生了很多优秀的电影，很多注定会被载入电影史册的优秀作品。  

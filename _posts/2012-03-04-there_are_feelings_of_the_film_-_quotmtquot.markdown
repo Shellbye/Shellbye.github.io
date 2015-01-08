@@ -7,7 +7,7 @@ slug: there_are_feelings_of_the_film_-_quotmtquot
 title: 有情怀的电影——《转山》
 wordpress_id: 227
 categories:
-- 个人日记
+- personal_diary
 ---
 
 影片用一个年轻生命的死亡作为开始，或许就预示着这注定是一部有情怀的电影。  

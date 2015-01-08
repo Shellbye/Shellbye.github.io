@@ -7,7 +7,7 @@ slug: ashes_of_time
 title: 时间的灰烬
 wordpress_id: 279
 categories:
-- 个人日记
+- personal_diary
 ---
 
 “人最大的麻烦，即是记性太好。如果什么都可以忘掉，以后每一天将会是一个新的开始。  ”  

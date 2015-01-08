@@ -7,7 +7,7 @@ slug: she__city_-_gifts
 title: 她·城---馈赠
 wordpress_id: 258
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 这是一个完美的生命

@@ -7,7 +7,7 @@ slug: let_the_storm_to_the_more_violent_it_-_liu_zheng
 title: 让暴风雨来的更猛烈些吧——刘峥
 wordpress_id: 142
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
 [music]3348064658|1|http://wq1901.hpjy.edu.cn/student/lingbailin/images/yxcb.mp3|隐形的翅膀|0|张含韵|0[/music]  

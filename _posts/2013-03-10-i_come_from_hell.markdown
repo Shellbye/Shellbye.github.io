@@ -7,7 +7,7 @@ slug: i_come_from_hell
 title: 我来自地狱
 wordpress_id: 272
 categories:
-- 个人日记
+- personal_diary
 ---
 
 至少我去过那里。  

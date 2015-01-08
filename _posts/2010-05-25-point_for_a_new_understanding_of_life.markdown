@@ -7,7 +7,7 @@ slug: point_for_a_new_understanding_of_life
 title: 对生活的一点新的理解
 wordpress_id: 107
 categories:
-- 个人日记
+- personal_diary
 ---
 
 想写的东西很多，可是一坐在电脑前，却又不知从何写起，就从今天的雨写起吧。  

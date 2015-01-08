@@ -7,7 +7,7 @@ slug: break_point_and_end_point
 title: 折点与终点
 wordpress_id: 35
 categories:
-- 个人日记
+- personal_diary
 ---
 
 他出生贫寒，她出生富贵。  

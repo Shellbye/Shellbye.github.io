@@ -7,7 +7,7 @@ slug: recently_i_suddenly_felt_time_slow_
 title: 最近突然觉得时间慢了..............
 wordpress_id: 114
 categories:
-- 个人日记
+- personal_diary
 ---
 
 有好久没有写东西了虽然还有作业没有没有完成，但是，想先写点东西。  

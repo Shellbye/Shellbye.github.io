@@ -7,7 +7,7 @@ slug: patriotism_is_a_fool39s_degree-2
 title: 爱国是愚人的度
 wordpress_id: 220
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 本周就不抒情了（无情可抒），也不感悟了（感悟很少），本周主要愤青  

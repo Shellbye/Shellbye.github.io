@@ -7,7 +7,7 @@ slug: why_me
 title: Why me?
 wordpress_id: 168
 categories:
-- 个人日记
+- personal_diary
 ---
 
    Yesterday I send her a message ask if she have a boyfriend , and her answer is "I have got someone who I like and I am sure that he liked me,too." Well, to tell the truth, this isn't the answer I want but it is a answer so I have to face it.Maybe it's a good thing,at least I won't be upset when I saw her talking to some other boy.  

@@ -7,7 +7,7 @@ slug: quotwine_cemeteryquot_book
 title: 《酒公墓》读后感
 wordpress_id: 640
 categories:
-- 个人日记
+- personal_diary
 ---
 
 本来是想看看网上有没有那段墓志铭，没想到全文都有，就都转载下来了。  

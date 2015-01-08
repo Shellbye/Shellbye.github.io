@@ -7,7 +7,7 @@ slug: the_most_beautiful_poem
 title: 最美的诗句
 wordpress_id: 251
 categories:
-- 个人日记
+- personal_diary
 ---
 
 双眉紧锁

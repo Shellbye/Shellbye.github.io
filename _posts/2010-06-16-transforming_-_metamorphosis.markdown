@@ -7,7 +7,7 @@ slug: transforming_-_metamorphosis
 title: Transforming-------蜕变
 wordpress_id: 117
 categories:
-- 个人日记
+- personal_diary
 ---
 
 第一次接触到这个神奇的词语是在一个关于心理的电影中，有点恐怖，当时对这个词语的感觉不好，因为它是被一个心理变态的杀人凶手用来解释自己杀人的动机的，他说对她们（他主要杀女性），死亡以及被毁容是一种Transforming，很显然，谁也不会对这个词语在此时有什么好的印象，知道前几天看了《爱丽丝梦游仙境》，对这个词语才有了新的认识。  

@@ -7,7 +7,7 @@ slug: i_used_to_have_a_cat
 title: 我曾经有过一只猫
 wordpress_id: 224
 categories:
-- 个人日记
+- personal_diary
 ---
 
 清水河有好多猫和狗，有时一个人在去食堂或图书馆的路上遇到它们，看它们跑来跑去自由地草地上嬉戏，多少还是可以给我带来些许欢乐的。  

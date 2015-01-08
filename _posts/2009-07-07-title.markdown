@@ -7,7 +7,7 @@ slug: title
 title: 题
 wordpress_id: 41
 categories:
-- 个人日记
+- personal_diary
 ---
 
 生活负责出题，理想给了一份答案，现实给了一份，而正确答案，是时间给的。

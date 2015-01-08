@@ -7,7 +7,7 @@ slug: quotnorthern_irelandquot_people_psychological_analysis_-_shi_xiao-meng
 title: 《北爱》人物心理分析——石小猛
 wordpress_id: 252
 categories:
-- 个人日记
+- personal_diary
 ---
 
 终于要写到剧中的关键人物了，好像有好多要写的，当然也包括基因突变这一尴尬的事实。

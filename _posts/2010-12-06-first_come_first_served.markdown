@@ -7,7 +7,7 @@ slug: first_come_first_served
 title: 先来后到
 wordpress_id: 172
 categories:
-- 个人日记
+- personal_diary
 ---
 
    前前后后忙活了半个多月，初赛《那长着蒲公英的土地》，决赛《茶花女》，最终赢得了三个奖状和一场宿醉，对于我而言，值了。  

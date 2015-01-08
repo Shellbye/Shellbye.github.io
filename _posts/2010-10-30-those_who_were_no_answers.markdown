@@ -7,7 +7,7 @@ slug: those_who_were_no_answers
 title: 那些个没有答案的
 wordpress_id: 151
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我一直是一个比较较真的人，从小就喜欢刨根问底，当然老妈并没有回答我的全部问题，于是很长一段时间里，我真的以为自己是妈妈捡来的。。。  

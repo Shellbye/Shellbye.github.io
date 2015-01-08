@@ -7,7 +7,7 @@ slug: backstroke_is_a_state_of_mind
 title: 仰泳是一种心态
 wordpress_id: 126
 categories:
-- 个人日记
+- personal_diary
 ---
 
 最近天气突然热了起来，于是这几天便顶着期末考试的压力天天游泳，一直没有什么大的进步，知道今天，刚才带着鼻夹居然仰泳游得不错，才发现，其实，仰泳是一种心态，游泳也是~~~  

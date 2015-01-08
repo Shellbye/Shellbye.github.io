@@ -7,7 +7,7 @@ slug: in-the-initial-night
 title: 在最初的夜里
 wordpress_id: 809
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 <blockquote>

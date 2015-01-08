@@ -7,7 +7,7 @@ slug: wild_nature
 title: 野性
 wordpress_id: 256
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我听不到野性的呼唤

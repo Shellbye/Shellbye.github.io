@@ -7,7 +7,7 @@ slug: if_you_can_please_reprint_your_space_we_all_need_to_look_at
 title: 如果可以，请转载到你的空间，大家都需要看看
 wordpress_id: 31
 categories:
-- 个人日记
+- personal_diary
 ---
 
 **主题:** Fw:如果可以，请认真看.........谢谢！   

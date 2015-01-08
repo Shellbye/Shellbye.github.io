@@ -7,7 +7,7 @@ slug: 4_classes_albums
 title: 4班相册
 wordpress_id: 45
 categories:
-- 个人日记
+- personal_diary
 ---
 
 实在无聊的不行，于是想到做个全班同学的像集，如果没有你请别心急，我会补齐的~~~~~~~   

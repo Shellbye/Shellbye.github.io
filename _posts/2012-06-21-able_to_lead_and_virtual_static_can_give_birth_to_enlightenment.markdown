@@ -7,7 +7,7 @@ slug: able_to_lead_and_virtual_static_can_give_birth_to_enlightenment
 title: 虛能引和，静能生悟
 wordpress_id: 241
 categories:
-- 个人日记
+- personal_diary
 ---
 
 这是昨天在图书馆的书画展上看的一幅字中的上半句。“虛”刚开始不认识，所以只知道“ *能引和，静能生悟”，今天又去看，用手机搜索了一下，原来是“虛”字。简单调查了一下，原来是安徽九华山布袋弥勒楹联。原文是“笑能引和，静能生悟”，不知为何，也不知何时，在书法界，它变成了“虛能引和，静能生悟“，或许这多少更符合书法的境界罢。

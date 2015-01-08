@@ -7,7 +7,7 @@ slug: police_-_gary_oldman
 title: 警察——加里·奥德曼
 wordpress_id: 254
 categories:
-- 个人日记
+- personal_diary
 ---
 
 当我的好友第一次告诉我说《[蝙蝠侠前传2：暗夜骑士](http://movie.douban.com/subject/3395373/)》里的戈登警长的扮演者和《[这个杀手不太冷](http://movie.douban.com/subject/1295644/)》里的变态警察的扮演者是同一个人的时候，我很肯定对他说：你个傻逼，怎么可能！可是，真相是，虽然一个角色是以天下为己任的警长，而一个是恶贯满盈警察败类，但是，他们的扮演者却真的是同一个人：[加里·奥德曼](http://movie.douban.com/celebrity/1010507/)，这个来自英国的用灵魂在演戏的家伙。

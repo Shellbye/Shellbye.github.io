@@ -7,7 +7,7 @@ slug: follow_your_heart_-_ban39s_speech_at_the_meeting
 title: Follow your heart————班会上的演讲
 wordpress_id: 148
 categories:
-- 个人日记
+- personal_diary
 ---
 
 follow your heart.这是上学期做英语作业采访欧姐时欧姐对于很多问题给出的共同答案，所以我对它思索了很久，于是，也收获了很多。  

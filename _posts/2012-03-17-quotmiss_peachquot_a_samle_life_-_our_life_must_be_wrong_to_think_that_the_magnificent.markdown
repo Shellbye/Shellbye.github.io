@@ -7,7 +7,7 @@ slug: quotmiss_peachquot_a_samle_life_-_our_life_must_be_wrong_to_think_that_the
 title: 《桃姐》 A Samle Life——我们错误的以为人生必须波澜壮阔
 wordpress_id: 229
 categories:
-- 个人日记
+- personal_diary
 ---
 
 所有甜美的果实都来自于忧伤的痛苦，所有快乐的回忆都来自苦难的经历，我们经历的磨难，是为了能够让我们更好的安慰别人。  

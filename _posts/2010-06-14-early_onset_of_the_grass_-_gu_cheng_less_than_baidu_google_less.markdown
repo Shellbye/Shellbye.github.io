@@ -7,7 +7,7 @@ slug: early_onset_of_the_grass_-_gu_cheng_less_than_baidu_google_less
 title: 早发的小草——顾城（百度不到，Google不到）
 wordpress_id: 116
 categories:
-- 个人日记
+- personal_diary
 ---
 
 这是我在杂志上偶然看到一首诗，自己珍藏了好久，一直没有发出来，总想独自占有它，刚才在百度和Google上都查了，找不到~~这么好的东西，其实是应该分享的，所以就发了吧，顺便说一下，我喜欢后两句，可是自己却做不到~~  

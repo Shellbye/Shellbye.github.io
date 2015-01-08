@@ -7,7 +7,7 @@ slug: things_are_often_not_what_it_appears_to_look_like_that
 title: 事情往往不是它看上去的那个样子的
 wordpress_id: 170
 categories:
-- 个人日记
+- personal_diary
 ---
 
    事情往往不是它看上去的那个样子的。  

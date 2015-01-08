@@ -7,7 +7,7 @@ slug: a_wonderful_person
 title: 一个人的精彩
 wordpress_id: 632
 categories:
-- 个人日记
+- personal_diary
 ---
 
 说是一个人的精彩，有些牵强，因为这是无奈之语，随着阅历的增加，以及生活中的很多不尽如人意的事的增多，我开始觉得可以信任的人是越来越少了，朋友在渐渐变多，可知己却在减少。  

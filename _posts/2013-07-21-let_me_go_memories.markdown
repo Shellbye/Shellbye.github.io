@@ -7,7 +7,7 @@ slug: let_me_go_memories
 title: 放我走吧，回忆
 wordpress_id: 277
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 那美好的回忆啊  

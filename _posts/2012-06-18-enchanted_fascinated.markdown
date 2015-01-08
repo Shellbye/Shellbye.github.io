@@ -7,7 +7,7 @@ slug: enchanted_fascinated
 title: Enchanted 着迷
 wordpress_id: 240
 categories:
-- 个人日记
+- personal_diary
 ---
 
 Enchanted 着迷  

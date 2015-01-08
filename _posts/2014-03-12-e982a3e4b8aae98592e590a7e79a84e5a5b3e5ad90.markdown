@@ -7,7 +7,7 @@ slug: '%e9%82%a3%e4%b8%aa%e9%85%92%e5%90%a7%e7%9a%84%e5%a5%b3%e5%ad%90'
 title: 那个酒吧的女子
 wordpress_id: 830
 categories:
-- 诗词歌赋
+- poetry
 post_format:
 - 日志
 ---

@@ -7,7 +7,7 @@ slug: special_edition______she_and_he_invisible_lover_
 title: （特别篇）★★★★★她和他，隐形的恋人Ⅱ
 wordpress_id: 145
 categories:
-- 高中的人和事
+- people_and_things_in_high_school
 ---
 
   

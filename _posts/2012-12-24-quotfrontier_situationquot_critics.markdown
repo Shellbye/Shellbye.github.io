@@ -7,7 +7,7 @@ slug: quotfrontier_situationquot_critics
 title: 《边境风云》影评
 wordpress_id: 270
 categories:
-- 个人日记
+- personal_diary
 ---
 
 可以说该片填补了大陆电影犯罪题材的空白，注意，不仅仅是填补了空白，而且是树立一个很高很高的标杆。有了此片，后来的人就不能再拍烂片了。   

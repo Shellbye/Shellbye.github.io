@@ -7,7 +7,7 @@ slug: rainy_night_to_go_home
 title: 雨夜回家
 wordpress_id: 40
 categories:
-- 个人日记
+- personal_diary
 ---
 
 半夜两点，刚下完雨，我骑着自行车从同学家回家。  

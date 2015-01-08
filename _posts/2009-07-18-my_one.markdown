@@ -7,7 +7,7 @@ slug: my_one
 title: 我的一中
 wordpress_id: 43
 categories:
-- 个人日记
+- personal_diary
 ---
 
   

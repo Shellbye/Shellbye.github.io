@@ -7,7 +7,7 @@ slug: describe_themselves_but_also_also
 title: 描述自己，却，也，还
 wordpress_id: 83
 categories:
-- 个人日记
+- personal_diary
 ---
 
 像个哲学家一样忧伤的思考人生，却  

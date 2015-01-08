@@ -7,7 +7,7 @@ slug: heart
 title: Heart
 wordpress_id: 113
 categories:
-- 个人日记
+- personal_diary
 ---
 
 Man's heart is such a place that once you stepped in you may never out of it.  

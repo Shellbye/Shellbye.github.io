@@ -7,7 +7,7 @@ slug: zhangmei_lian_teacher_-_elementary_school_fragmentary_memories
 title: 张美莲老师——小学的一些零碎记忆
 wordpress_id: 146
 categories:
-- 个人日记
+- personal_diary
 ---
 
 师者，所以传道授业解惑也。  

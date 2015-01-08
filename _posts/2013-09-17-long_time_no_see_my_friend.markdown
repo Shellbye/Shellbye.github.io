@@ -7,7 +7,7 @@ slug: long_time_no_see_my_friend
 title: Long time no see, my friend
 wordpress_id: 285
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 Long time no see, my friend  

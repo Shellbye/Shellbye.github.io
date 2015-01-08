@@ -7,7 +7,7 @@ slug: less_time_do_not_tell
 title: 不到时候，不要说出
 wordpress_id: 34
 categories:
-- 个人日记
+- personal_diary
 ---
 
 上网真的没什么可干的，就看了老师很推荐的《我的青春谁做主》，确实不错，我一下明白了不少东西。  

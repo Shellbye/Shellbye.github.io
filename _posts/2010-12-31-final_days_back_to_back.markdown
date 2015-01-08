@@ -7,7 +7,7 @@ slug: final_days_back_to_back
 title: 岁末年终，回回首
 wordpress_id: 177
 categories:
-- 个人日记
+- personal_diary
 ---
 
 在这个时候写东西，会觉得特别的有意思，所以对于我这个喜欢写东西的小白来说，就真得写点东西了。

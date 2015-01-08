@@ -7,7 +7,7 @@ slug: its_been_a_long_time_since_the_last_diary_i_wrote_in_english
 title: It's been a long time since the last diary I wrote in English
 wordpress_id: 223
 categories:
-- 个人日记
+- personal_diary
 ---
 
 It's said that when you're not using your mother  language, you'll feel safe. And that's why I wrote this in English. To  tell the truth, I didn't spent anytime in English learning this term,  how pathetic since that's all because I didn't have any English relevant  course! Time is really limited,isn't it? You have to spent your  precious time in the thing that really counts but the thing you deeply  love.

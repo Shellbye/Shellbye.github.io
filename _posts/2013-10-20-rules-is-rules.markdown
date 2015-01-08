@@ -7,7 +7,7 @@ slug: rules-is-rules
 title: 对规则的不严格执行就是对遵守规则的人的伤害
 wordpress_id: 740
 categories:
-- 个人日记
+- personal_diary
 ---
 
 

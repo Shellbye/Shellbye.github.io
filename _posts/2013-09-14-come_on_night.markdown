@@ -7,7 +7,7 @@ slug: come_on_night
 title: 来吧，夜
 wordpress_id: 284
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 来吧，夜，我的情人  

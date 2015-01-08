@@ -7,7 +7,7 @@ slug: reading_quotwalking_in_the_painting_emperor_-_zhang_daqian_adrift_after_
 title: 读《行走中的画帝——张大千漂泊的后…
 wordpress_id: 125
 categories:
-- 个人日记
+- personal_diary
 ---
 
 

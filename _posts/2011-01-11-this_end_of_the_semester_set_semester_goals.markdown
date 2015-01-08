@@ -7,7 +7,7 @@ slug: this_end_of_the_semester_set_semester_goals
 title: 这学期末，定下学期目标
 wordpress_id: 181
 categories:
-- 个人日记
+- personal_diary
 ---
 
 趁着今天有点时间，写点东西，不然明天忙着准备考试，后天忙着考试，再后天忙着各种吃饭，最后忙着回家，回了家就没有这种悠闲地坐在电脑前写东西的时间了。

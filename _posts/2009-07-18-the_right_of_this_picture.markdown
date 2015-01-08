@@ -7,7 +7,7 @@ slug: the_right_of_this_picture
 title: 右边的这张图
 wordpress_id: 44
 categories:
-- 个人日记
+- personal_diary
 ---
 
 王力宏的图片好多啊，可就是这张，让我一看之下就喜欢上了，没有那种明星的张扬，目光中略带忧郁，仿佛还透着点点悲伤与无奈，很像现在的我的心情。  

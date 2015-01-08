@@ -7,7 +7,7 @@ slug: this_friendship_is_not_less_than_love_is_not_called_ambiguous_call_friends
 title: 这种友谊不低于爱情，不叫暧昧~叫知己~~
 wordpress_id: 93
 categories:
-- 个人日记
+- personal_diary
 ---
 
 你们可能相爱过，你们也可能喜欢着彼此，  

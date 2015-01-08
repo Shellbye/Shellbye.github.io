@@ -7,7 +7,7 @@ slug: early_onset_of_the_grass_-_gu_cheng_baidu_less_goog_
 title: 早发的小草——顾城（百度不到，Goog…
 wordpress_id: 130
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 

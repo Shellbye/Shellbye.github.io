@@ -7,7 +7,7 @@ slug: this_is_for_you
 title: 这个是写给你的
 wordpress_id: 105
 categories:
-- 个人日记
+- personal_diary
 ---
 
 [music]315161|3|http://stream2.qqmusic.qq.com/315161.wma|my heart will go on|4709|席琳·迪昂,席琳·迪翁(Celine Dion)|524811|3|http://stream5.qqmusic.qq.com/524811.wma|Pretty Boy|2201|窈窕美眉(M2M)|97775|3|http://stream1.qqmusic.qq.com/97775.wma|东风破|4558|周杰伦|1[/music]  

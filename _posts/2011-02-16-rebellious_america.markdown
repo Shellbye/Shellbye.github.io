@@ -7,7 +7,7 @@ slug: rebellious_america
 title: 桀骜不驯的美
 wordpress_id: 188
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 生命诚可贵，爱情价更高。  

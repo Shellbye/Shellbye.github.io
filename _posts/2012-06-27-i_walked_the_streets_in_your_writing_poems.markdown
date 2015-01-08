@@ -7,7 +7,7 @@ slug: i_walked_the_streets_in_your_writing_poems
 title: 我在你走过的街边写下情诗
 wordpress_id: 242
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 我在你走过的街边写下情诗

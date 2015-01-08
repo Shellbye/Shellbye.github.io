@@ -7,7 +7,7 @@ slug: quotnorthern_irelandquot_people_psychological_analysis_-_cheng_feng_spoile
 title: 《北爱》人物心理分析——程锋（剧透慎入）
 wordpress_id: 250
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我想这已经不能算是什么“人物心理分析”了，因为看到第32集我起初对这部电视剧的好感都渐渐地没了，所以开始的一天两三集，变成现在的三两天一集或者更少了，因为我感觉剧情越来越没谱了，继杨子曦之后，多位角色发生了基因突变，当然，也包括本剧的编剧兼导演所扮演的程锋程公子。

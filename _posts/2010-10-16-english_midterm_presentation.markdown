@@ -7,7 +7,7 @@ slug: english_midterm_presentation
 title: 英语期中考试的presentation
 wordpress_id: 149
 categories:
-- 个人日记
+- personal_diary
 ---
 
 Hello ladies and gentlemen  

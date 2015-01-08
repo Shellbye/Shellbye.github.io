@@ -7,7 +7,7 @@ slug: internet
 title: 上网
 wordpress_id: 37
 categories:
-- 个人日记
+- personal_diary
 ---
 
 无聊的时候就会上网，打发无聊的时间，可结果常是愈发的无聊，简直无聊透顶。  

@@ -7,7 +7,7 @@ slug: be_baptized
 title: 受洗
 wordpress_id: 39
 categories:
-- 个人日记
+- personal_diary
 ---
 
 昨天，在教堂，接受了一年一度的受洗。  

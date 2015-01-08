@@ -7,7 +7,7 @@ slug: if_i_love_it_is_because_the_body_in_which_i_am_very_happy
 title: 如果我爱，那是因为身在其中我很快乐
 wordpress_id: 167
 categories:
-- 个人日记
+- personal_diary
 ---
 
 今天校话剧比赛，作为学院的负责人、话剧导演和评委的我，感觉又学习到了不少呀！  

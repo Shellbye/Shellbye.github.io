@@ -7,7 +7,7 @@ slug: wish_i_could_tell_you
 title: 好想告诉你
 wordpress_id: 153
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 

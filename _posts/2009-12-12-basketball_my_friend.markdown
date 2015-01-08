@@ -7,7 +7,7 @@ slug: basketball_my_friend
 title: 篮球，我的朋友
 wordpress_id: 76
 categories:
-- 个人日记
+- personal_diary
 ---
 
 好久没有打篮球了，就像好久没有像个小孩子一样高兴了，昨天下午体育课，虽然刚测完2000米，但还是和同学院的同学打了近两个小时篮球。  

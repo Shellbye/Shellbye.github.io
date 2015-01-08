@@ -7,7 +7,7 @@ slug: november_5_2010_diary
 title: 2010年11月05日的日记
 wordpress_id: 156
 categories:
-- 个人日记
+- personal_diary
 ---
 
    怎么申请个MSN这么麻烦呀！          

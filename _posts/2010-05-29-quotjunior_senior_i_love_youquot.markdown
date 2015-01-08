@@ -7,7 +7,7 @@ slug: quotjunior_senior_i_love_youquot
 title: 《初三 大四 我爱你》
 wordpress_id: 110
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我很少看爱情片，但是偶尔看一个，总会有很多感触。下载了好久，终于下载好了一部泰国的爱情片《初三大四我爱你》，起初是在同学的分享中看到的，同学说不错，我就看了。  

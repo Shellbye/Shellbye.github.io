@@ -7,7 +7,7 @@ slug: only_a_single_people_would_love_to_think
 title: 只有一个单身的人才会去思考爱情
 wordpress_id: 269
 categories:
-- 个人日记
+- personal_diary
 ---
 
 不是么？那些热恋中的情人们，他们的爱如炙热的阳光，他们的笑如灿烂的烟火，即使有了磕磕碰碰，他们也总是会想尽一切办法解决掉，他们思考的，往往是爱了之后的事，对于为什么爱，怎么去爱，这样的问题，我觉得只有像我这样的单身的人才会偶尔思考。

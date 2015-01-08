@@ -7,7 +7,7 @@ slug: wonderful_movie_to_life_than
 title: 生活远比电影要精彩
 wordpress_id: 226
 categories:
-- 个人日记
+- personal_diary
 ---
 
 “生活远比电影要精彩，因为在电影中要有铺垫，要有伏笔，但是在生活中，有些事就那样发生了，毫无预兆”。

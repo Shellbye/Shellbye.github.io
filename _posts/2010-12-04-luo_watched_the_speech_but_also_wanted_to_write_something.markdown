@@ -7,7 +7,7 @@ slug: luo_watched_the_speech_but_also_wanted_to_write_something
 title: 看了老罗的演讲，又想写东西了
 wordpress_id: 171
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
    我总觉得，兼容并包是一种优秀的品质，尽管我自己还不足够兼容并包，但是我一直在努力着。于是在新浪博客上关注了不少人，有之前熟悉的，也有不熟悉但是名气很高的，柴静就是其中一个，确实不错，尤其是今天，我通过她的博客的认识了罗永浩，也就是老罗。  

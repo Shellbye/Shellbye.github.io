@@ -7,7 +7,7 @@ slug: one_hundred_word_contest_
 title: 百字大赛！快来参加！！欢迎转载！！！
 wordpress_id: 100
 categories:
-- 个人日记
+- personal_diary
 ---
 
 一、比赛内容  

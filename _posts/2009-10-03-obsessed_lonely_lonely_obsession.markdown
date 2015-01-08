@@ -7,7 +7,7 @@ slug: obsessed_lonely_lonely_obsession
 title: 迷恋孤独，迷恋寂寞
 wordpress_id: 58
 categories:
-- 个人日记
+- personal_diary
 ---
 
 寂寞的校园在雨中显得更加美丽，更加让人迷恋。多雨的成都竟将她的泪洒在中秋节，丝毫没有考虑那些远行的客人的感受，真是不尽人意。不在如从前一样共享同一片蓝天了，东边或许蓝天如洗，可西边却阴雨连连。  

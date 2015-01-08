@@ -7,7 +7,7 @@ slug: the_quality_of_people
 title: 人的品质
 wordpress_id: 28
 categories:
-- 个人日记
+- personal_diary
 ---
 
 我觉的按照某种分类方法，可以把人的品质不太科学的分为两种：显的与隐的。  

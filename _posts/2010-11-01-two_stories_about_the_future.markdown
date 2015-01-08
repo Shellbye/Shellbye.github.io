@@ -7,7 +7,7 @@ slug: two_stories_about_the_future
 title: 两个关于未来的故事
 wordpress_id: 154
 categories:
-- 无杂不文
+- miscellaneous
 ---
 
 我一直有种理念，认为未来和过去紧密相连。为了说明下这个观点，找了下面两个故事和大家分享：

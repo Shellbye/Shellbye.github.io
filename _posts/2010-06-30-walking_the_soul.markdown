@@ -7,7 +7,7 @@ slug: walking_the_soul
 title: 行走的灵魂
 wordpress_id: 122
 categories:
-- 个人日记
+- personal_diary
 ---
 
 好久没有写东西了，主要原因是寝室断了网，而且对于我而言，面对QQ空间的编辑界面比面对WORD界面要有灵感的多，所以，打不开网页是导致产量下降的主要原因~~~~前几天写了一个，还是个半成品~~~~~  

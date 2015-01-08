@@ -7,7 +7,7 @@ slug: chengdu_found
 title: 发现成都
 wordpress_id: 53
 categories:
-- 个人日记
+- personal_diary
 ---
 
 今天要面试，所以大早就坐上了校车去新校，外面在下着小雨…  

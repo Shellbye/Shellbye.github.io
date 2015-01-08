@@ -7,7 +7,7 @@ slug: the_five_foot_shackles_from_hell
 title: 距离地狱一尺之五 镣铐
 wordpress_id: 264
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 青色的月光擦亮了墙壁  

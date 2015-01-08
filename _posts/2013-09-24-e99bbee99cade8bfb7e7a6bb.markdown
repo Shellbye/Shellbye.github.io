@@ -7,7 +7,7 @@ slug: '%e9%9b%be%e9%9c%ad%e8%bf%b7%e7%a6%bb'
 title: 雾霭迷离
 wordpress_id: 700
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 雾霭迷离的南国清晨

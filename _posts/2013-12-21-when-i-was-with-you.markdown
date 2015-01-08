@@ -7,7 +7,7 @@ slug: when-i-was-with-you
 title: 当我和你在一起的时候
 wordpress_id: 773
 categories:
-- 诗词歌赋
+- poetry
 ---
 
 当我和你在一起的时候

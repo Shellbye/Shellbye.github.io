@@ -7,7 +7,7 @@ slug: in_the_end_who_is_going_to_pay_for_your_squandered_youth
 title: 到底该由谁，来为你挥霍青春买单？
 wordpress_id: 120
 categories:
-- 个人日记
+- personal_diary
 ---
 
 说实话，定这个题目，我自己都觉得有点别扭，怕被人怀疑是标题党~~~但是，想了好久，是在想不到该换成一个什么样的题目，再加上我也希望可以尝试新的东西，喜欢不断地变化，所以就觉得用这个题目了~~~  

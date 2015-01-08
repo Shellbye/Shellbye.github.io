@@ -7,7 +7,7 @@ slug: red_cherry_green_banana
 title: 红了樱桃，绿了芭蕉
 wordpress_id: 244
 categories:
-- 个人日记
+- personal_diary
 ---
 
 时光容易把人抛，红了樱桃，绿了芭蕉。  ——蒋捷
