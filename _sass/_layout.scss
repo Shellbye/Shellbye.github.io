@@ -16,10 +16,11 @@
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
+    color: #FAFBFC;
 
     &,
     &:visited {
-        color: $grey-color-dark;
+        color: #FAFBFC;
     }
 }
 
@@ -32,7 +33,7 @@
     }
 
     .page-link {
-        color: $text-color;
+        color: #FAFBFC;
         line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one
