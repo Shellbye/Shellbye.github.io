@@ -7,7 +7,7 @@ slug: goagent%e5%85%a8%e5%b1%80%e4%bb%a3%e7%90%86%e8%ae%be%e7%bd%ae
 title: goagent全局代理设置
 wordpress_id: 1044
 categories:
-- 技术世界
+- tech_world
 tags:
 - goagent
 - 代理

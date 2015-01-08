@@ -7,7 +7,7 @@ slug: django-test-templatedoesnotexist
 title: Django test TemplateDoesNotExist
 wordpress_id: 813
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - TemplateDoesNotExist

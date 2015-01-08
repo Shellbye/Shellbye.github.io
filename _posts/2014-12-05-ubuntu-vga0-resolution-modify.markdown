@@ -7,7 +7,7 @@ slug: ubuntu-vga0-resolution-modify
 title: ubuntu VGA0 resolution modify
 wordpress_id: 1145
 categories:
-- 技术世界
+- tech_world
 tags:
 - linux
 - ubuntu

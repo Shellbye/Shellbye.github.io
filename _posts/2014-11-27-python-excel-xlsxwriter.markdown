@@ -7,7 +7,7 @@ slug: python-excel-xlsxwriter
 title: python excel xlsxwriter
 wordpress_id: 1126
 categories:
-- 技术世界
+- tech_world
 tags:
 - excel
 - Python

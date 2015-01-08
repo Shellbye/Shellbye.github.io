@@ -7,7 +7,7 @@ slug: mongodb-save-objectid
 title: MongoDB save() ObjectId
 wordpress_id: 1090
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - MongoDB

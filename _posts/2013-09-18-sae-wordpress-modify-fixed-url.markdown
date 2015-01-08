@@ -7,7 +7,7 @@ slug: sae-wordpress-modify-fixed-url
 title: SAE WordPress 修改固定链接
 wordpress_id: 20
 categories:
-- 技术世界
+- tech_world
 tags:
 - SAE
 - WorPress

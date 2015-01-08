@@ -7,7 +7,7 @@ slug: httpresponse-%e8%8e%b7%e5%8f%96html%e5%86%85%e5%ae%b9
 title: HttpResponse 获取html内容
 wordpress_id: 978
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

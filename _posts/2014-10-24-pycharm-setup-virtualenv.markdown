@@ -7,7 +7,7 @@ slug: pycharm-setup-virtualenv
 title: Pycharm setup virtualenv
 wordpress_id: 1083
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - pycharm

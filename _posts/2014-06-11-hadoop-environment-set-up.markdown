@@ -7,7 +7,7 @@ slug: hadoop-environment-set-up
 title: Hadoop环境搭建
 wordpress_id: 913
 categories:
-- 技术世界
+- tech_world
 tags:
 - hadoop
 - java

@@ -7,7 +7,7 @@ slug: android-find-folder-tools-inside-sdk-pathtoyoursdk
 title: Android Could not find folder 'tools' inside SDK '/path/to/your/sdk'.
 wordpress_id: 988
 categories:
-- 技术世界
+- tech_world
 ---
 
 因为在学Andoid的过程中需要用到Google Play Service 所以用SDK Manager更新了一些东西，结果发现SDK Tools版本更新的过高了，导致新建项目时Compile With一栏没有了可以选择的东西，于是又用SDK Manager把SDK Tools删掉了，这下糟了，重启eclipse之后连SDK Manager都打不开了，显示Could not find folder 'tools' inside SDK '/path/to/your/sdk'.如下图：

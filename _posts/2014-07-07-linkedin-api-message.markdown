@@ -7,7 +7,7 @@ slug: linkedin-api-message
 title: LinkedIn API Message
 wordpress_id: 950
 categories:
-- 技术世界
+- tech_world
 tags:
 - API
 - LinkedIn

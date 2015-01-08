@@ -7,7 +7,7 @@ slug: reportlab-drawstring%e7%ac%94%e8%ae%b0
 title: ReportLab drawString笔记
 wordpress_id: 785
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - ReportLab

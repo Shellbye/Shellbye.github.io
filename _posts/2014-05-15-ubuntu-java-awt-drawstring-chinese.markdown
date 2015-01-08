@@ -7,7 +7,7 @@ slug: ubuntu-java-awt-drawstring-chinese
 title: ubuntu上JAVA中awt的drawString方法无法写入中文
 wordpress_id: 894
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - ubuntu

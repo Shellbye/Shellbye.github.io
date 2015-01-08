@@ -7,7 +7,7 @@ slug: python-sort
 title: python sort
 wordpress_id: 1128
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 - sort

@@ -7,7 +7,7 @@ slug: log4j2-filter-%e7%ac%94%e8%ae%b0
 title: log4j2 filter 笔记
 wordpress_id: 1078
 categories:
-- 技术世界
+- tech_world
 tags:
 - log4j2
 ---

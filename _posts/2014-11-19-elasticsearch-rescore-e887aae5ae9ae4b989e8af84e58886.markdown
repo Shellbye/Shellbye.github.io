@@ -7,7 +7,7 @@ slug: elasticsearch-rescore-%e8%87%aa%e5%ae%9a%e4%b9%89%e8%af%84%e5%88%86
 title: Elasticsearch rescore 自定义评分
 wordpress_id: 1110
 categories:
-- 技术世界
+- tech_world
 tags:
 - elasticsearch
 ---

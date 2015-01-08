@@ -7,7 +7,7 @@ slug: django-f-expression
 title: Django F expression 实例
 wordpress_id: 900
 categories:
-- 技术世界
+- tech_world
 tags:
 - database
 - Django

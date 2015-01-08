@@ -7,7 +7,7 @@ slug: ubuntu-%e6%b7%bb%e5%8a%a0%e9%9a%8f%e7%b3%bb%e7%bb%9f%e5%90%af%e5%8a%a8%ef%
 title: Ubuntu 添加随系统启动（boot）程序
 wordpress_id: 1066
 categories:
-- 技术世界
+- tech_world
 tags:
 - bash
 - linux

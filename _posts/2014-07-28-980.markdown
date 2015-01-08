@@ -7,7 +7,7 @@ slug: '980'
 title: java 执行系统命令并输出
 wordpress_id: 980
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

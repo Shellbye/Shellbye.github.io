@@ -6,6 +6,8 @@ layout: post
 slug: scrapy-cralw-images-note
 title: scrapy cralw images note
 wordpress_id: 1123
+categories:
+- tech_world
 tags:
 - crawl
 - Python

@@ -7,7 +7,7 @@ slug: django-uwsgi-nginx
 title: Django uWSGI Nginx 配置笔记
 wordpress_id: 874
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - Nginx

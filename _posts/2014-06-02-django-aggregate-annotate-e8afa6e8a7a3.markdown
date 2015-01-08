@@ -7,7 +7,7 @@ slug: django-aggregate-annotate-%e8%af%a6%e8%a7%a3
 title: Django aggregate annotate 详解
 wordpress_id: 904
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 ---

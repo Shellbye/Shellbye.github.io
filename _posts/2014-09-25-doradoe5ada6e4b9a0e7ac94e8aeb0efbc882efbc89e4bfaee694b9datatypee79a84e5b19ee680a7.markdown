@@ -7,7 +7,7 @@ slug: dorado%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%ef%bc%882%ef%bc%89%e4%bf%ae%e6%
 title: Dorado学习笔记（2）修改DataType的属性
 wordpress_id: 1051
 categories:
-- 技术世界
+- tech_world
 tags:
 - Dorado
 ---

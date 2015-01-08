@@ -7,7 +7,7 @@ slug: java-object-sort
 title: JAVA Object Sort
 wordpress_id: 1099
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

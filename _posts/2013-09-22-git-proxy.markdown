@@ -7,7 +7,7 @@ slug: git-proxy
 title: Git 代理设置 proxy
 wordpress_id: 672
 categories:
-- 技术世界
+- tech_world
 tags:
 - git
 - proxy

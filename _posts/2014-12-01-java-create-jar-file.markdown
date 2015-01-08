@@ -7,7 +7,7 @@ slug: java-create-jar-file
 title: java create jar file
 wordpress_id: 1132
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

@@ -7,7 +7,7 @@ slug: java-%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f-%e6%8f%90%e5%8f%96%e5%a
 title: Java 正则表达式 提取子串
 wordpress_id: 1007
 categories:
-- 技术世界
+- tech_world
 ---
 
 假设现在有这样一个字符串：

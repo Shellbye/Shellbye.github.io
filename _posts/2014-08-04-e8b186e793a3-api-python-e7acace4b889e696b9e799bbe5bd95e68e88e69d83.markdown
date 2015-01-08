@@ -7,7 +7,7 @@ slug: '%e8%b1%86%e7%93%a3-api-python-%e7%ac%ac%e4%b8%89%e6%96%b9%e7%99%bb%e5%bd%
 title: 豆瓣 API Python 第三方登录授权
 wordpress_id: 993
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 ---

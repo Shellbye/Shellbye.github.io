@@ -7,7 +7,7 @@ slug: mysql-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4
 title: MySQL 常用命令
 wordpress_id: 1030
 categories:
-- 技术世界
+- tech_world
 tags:
 - MySQL
 ---

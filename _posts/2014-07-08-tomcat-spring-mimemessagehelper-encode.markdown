@@ -7,7 +7,7 @@ slug: tomcat-spring-mimemessagehelper-encode
 title: tomcat + spring MimeMessageHelper encode
 wordpress_id: 957
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - spring

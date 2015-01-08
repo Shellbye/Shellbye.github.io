@@ -7,7 +7,7 @@ slug: java-create-jar-file-maven
 title: java create jar file with maven
 wordpress_id: 1141
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - maven

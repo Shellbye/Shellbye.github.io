@@ -7,7 +7,7 @@ slug: python-%e7%88%ac%e8%99%ab%e7%a4%ba%e4%be%8b
 title: Python 爬虫示例
 wordpress_id: 1015
 categories:
-- 技术世界
+- tech_world
 post_format:
 - 日志
 tags:

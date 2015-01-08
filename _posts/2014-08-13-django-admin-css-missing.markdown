@@ -7,7 +7,7 @@ slug: django-admin-css-missing
 title: Django Admin CSS missing
 wordpress_id: 1011
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 ---

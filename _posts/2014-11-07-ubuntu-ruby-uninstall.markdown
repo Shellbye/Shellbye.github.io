@@ -7,7 +7,7 @@ slug: ubuntu-ruby-uninstall
 title: ubuntu ruby uninstall
 wordpress_id: 1103
 categories:
-- 技术世界
+- tech_world
 tags:
 - ruby
 ---

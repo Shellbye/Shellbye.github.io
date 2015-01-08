@@ -7,7 +7,7 @@ slug: python-triple-operator
 title: Python 三目运算  triple operator
 wordpress_id: 852
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 ---

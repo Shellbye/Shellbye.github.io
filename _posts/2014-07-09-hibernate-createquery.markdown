@@ -7,7 +7,7 @@ slug: hibernate-createquery
 title: Hibernate createQuery()
 wordpress_id: 965
 categories:
-- 技术世界
+- tech_world
 ---
 
 种种迹象表明，Hibernate很牛逼，但是目前我不知道它又多牛逼，也不知道它为什么牛逼，只是最近在写的过程中遇到了一些问题，下面是一些笔记：

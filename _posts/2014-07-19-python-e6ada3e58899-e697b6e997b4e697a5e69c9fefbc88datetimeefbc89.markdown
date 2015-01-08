@@ -7,7 +7,7 @@ slug: python-%e6%ad%a3%e5%88%99-%e6%97%b6%e9%97%b4%e6%97%a5%e6%9c%9f%ef%bc%88dat
 title: Python 正则 时间日期（DateTime）
 wordpress_id: 974
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 - 正则

@@ -7,7 +7,7 @@ slug: linux-svn-change-user
 title: Linux svn 切换用户
 wordpress_id: 764
 categories:
-- 技术世界
+- tech_world
 ---
 
 在linux中，切换svn，使用命令

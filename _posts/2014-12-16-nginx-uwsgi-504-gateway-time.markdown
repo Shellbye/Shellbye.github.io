@@ -7,7 +7,7 @@ slug: nginx-uwsgi-504-gateway-time
 title: nginx uwsgi 504 gateway time-out
 wordpress_id: 1152
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - Nginx

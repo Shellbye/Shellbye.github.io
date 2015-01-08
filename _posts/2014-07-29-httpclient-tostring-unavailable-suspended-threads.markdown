@@ -7,7 +7,7 @@ slug: httpclient-tostring-unavailable-suspended-threads
 title: HttpClient-----[toString() unavailable - no suspended threads]
 wordpress_id: 985
 categories:
-- 技术世界
+- tech_world
 ---
 
 在使用HttpClient做模拟登陆时，当连续多次发送HttpGet或者HttpPost请求时，HttpClient就出问题了，具体问题不知道是啥，只是程序结束不了，查看HttpClient则显示[toString() unavailable - no suspended threads]。问题重现如下：

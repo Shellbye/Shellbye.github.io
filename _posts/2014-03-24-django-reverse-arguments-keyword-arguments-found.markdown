@@ -7,7 +7,7 @@ slug: django-reverse-arguments-keyword-arguments-found
 title: Django Reverse for '*' with arguments '()' and keyword arguments '{}' not found
 wordpress_id: 833
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - Reverse

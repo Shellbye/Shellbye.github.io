@@ -7,7 +7,7 @@ slug: elasticsearch-java-api-crud
 title: 'Elasticsearch JAVA api CRUD '
 wordpress_id: 1108
 categories:
-- 技术世界
+- tech_world
 tags:
 - elasticsearch
 - java

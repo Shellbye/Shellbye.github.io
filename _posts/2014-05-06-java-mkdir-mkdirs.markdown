@@ -7,7 +7,7 @@ slug: java-mkdir-mkdirs
 title: JAVA mkdir() and mkdirs()
 wordpress_id: 882
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

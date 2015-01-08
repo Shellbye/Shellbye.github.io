@@ -7,7 +7,7 @@ slug: dorado%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89eclipse%e5%88
 title: Dorado学习笔记（1）eclipse切换jre版本
 wordpress_id: 1046
 categories:
-- 技术世界
+- tech_world
 tags:
 - Dorado
 - eclipse

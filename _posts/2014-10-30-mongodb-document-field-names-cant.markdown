@@ -7,7 +7,7 @@ slug: mongodb-document-field-names-cant
 title: MongoDB Document field names can't have a . in them
 wordpress_id: 1096
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - MongoDB

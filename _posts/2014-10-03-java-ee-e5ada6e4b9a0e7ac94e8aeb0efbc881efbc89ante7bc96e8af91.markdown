@@ -7,7 +7,7 @@ slug: java-ee-%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%ef%bc%881%ef%bc%89ant%e7%bc%9
 title: JAVA EE 学习笔记（1）ANT编译
 wordpress_id: 1059
 categories:
-- 技术世界
+- tech_world
 tags:
 - ant
 - java ee

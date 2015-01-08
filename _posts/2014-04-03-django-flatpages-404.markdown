@@ -7,7 +7,7 @@ slug: django-flatpages-404
 title: Django flatpages 404
 wordpress_id: 843
 categories:
-- 技术世界
+- tech_world
 tags:
 - '404'
 - Django

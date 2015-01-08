@@ -7,7 +7,7 @@ slug: putty-%e4%b8%ad%e6%97%a0%e6%b3%95%e4%bd%bf%e7%94%a8-byubo-%e5%8a%9f%e8%83%
 title: putty 中无法使用 byubo 功能键
 wordpress_id: 1013
 categories:
-- 技术世界
+- tech_world
 ---
 
 参考文章：[http://choorucode.com/2013/01/21/byobu-function-keys-do-not-work-in-putty/ ](http://choorucode.com/2013/01/21/byobu-function-keys-do-not-work-in-putty/)

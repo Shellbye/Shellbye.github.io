@@ -7,7 +7,7 @@ slug: dpkg-dependency-problems-prevent-configuration-of
 title: 'ubuntu dpkg: dependency problems prevent configuration of *'
 wordpress_id: 889
 categories:
-- 技术世界
+- tech_world
 tags:
 - apt-get
 - ubuntu

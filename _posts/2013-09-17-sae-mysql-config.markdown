@@ -7,7 +7,7 @@ slug: sae-mysql-config
 title: 'SAE 数据库连接配置 '
 wordpress_id: 800
 categories:
-- 技术世界
+- tech_world
 tags:
 - MySQL
 ---

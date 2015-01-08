@@ -8,7 +8,7 @@ title: 'MySQL _mysql_exceptions.OperationalError: (2003, "Can''t connect to MySQ
   server on ''localhost'' (10061)")'
 wordpress_id: 961
 categories:
-- 技术世界
+- tech_world
 tags:
 - MySQL
 ---

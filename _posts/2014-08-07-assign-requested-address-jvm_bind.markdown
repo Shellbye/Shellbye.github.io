@@ -7,7 +7,7 @@ slug: assign-requested-address-jvm_bind
 title: 'Cannot assign requested address: JVM_Bind'
 wordpress_id: 1001
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 - tomcat

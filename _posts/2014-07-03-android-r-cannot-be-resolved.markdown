@@ -7,7 +7,7 @@ slug: android-r-cannot-be-resolved
 title: Android R cannot be resolved
 wordpress_id: 947
 categories:
-- 技术世界
+- tech_world
 tags:
 - Android
 ---

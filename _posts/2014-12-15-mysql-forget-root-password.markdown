@@ -7,7 +7,7 @@ slug: mysql-forget-root-password
 title: MySQL forget root password
 wordpress_id: 1149
 categories:
-- 技术世界
+- tech_world
 tags:
 - linux
 - MySQL

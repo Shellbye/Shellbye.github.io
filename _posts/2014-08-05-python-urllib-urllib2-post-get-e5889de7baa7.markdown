@@ -7,7 +7,7 @@ slug: python-urllib-urllib2-post-get-%e5%88%9d%e7%ba%a7
 title: python urllib urllib2 post get 初级
 wordpress_id: 995
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 - urllib2

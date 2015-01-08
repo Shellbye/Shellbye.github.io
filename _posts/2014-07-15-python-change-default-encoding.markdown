@@ -7,7 +7,7 @@ slug: python-change-default-encoding
 title: Python 修改默认编码
 wordpress_id: 972
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 - 编码

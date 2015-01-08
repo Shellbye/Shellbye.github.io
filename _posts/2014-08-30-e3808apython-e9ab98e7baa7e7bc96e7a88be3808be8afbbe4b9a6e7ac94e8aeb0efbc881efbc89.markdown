@@ -7,7 +7,7 @@ slug: '%e3%80%8apython-%e9%ab%98%e7%ba%a7%e7%bc%96%e7%a8%8b%e3%80%8b%e8%af%bb%e4
 title: 《Python 高级编程》读书笔记（1）
 wordpress_id: 1022
 categories:
-- 技术世界
+- tech_world
 tags:
 - Python
 ---

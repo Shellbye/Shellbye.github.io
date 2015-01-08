@@ -7,7 +7,7 @@ slug: java-graphics-fillrect
 title: JAVA 图像渐变暗化 graphics fillRect
 wordpress_id: 864
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

@@ -7,7 +7,7 @@ slug: django-south-databaseerror-table-southtut_knight-already-exists
 title: 'Django South DatabaseError: table "southtut_knight" already exists'
 wordpress_id: 878
 categories:
-- 技术世界
+- tech_world
 tags:
 - Django
 - South

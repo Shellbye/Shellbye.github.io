@@ -7,7 +7,7 @@ slug: site-icon-diy
 title: 网站图标LOGO制作
 wordpress_id: 707
 categories:
-- 技术世界
+- tech_world
 tags:
 - DIY
 - ico

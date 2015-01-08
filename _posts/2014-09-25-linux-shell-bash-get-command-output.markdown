@@ -7,7 +7,7 @@ slug: linux-shell-bash-get-command-output
 title: Linux Shell Bash get command output
 wordpress_id: 1049
 categories:
-- 技术世界
+- tech_world
 tags:
 - bash
 - linux

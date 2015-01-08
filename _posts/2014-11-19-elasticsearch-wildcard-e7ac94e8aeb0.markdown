@@ -7,7 +7,7 @@ slug: elasticsearch-wildcard-%e7%ac%94%e8%ae%b0
 title: Elasticsearch wildcard 笔记
 wordpress_id: 1120
 categories:
-- 技术世界
+- tech_world
 tags:
 - elasticsearch
 ---

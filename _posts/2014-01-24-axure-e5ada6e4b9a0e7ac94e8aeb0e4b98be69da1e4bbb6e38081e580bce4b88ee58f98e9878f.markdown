@@ -7,7 +7,7 @@ slug: axure-%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%e4%b9%8b%e6%9d%a1%e4%bb%b6%e3%8
 title: Axure 学习笔记之条件、值与变量
 wordpress_id: 790
 categories:
-- 技术世界
+- tech_world
 tags:
 - Axure
 ---

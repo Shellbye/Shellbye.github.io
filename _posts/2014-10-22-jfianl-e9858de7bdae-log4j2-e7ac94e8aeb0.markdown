@@ -7,7 +7,7 @@ slug: jfianl-配置-log4j2-笔记
 title: jfianl 配置 log4j2 笔记
 wordpress_id: 1073
 categories:
-- 技术世界
+- tech_world
 tags:
 - jfianl
 - log4j2

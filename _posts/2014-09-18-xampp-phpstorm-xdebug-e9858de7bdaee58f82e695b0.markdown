@@ -7,7 +7,7 @@ slug: xampp-phpstorm-xdebug-%e9%85%8d%e7%bd%ae%e5%8f%82%e6%95%b0
 title: XAMPP PhpStorm Xdebug 配置参数
 wordpress_id: 1033
 categories:
-- 技术世界
+- tech_world
 tags:
 - PHP
 - xampp
