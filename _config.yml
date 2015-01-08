@@ -7,6 +7,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://shellbye.com" # the base hostname & protocol for your site
 twitter_username: ShellbyeBai
 github_username:  shellbye
+timezone: Asia/Chongqing
 
 # Build settings
 markdown: kramdown
