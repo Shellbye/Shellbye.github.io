@@ -12,3 +12,4 @@ github_username:  shellbye
 markdown: kramdown
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 comments: true
+permalink: /:categories/:title/
