@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2014-10-22 09:02:20+00:00
 layout: post
-slug: jfianl-%e9%85%8d%e7%bd%ae-log4j2-%e7%ac%94%e8%ae%b0
+slug: jfianl-配置-log4j2-笔记
 title: jfianl 配置 log4j2 笔记
 wordpress_id: 1073
 categories:
