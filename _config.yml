@@ -3,7 +3,7 @@ title: 六系小白
 email: shellbye.com@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   我爱李燕
-baseurl: "/blog" # the subpath of your site, e.g. /blog/
+baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://shellbye.com" # the base hostname & protocol for your site
 twitter_username: ShellbyeBai
 github_username:  shellbye
