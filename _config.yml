@@ -3,14 +3,16 @@ title: 六系小白
 email: shellbye.com@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   我爱李燕
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "/blog" # the subpath of your site, e.g. /blog/
 url: "http://shellbye.com" # the base hostname & protocol for your site
 twitter_username: ShellbyeBai
 github_username:  shellbye
 timezone: Asia/Chongqing
+paginate: 8
+paginate_path: "page:num/"
 
 # Build settings
 markdown: kramdown
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 comments: true
-permalink: /blog/:categories/:title/
+permalink: /:categories/:title/
