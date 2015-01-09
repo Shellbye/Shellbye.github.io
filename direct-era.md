@@ -5,6 +5,7 @@ date: 2013-09-19 11:41:50+00:00
 layout: page
 slug: direct-era
 title: 导演时代
+permalink: /direct-era/
 wordpress_id: 361
 ---
 
