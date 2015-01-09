@@ -15,4 +15,4 @@ paginate_path: "page:num/"
 markdown: kramdown
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 comments: true
-permalink: /:blog/:categories/:title/
+permalink: /blog/:categories/:title/

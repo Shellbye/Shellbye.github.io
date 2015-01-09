@@ -16,7 +16,7 @@ After two day work, my Wordpress now migrate to github page.
 
 New site now looks like this:
 
-![My new site](/blog/assets/Screenshot.png)
+![My new site](/assets/Screenshot.png)
 
 Let's say how does the highlight works:
 
