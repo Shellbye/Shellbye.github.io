@@ -5,7 +5,7 @@ date: 2013-09-17 04:53:38+00:00
 layout: page
 slug: about-me
 title: 关于我
-permalink: /about-me/
+permalink: /blog/about-me/
 wordpress_id: 794
 ---
 
