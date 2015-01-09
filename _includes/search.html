@@ -1,0 +1,15 @@
+<form onsubmit="return dispatch()">
+        <input type="text" id="q">
+</form>
+<script type="text/javascript">
+    function dispatch() {
+        var q = document.getElementById("q");
+        if (q.value != "") {
+            var url = 'http://www.google.com/search?q=site:shellbye.com/blog/%20' + q.value;
+            window.open(url, "_blank");
+            return false;
+        } else {
+            return false;
+        }
+    }
+</script>
