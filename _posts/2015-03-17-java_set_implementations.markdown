@@ -33,7 +33,8 @@ Set实现了Collection和Iterable两个接口，它的实现包含但不限于Ha
 [Collections framework](http://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html)的一个接口，
 从下表Collection Implementations中可以看到它的实现对应的不同数据结构关系：
 
-Interface ||	Hash Table || Resizable Array || Balanced Tree || Linked List || Hash Table + Linked List
+Interface || Hash Table || Resizable Array || Balanced Tree || Linked List || Hash Table + Linked List
+--------- ||------------|| ----------------||-------------- ||-------------|| ----------------
 Set       || HashSet    ||                 || TreeSet       ||             || LinkedHashSet
 List      ||            || ArrayList       ||               || LinkedList  ||
 Deque     ||            || ArrayDeque      ||               || LinkedList  ||
