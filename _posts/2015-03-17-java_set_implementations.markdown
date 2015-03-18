@@ -33,11 +33,11 @@ Set实现了Collection和Iterable两个接口，它的实现包含但不限于Ha
 [Collections framework](http://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html)的一个接口，
 从下表Collection Implementations中可以看到它的实现对应的不同数据结构关系：
 
-Interface |	Hash Table | Resizable Array | Balanced Tree | Linked List | Hash Table + Linked List
-Set       | HashSet    |                 | TreeSet       |             | LinkedHashSet
-List      |            | ArrayList       |               | LinkedList  |
-Deque     |            | ArrayDeque      |               | LinkedList  |
-Map       | HashMap    |                 | TreeMap       |             | LinkedHashMap
+Interface ||	Hash Table || Resizable Array || Balanced Tree || Linked List || Hash Table + Linked List
+Set       || HashSet    ||                 || TreeSet       ||             || LinkedHashSet
+List      ||            || ArrayList       ||               || LinkedList  ||
+Deque     ||            || ArrayDeque      ||               || LinkedList  ||
+Map       || HashMap    ||                 || TreeMap       ||             || LinkedHashMap
 
 
 当然到这里其实面试的问题基本就回答了，但是我就很奇怪为啥Set有这么多的不同的实现，于是从
