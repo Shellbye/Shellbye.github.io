@@ -13,11 +13,11 @@ tags:
 - sort
 ---
 
-之前写过一个java的[sort笔记](http://www.shellbye.com/blog/%e6%8a%80%e6%9c%af%e4%b8%96%e7%95%8c/java-object-sort/)，今天整理了一些博客和stackoverflow上的问答，总结了如下的python sort，源码在[这里](https://github.com/Shellbye/Core_Python_Programming/blob/master/pysort/views.py)。
+之前写过一个java的[sort笔记](/blog/tech_world/java-object-sort/)，今天整理了一些博客和stackoverflow上的问答，总结了如下的python sort，源码在[这里](https://github.com/Shellbye/Core_Python_Programming/blob/master/pysort/views.py)。
 
 pysort.py
 
-    
+{% hightlight python %}    
     __author__ = 'shellbye'
     
     
@@ -196,7 +196,7 @@ pysort.py
         # sort_dict_by_value()
         # sort_dict_by_value_advance()
         sort_dict_by_key()
-
+{% endhighlight %}
 
 
 参考：
