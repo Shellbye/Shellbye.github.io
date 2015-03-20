@@ -17,7 +17,7 @@ tags:
 
 pysort.py
 
-{% hightlight python %}    
+{% highlight python %}    
     __author__ = 'shellbye'
     
     

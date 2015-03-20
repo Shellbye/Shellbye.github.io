@@ -21,16 +21,16 @@ tags:
 这两种不同可以用如下的两行代码进行简要的表示
 
 
-{% hightlight java %}
-    Collections.sort(objectNeedToSort);
-    Collections.sort(objectNeedToSort, new objectCanCompareObjectNeedToSort());
+{% highlight java %}
+Collections.sort(objectNeedToSort);
+Collections.sort(objectNeedToSort, new objectCanCompareObjectNeedToSort());
 {% endhighlight %}
 
 
 下面是实现了Comparator的排序方法：
 
 
-{% hightlight java %}
+{% highlight java %}
 package interview;
 
 import java.util.*;
