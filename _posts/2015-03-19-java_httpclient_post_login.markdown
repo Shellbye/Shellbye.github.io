@@ -30,10 +30,10 @@ http://www.chinahr.com/modules/jsperson/userinfo_json.php?noblock=1&a=1就是验
     
 基本上都可以简单的概况为以下三行代码：
 
-{% hightlight java %}
-        installCookie(request);
-        HttpResponse response = client.execute(request);
-        updateCookie(response);
+{% highlight java %}
+installCookie(request);
+HttpResponse response = client.execute(request);
+updateCookie(response);
 {% endhighlight %}
 
 POST中稍微有所不同，因为要构造POST表单数据，我的做法是把表单数据用HashMap初始化，
