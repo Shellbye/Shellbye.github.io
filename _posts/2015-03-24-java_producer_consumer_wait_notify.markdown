@@ -185,7 +185,11 @@ class Consumer0 extends Thread {
 {% endhighlight %}
 
 一些参考：
+
 [0].[http://javarevisited.blogspot.sg/2012/02/why-wait-notify-and-notifyall-is.html](http://javarevisited.blogspot.sg/2012/02/why-wait-notify-and-notifyall-is.html)
+
 [1].[http://javarevisited.blogspot.sg/2011/05/wait-notify-and-notifyall-in-java.html](http://javarevisited.blogspot.sg/2011/05/wait-notify-and-notifyall-in-java.html)
+
 [2].[http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java](http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java)
+
 [3].[http://stackoverflow.com/questions/3362303/whats-a-monitor](http://stackoverflow.com/questions/3362303/whats-a-monitor)
