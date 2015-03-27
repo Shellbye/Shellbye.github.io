@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2013-10-23 17:03:56+00:00
 layout: post
-slug: '%e7%bb%8f%e5%8e%86%e6%88%90%e8%b4%a5%ef%bc%8c%e6%94%b6%e8%8e%b7%e5%9b%9e%e5%bf%86'
+slug: collect-memories-through-success-or-failure
 title: 经历成败，收获回忆
 wordpress_id: 744
 categories:

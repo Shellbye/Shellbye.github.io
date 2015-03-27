@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2013-09-26 14:26:37+00:00
 layout: post
-slug: '%e5%8d%9c%e7%ae%97%e5%ad%90%c2%b7%e7%a7%8b%e9%9b%a8'
+slug: bu_suan_zi_the_rain
 title: 卜算子·秋雨
 wordpress_id: 704
 categories:

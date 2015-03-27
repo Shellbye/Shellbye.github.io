@@ -3,9 +3,8 @@ author: shellbye
 comments: true
 date: 2013-09-24 23:23:36+00:00
 layout: post
-slug: '%e9%9b%be%e9%9c%ad%e8%bf%b7%e7%a6%bb'
+slug: the_fog_blurred
 title: 雾霭迷离
-wordpress_id: 700
 categories:
 - poetry
 ---

@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2013-10-06 15:11:15+00:00
 layout: post
-slug: '%e5%9d%a0%e8%90%bd%e7%9a%84%e6%b5%81%e6%98%9f'
+slug: falling-stars
 title: 坠落的流星
 wordpress_id: 730
 categories:

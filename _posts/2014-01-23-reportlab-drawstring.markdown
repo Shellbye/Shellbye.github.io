@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2014-01-23 07:42:45+00:00
 layout: post
-slug: reportlab-drawstring%e7%ac%94%e8%ae%b0
+slug: reportlab-drawstring
 title: ReportLab drawString笔记
 wordpress_id: 785
 categories:
