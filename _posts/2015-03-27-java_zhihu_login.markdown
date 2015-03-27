@@ -16,7 +16,9 @@ tags:
 导致代码复用出现不少问题，于是干脆Repeat Myself了，把代码直接copy了过来复用。
 但是依然没有成功，后来debug才发现原来是知乎的一个cookie导致的，该cookie的name是z_c0，它的值很奇特，
 值中居然包含等号“=”，直接导致我的 ```updateCookie```函数在更新cookie时出现了问题，因为在其内部，
-这个函数是通过分割等号获取cookie内部的各个键值的。于是我对代码稍作修改，便可以成功登录了。
+这个函数是通过分割等号获取cookie内部的各个键值的。
+于是我用了```split```的[另一个重载方法](http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String,%20int))，
+并将第二个参数传为2（即分割只进行一次，只分割成两个子串即可），便可以成功登录了。
 
 好了，Talk is cheap, 看代码吧。
 
@@ -115,10 +117,7 @@ public class ZhihuLogin {
         String cookieStr = "";
         List<Cookie> list = cs.getCookies();
         for (Cookie cookie : list) {
-            if ("q_c1".equals(cookie.getName()) || "z_c0".equals(cookie.getName())){
-                // zhihu only need these two cookie to recognize user
-                cookieStr += cookie.getName() + "=" + cookie.getValue() + ";";
-            }
+            cookieStr += cookie.getName() + "=" + cookie.getValue() + ";";
         }
         if (cookieStr.length() > 1) {
             request.addHeader("Cookie", cookieStr);
@@ -134,16 +133,11 @@ public class ZhihuLogin {
             if ("Set-Cookie".equalsIgnoreCase(name)) {
                 String[] tempStr = value.split(";");
                 for (String str : tempStr) {
-                    String[] cookies = str.split("=");
+                    String[] cookies = str.split("=", 2);
                     if (cookies.length == 1)
                         cs.addCookie(new BasicClientCookie(cookies[0], ""));
                     else{
-                        if("z_c0".equals(cookies[0])){
-                            cookies[1] += "=" + cookies[2];
-                            cs.addCookie(new BasicClientCookie(cookies[0], cookies[1]));
-                        }else {
-                            cs.addCookie(new BasicClientCookie(cookies[0], cookies[1]));
-                        }
+                        cs.addCookie(new BasicClientCookie(cookies[0], cookies[1]));
                     }
                 }
             }
