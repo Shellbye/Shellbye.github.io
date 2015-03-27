@@ -6,7 +6,7 @@ layout: post
 slug: C-struct-padding
 title: C struct padding
 categories:
-- 技术世界
+- tech_world
 tags:
 - C
 - data structure

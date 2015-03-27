@@ -6,7 +6,7 @@ layout: post
 slug: java-producer-consumer-wait-notify
 title: java 生产者 消费者 以及wait()和notify()分析
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

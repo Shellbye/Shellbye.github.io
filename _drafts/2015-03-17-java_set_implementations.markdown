@@ -6,7 +6,7 @@ layout: post
 slug: java-set-implementations
 title: java set implementations
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

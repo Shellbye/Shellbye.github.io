@@ -6,7 +6,7 @@ layout: post
 slug: java-httpclient-post-login
 title: java httpclient post login
 categories:
-- 技术世界
+- tech_world
 tags:
 - java
 ---

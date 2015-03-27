@@ -7,7 +7,7 @@ slug: first-blog-from-jekyll
 title: First blog from jekyll
 wordpress_id: 1099
 categories:
-- 技术世界
+- tech_world
 tags:
 - jekyll
 ---
