@@ -1,7 +1,7 @@
 ---
 author: shellbye
 comments: true
-date: 2015-04-02 11:27:08+00:00
+date: 2015-04-02 10:27:08+00:00
 layout: post
 slug: java_socket_http_post_get
 title: java socket http post get
