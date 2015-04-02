@@ -10,7 +10,7 @@ categories:
 tags:
 - java
 - http
--socket
+- socket
 ---
 
 
