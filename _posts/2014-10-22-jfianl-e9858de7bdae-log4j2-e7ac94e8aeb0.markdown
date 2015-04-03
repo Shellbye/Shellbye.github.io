@@ -18,13 +18,13 @@ tags:
     
     
     <dependency>
-        <groupid>org.apache.logging.log4j</groupid>
-        <artifactid>log4j-api</artifactid>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
         <version>2.0.2</version>
     </dependency>
     <dependency>
-        <groupid>org.apache.logging.log4j</groupid>
-        <artifactid>log4j-core</artifactid>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
         <version>2.0.2</version>
     </dependency>
 
