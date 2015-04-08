@@ -5,7 +5,6 @@ date: 2015-01-08 11:27:08+00:00
 layout: post
 slug: first-blog-from-jekyll
 title: First blog from jekyll
-wordpress_id: 1099
 categories:
 - tech_world
 tags:
