@@ -119,3 +119,6 @@ SERVER_EMAIL = 'your_account@example.com'
 
 在我的项目里，设置好这些就可以发送日志邮件了，也许你的还有其他需要配置的，
 具体的请参考万能的stackoverflow.com里的[这个](http://stackoverflow.com/questions/1414130/django-not-sending-emails-to-admins)回答。
+
+3.```mail_admins```里面的```include_html```如果设置成```True```的话，有可能会被当做垃圾邮件。我使用的163的免费邮箱，
+就发生了系统退信。
