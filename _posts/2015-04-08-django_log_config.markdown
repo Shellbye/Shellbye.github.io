@@ -112,6 +112,8 @@ def index(request):
         logger.error('Error: ' + e)
 {% endhighlight %}
 
+其中```formatters```的里具体的参数的信息和配置可以参考[这里](https://docs.python.org/3/library/logging.html#logrecord-attributes)
+
 需要特别强调的是```mail_admins```，这里并不是简单的这样配置了就可以工作的，
 还需要一些```settings.py```里的其他配置配合才能正常工作，主要有以下几点：
 
