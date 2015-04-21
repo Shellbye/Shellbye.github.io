@@ -96,6 +96,22 @@ LOGGING = {
 }
 {% endhighlight %}
 
+使用的话，就是这个样子了：
+
+{% highlight python %}
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
+def index(request):
+    try:
+        ...
+    except Exception, e:
+        logger.error('Error: ' + e)
+{% endhighlight %}
+
 需要特别强调的是```mail_admins```，这里并不是简单的这样配置了就可以工作的，
 还需要一些```settings.py```里的其他配置配合才能正常工作，主要有以下几点：
 
