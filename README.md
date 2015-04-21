@@ -1,4 +1,4 @@
 Shellbye.github.io
 ==================
 
-my blog
+[http://shellbye.com](http://shellbye.com)
