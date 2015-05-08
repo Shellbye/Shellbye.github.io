@@ -86,7 +86,7 @@ permalink: /blog/poet/
 一道浅浅的泪痕留在了她的脸上  
 就像流星的轨迹停留在夜空之上  
 
-[卜算子·秋雨](/blog/poetry/bu_suan_zi_the_rain/)
+[卜算子·秋雨](/blog/poetry/bu-suan-zi-the-rain/)
 ----
 2013-09-26  
 盛夏常思秋，怎奈热难消。  
@@ -94,7 +94,7 @@ permalink: /blog/poet/
 秋意渐浓日，思乡情甚时。  
 正说深秋迟不到，雨把屋檐敲。  
 
-[雾霭迷离](/blog/poetry/the_fog_blurred/)
+[雾霭迷离](/blog/poetry/the-fog-blurred/)
 ----
 2013-09-24  
 雾霭迷离的南国清晨  
@@ -484,7 +484,7 @@ All the wonderful memories have found themselves
 我无法真正地敬畏生命  
 只因它们总被无情的践踏  
 
-[最美的诗句](/blog/poetry/the_most_beautiful_poem/)
+[最美的诗句](/blog/personal_diary/the_most_beautiful_poem/)
 ----
 2012-08-29  
 双眉紧锁  
@@ -527,7 +527,7 @@ All the wonderful memories have found themselves
 我无悔地燃烧自己  
 但求片刻垂青  
 
-[The lady on horseback](/blog/poetry/the_lady_on_horseback/)
+[The lady on horseback](/blog/personal_diary/the_lady_on_horseback/)
 ----
 2012-06-16  
 The lady on horseback  
@@ -561,7 +561,7 @@ Because I told you this in your dream
 错过原本应是痛彻心扉的  
 但你的回眸融化了我的心  
 
-[敌友](/blog/poetry/friend_and_foe/)
+[距离天堂一米之一    大海](/blog/poetry/one_of_paradise_one_meter_from_the_sea/)
 ----
 2012-05-20  
 我听到了大海的声音  
@@ -873,7 +873,7 @@ There is a period that you finally realised life do harm you and it really hurt.
 于是我柔柔眼睛  
 向着日落的方向，继续赶路  
 
-[描述自己，却，也，还](/blog/personal_diary/describe_themselves_but_also_also-2/)
+[描述自己，却，也，还](/blog/poetry/describe_themselves_but_also_also-2/)
 ----
 2010-07-07  
 像个哲学家一样忧伤的思考人生，却  
