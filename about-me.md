@@ -10,7 +10,7 @@ permalink: /blog/about-me/
 
 My name is Shellbye, I'm a [programmer](https://github.com/Shellbye){:target="_blank"}, 
 [director](/blog/direct-era/){:target="_blank"} and 
-[poet](http://www.google.com/search?q=site:shellbye.com/blog/%20poetry){:target="_blank"}.
+[poet](/blog/poet/){:target="_blank"}.
 Currently, I'm working on my CS master's degree at [UESTC](http://www.uestc.edu.cn/){:target="_blank"} and working 
 at [成都数联寻英科技有限公司](http://www.shulianxunying.com/){:target="_blank"} 
 as Development Engineer intern at the same time.
