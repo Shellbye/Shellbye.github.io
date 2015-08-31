@@ -12,7 +12,7 @@ permalink: /blog/poet/
 霸面结束后，花了点时间整理了一下自己的诗作，
 全部集中起来放到这里了  
 
-[那个酒吧的女子](/blog/poetry/e982a3e4b8aae98592e590a7e79a84e5a5b3e5ad90/)
+[那个酒吧的女子](/blog/poetry/the-girl-in-the-bar/)
 ----
 2014-03-12  
 那个酒吧的女子  

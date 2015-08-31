@@ -3,7 +3,7 @@ author: shellbye
 comments: true
 date: 2014-03-12 16:32:01+00:00
 layout: post
-slug: '%e9%82%a3%e4%b8%aa%e9%85%92%e5%90%a7%e7%9a%84%e5%a5%b3%e5%ad%90'
+slug: the-girl-in-the-bar
 title: 那个酒吧的女子
 wordpress_id: 830
 categories:
