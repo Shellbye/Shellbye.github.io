@@ -11,10 +11,12 @@ tags:
 - algorithms
 - data structure
 - job
+- sort
 ---
 
 冒泡排序几乎是所有排序里被认为最简单的，但是其实冒泡排序也是有不少坑的，我今天大致折腾了一下，发现了不少坑。  
-首先看《大话数据结构》给出的冒泡排序的第一版（作者说了，这个其实不是正宗冒泡，因为它没有两两对比，下面的算法其实是简单交换排序）：
+首先看《大话数据结构》给出的冒泡排序的第一版（作者说了，这个其实不是正宗冒泡，因为它没有两两对比，
+下面的算法其实是简单交换排序）：
 {% highlight java %}
 public static void BubbleSortV0(List<Integer> list) {
     for (int i = 0; i < list.size(); i++) {
