@@ -1,0 +1,73 @@
+---
+author: shellbye
+comments: true
+date: 2015-09-13 16:57:08+00:00
+layout: post
+slug: heap_sort
+title: Heap sort 堆排序
+categories:
+- tech_world
+tags:
+- algorithms
+- data structure
+- job
+- sort
+---
+
+堆排序可以分为构造堆和排序输出两个阶段。在构造堆的过程中，将原始数组重新组织安排进一个堆中，
+然后从这个堆中依次输出最大或最小元素，即可得到排序结果。  
+
+### 构造堆
+构造堆有由上自下和由下自上两种构造方法。由下自上的构造主要用于以下情况，
+即堆的有序状态被破坏是因为某个结点变得比它的父节点要大时，此时就要交换当前结点与其父节点。
+由上自下的构造则是用于以下情况，堆的有序状态被破坏是因为某个结点变得比他的子节点小的情况下，
+此时需要将它与它的较大的子节点交换（之所以选较大的，是因为该结点要成为新的父节点，
+所以不能随便选，要选择那个较大的）。
+
+{% highlight java %}
+public static void HeapSort(List<Integer> list) {
+	int len = list.size() - 1;
+	// construct the big head heap
+	for (int k = len / 2; k > 0; k--){
+		sink(list, k, len);
+	}
+	int to_be_outputted_len = len;
+	while (to_be_outputted_len > 1) {
+		exchange(list, 1, to_be_outputted_len--); // output current root
+		sink(list, 1, to_be_outputted_len); // sink the new root to where it fits
+	}
+}
+
+private static void sink(List<Integer> list, int k, int n) {
+	while (2*k <= n) {
+		int i = 2 * k;
+		if (i < n && less(list, i, i + 1)){ // find the bigger child node
+			i++;
+		}
+		if (!less(list, k, i)){ // already reach where it fits
+			break;
+		}
+		exchange(list, i, k);
+		k = i;
+	}
+}
+{% endhighlight %}
+
+为了能够简单方便的计算堆的子结点（2i，2i+1）和其父节点（i/2），在测试数据中，
+第0位就不会使用了，而是直接从第一位开始。所以在第一个for循环中，
+k的退出条件就是`k>0`，即最后一个处理的元素是索引为1的元素，它将下沉到它应该位于的位置中。
+在排序时`while`中，退出条件则是`len > 1`，即最后交换的是倒数第二个元素和它前面的元素，
+即倒数第一个元素。之所以与上面的for中不一样，是因为for中是当前元素在与其后面的元素比较、交换，
+而在while中，则是当前元素与其前面的元素比较、交换。  
+
+### 关于堆
+通过一段时间的复习，我似乎渐渐明白为啥java用堆来管理内存了。首先堆是一种特殊的树，
+它满足这样的条件：
+
+    该树的每一个节点都大于（小于）等于它的任意子节点。
+
+堆是一种很高效的数据结构。为什么说它高效呢，我们都知道数组与链表的优劣，
+数组访问很快，但是插入删除很慢；链表是插入删除很快，但是访问很慢；那么，
+有没有折中的方案呢？堆就是这个折中的方案。因为它的有序性，它的访问要快过链表；
+又因为它本身是链表结构的，所以它的插入和删除又比数组要快，
+而且不需要大量的移动元素。我觉得这可能就是java虚拟机使用堆来管理内存的原因吧。
