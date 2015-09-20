@@ -54,7 +54,10 @@ public static void merge(List<Integer> list, int low, int mid, int high) {
 }
 {% endhighlight %}
 
-递归的程序需要注意的一点就是退出条件，在归并排序中，就是`MergeSort`中的前两行代码。
+首先需要注意等是在`merge`中，对list进行备份时，并不是全部备份，而是从low到high的一个局部备份。
+然后在for循环里面，i和j都是累加，i是从low开始往mid走，j是从mid+1开始往high走，
+它们的终止条件都是小于目的位置。然后每次放置完哪个，哪个就要向后移动。  
+还有就是递归的程序需要注意的一点就是退出条件，在归并排序中，就是`MergeSort`中的前两行代码。
 
 ### 快速排序
 一个排序算法得有多快才能让它的名字就叫做快速排序呢？
@@ -71,17 +74,22 @@ public static void QuickSort(List<Integer> list, int low, int high) {
 }
 
 public static int partition(List<Integer> list, int low, int high) {
-	int i = low, j = high;
-	int value = list.get(i);
-	while (i < j) {
-		while (list.get(i) < value) {
-			i++;
+	int i = low, j = high + 1;
+	int value = list.get(low);
+	while (true) {
+		while (list.get(++i) < value) {
+			if (i == high)
+				break;
 		}
-		while (list.get(high) > value) {
-			high--;
+		while (list.get(--j) > value) {
+			if (j == low)
+				break;
 		}
+		if (i >= j)
+			break;
 		exchange(list, i, j);
 	}
+	exchange(list, low, j);
 	return j;
 }
 {% endhighlight %}
