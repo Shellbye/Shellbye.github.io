@@ -94,6 +94,8 @@ public static int partition(List<Integer> list, int low, int high) {
 }
 {% endhighlight %}
 
+快排需要注意有内层的两个`while`循环和进入partition之后的`high + 1`，这里之所以需要加一，
+是因为在内层的两个循环之中，是先减一之后才进行的比较。
 快排的重点是`partition`函数，在内部的两个`while`循环中，是分别从前往后找比`value`大的，
 和从后往前找比`value`小的，然后交换他们。之前在数据结构课上，每一个`while`循环之后，
 都要`exchang`，但是这种方法显然没有上面的代码的简洁且高效，因为它只有一次交换操作。
