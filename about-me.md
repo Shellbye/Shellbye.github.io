@@ -11,9 +11,7 @@ permalink: /blog/about-me/
 My name is Shellbye, I'm a [programmer](https://github.com/Shellbye){:target="_blank"}, 
 [director](/blog/direct-era/){:target="_blank"} and 
 [poet](/blog/poet/){:target="_blank"}.
-Currently, I'm working on my CS master's degree at [UESTC](http://www.uestc.edu.cn/){:target="_blank"} and working 
-at [成都数联寻英科技有限公司](http://www.shulianxunying.com/){:target="_blank"} 
-as Development Engineer intern at the same time.
+Currently, I'm working on my CS master's degree at [UESTC](http://www.uestc.edu.cn/){:target="_blank"}.
 
 
 Not as other lucky birds, I didn't have the opportunely to access Internet until I was in middle school.
@@ -40,12 +38,12 @@ some of my classmate and I started a studio using Django to build website.
 The studio did not last very long but long enough for me, 
 I learned both the program skills and the art of management.
 
-
-Now I use [Scrapy](http://doc.scrapy.org/en/master/index.html){:target="_blank"} 
+I've used [Scrapy](http://doc.scrapy.org/en/master/index.html){:target="_blank"} 
 + [Supervisord](http://supervisord.org/){:target="_blank"} to crawl and collect data, 
 then store them in [MongoDB](https://www.mongodb.org/){:target="_blank"}.
 
-Java is my working language now, but I like Python the most. 
+
+I have use Java for a while, but I like Python the most. 
 I hope that one day I can write some technical book.
 
 
