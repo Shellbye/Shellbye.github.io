@@ -1,7 +1,7 @@
 ---
 author: shellbye
 comments: true
-date: 2015-01-08 11:27:08+00:00
+date: 2015-12-28 11:27:08+00:00
 layout: post
 slug: first-blog-from-jekyll
 title: First blog from jekyll
@@ -33,3 +33,9 @@ def index(request):
     else:
         return False
 {% endhighlight %}
+
+This is a link about [Wiki]{:target="_blank"}.
+This ia a link in my owe [site]{:target="_blank"}.
+
+[Wiki]:https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Common_non-standard_request_fields
+[site]:/blog/poet/
