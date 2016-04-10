@@ -1,7 +1,7 @@
 ---
 author: shellbye
 comments: true
-date: 2016-04-08 01:27:08+00:00
+date: 2016-04-08 10:27:08+00:00
 layout: post
 slug: pick_up_math_1_box_plot
 title: 重拾数学1－箱线图
