@@ -6,7 +6,9 @@ layout: page
 slug: poet
 title: 小白的诗
 permalink: /blog/poet/
+group: navigation
 ---
+{% include JB/setup %}
 
 
 雨夜
@@ -147,22 +149,22 @@ All the wonderful memories have found themselves
 把我拥入你的怀里  
 在我的耳边轻轻地说着爱我  
 让我踏实地睡在你的腿上  
-  
+
 来吧，夜，我的情人  
 让我们一起在没有人注视的时候狂奔  
 我们的欢笑将吵醒已经入睡的人们  
 他们将会嫉妒我们放浪的笑声  
-  
+
 来吧，夜，我的情人  
 就这样依偎在我的肩膀吧  
 让我感觉的到自己的存在  
 请不要让我无故的消失掉  
-  
+
 来吧，夜，我的情人  
 请深情地望着我  
 就像我深情的望着你一样  
 只有你的眼神能让我无所畏惧  
-  
+
 夜啊，我深爱的情人  
 请告诉我  
 我该怎样挽留你  
@@ -187,27 +189,27 @@ All the wonderful memories have found themselves
 总出现在夏日的梦里  
 让我沉溺其中  
 不愿醒来面对忙碌的世界  
-  
+
 那美好的回忆啊  
 犹如一首熟悉的老歌  
 总在我耳畔响起  
 让我的独孤显得如此刺耳  
-  
+
 那美好的回忆啊  
 就像浅滩里的海草  
 我已被紧紧地缠绕  
 无法脱离这过去的美好幻象  
-  
+
 放我走吧，回忆  
 我们的世界里其实只有我  
 你是那虚无的梦幻  
 是一种不存在的影像  
-  
+
 放我走吧，回忆  
 我不愿永远停留在你的世界里  
 那里荒芜的从草不生  
 那里寂寥的有如旷野  
-  
+
 放我走吧，回忆  
 请打开这美丽的牢笼  
 请解开这温柔的镣铐  
@@ -240,83 +242,83 @@ All the wonderful memories have found themselves
 都是一种认真的挽留  
 它希望推迟离别的到来  
 它想多留你哪怕一场雨的时间  
-  
+
 毕业季里的每一朵云  
 都是一弯浅浅的暗恋  
 它看似卑微的虚无缥缈  
 其实都是一个个浪漫的挂念  
-  
+
 毕业季里的每一阵风  
 都传唱着青春的旋律  
 它是青春不朽的美丽赞歌  
 它是真爱不消的永恒祝福  
-  
+
 毕业季里的每一缕光  
 都是一次真实的见证  
 它为每一段真挚的情谊  
 盖上亘古不变的印章  
-  
+
 ===============================  
-  
+
 毕业季里的每一片叶  
 都写着一个沉睡的秘密  
 它在风中犹犹豫豫的落下  
 最后化作被遗忘的尘埃  
-  
+
 毕业季里的每一颗树  
 都是一枝忧伤的遗憾  
 它使得所有的梦幻变得真实  
 它填补了无悔年华里最后的空白  
-  
+
 毕业季里的每一朵花  
 都是一回小小的误会  
 不同于永远伫立在那里的遗憾之树  
 它曾盛开但终将迎来凋零  
-  
+
 毕业季里的每一苗草  
 都有着伟大的不羁梦想  
 虽然前路荆棘密布  
 但依然无法阻挡成长的渴望  
-  
+
 ===============================  
-  
+
 毕业季里的每一杯酒  
 都是一幕仔细的回顾  
 它从一切开始的地方起  
 慢慢地诉说着过往的那些回忆  
-  
+
 毕业季里的每一滴泪  
 都有着它朴实的原因  
 它为青葱岁月的每个故事  
 都划上了一个或悲或喜的句点  
-  
+
 毕业季里的每一阵笑  
 背后似乎都隐藏着烦恼  
 这干净的烦恼啊  
 总是会在以后的日子里化作诗句  
-  
+
 毕业季里的每一首歌  
 都是为离别吹响的号角  
 只是这号角声啊  
 远航的鼓励里却有着丝丝的不舍  
-  
+
 ==============================  
-  
+
 毕业季里的每一张照片  
 将一个个瞬间定格为永恒  
 它是我们送给未来的一份礼物  
 一份贵重程度随时间不减反增的礼物  
-  
+
 毕业季里的每一声叹息  
 都纯粹的不含伪装  
 它是最简单的无奈  
 为清晰的毕业照里留下几个的噪点  
-  
+
 毕业季里的每一次回首  
 看到的都是不离去的理由  
 但也正是这些理由  
 让你不得不得踏上追逐未来的旅程  
-  
+
 毕业季里的每一声再见  
 都饱含着约定与期待  
 它是一句短暂的誓言  
@@ -355,22 +357,22 @@ All the wonderful memories have found themselves
 2013-04-23  
 听到你的名字  
 我就觉得很美  
-  
+
 它让我对你的美再一次充满幻想  
 它就这样轻易地把我拖入了美梦  
-  
+
 不需要见到你  
 不需要拥有你  
-  
+
 仅你的名字就可以填满我的世界  
 只回忆就足够我熬过思念的煎熬  
-  
+
 我不会爱上你  
 也不会忘记你  
-  
+
 你是我广袤天空中掠过的一片云  
 你是我深蓝大海里游弋的一只鱼  
-  
+
 为你写下诗句  
 因我不能永生  
 
@@ -418,7 +420,7 @@ All the wonderful memories have found themselves
 阴森的走廊尽头传来慑人的声响  
 仿佛来自地狱的狂笑  
 万物毛骨悚然  
-  
+
 是镣铐  
 是枷锁  
 拖着最沉重的罪孽  
@@ -432,12 +434,12 @@ All the wonderful memories have found themselves
 歌舞升平  
 它却静静的蜷缩着  
 目睹着肮脏和丑陋  
-  
+
 歌功颂德  
 整个世界已将它遗忘  
 不理不睬  
 不闻不问  
-  
+
 但它知道  
 光明褪去之后  
 它将坐拥整个世界  
@@ -528,7 +530,7 @@ All the wonderful memories have found themselves
 独自享受深巷的一缕清幽  
 深夜也不愿睡去  
 却爱凝视夜空中华丽的圆月  
-  
+
 她静静地走过  
 却悄然卷走了我的思绪  
 把它渐渐拉长，再拉长  
@@ -541,7 +543,7 @@ All the wonderful memories have found themselves
 只待你惊鸿一瞥  
 我把自己融化在诗中  
 惟愿凝视你哪怕一瞬  
-  
+
 我在你坐过的石凳旁点燃烟花  
 只想换来你片刻的笑靥  
 我无悔地燃烧自己  
@@ -642,17 +644,17 @@ I thought I was dead already
 I thought I would be gone forever  
 I thought I would be forgotten  
 I thought I should vanished  
-  
+
 Untill I saw the Moon,tonight  
 Untill I saw warmth, I saw hope  
 which I once thought I don't deserve  
 which I once dare not to persue  
-  
+
 She is right there in front of me  
 Soft and bright  
 Her image disappeared in the air  
 Hid above the cloud  
-  
+
 Tonight, I was saved by the Moon  
 Tomorrow, I will fight for mine own  
 Only by staring at her can I   
@@ -677,7 +679,7 @@ I shall not feel lonely
 The day I become crazy  
 For it's sure and clear  
 I have a date in the future  
-  
+
 I have no time to wIpe my tears  
 And no one really cares  
 I won't clean the blood on my T-shirt  
@@ -688,13 +690,13 @@ Even I have a date in the future
 2011-11-07  
 我是黑暗中的因纽特人  
 你是一道魔幻般的极光  
-  
+
 被你炫丽的光芒照亮的  
 不仅仅是我孤单的现在  
-  
+
 还有安稳静待你的过往  
 以及注定会有你的未来  
-  
+
 To Rossi  
 From Inuit  
 
@@ -705,12 +707,12 @@ Haven't see you since yesterday
 Where are you now?   
 Are you happy like I wished,  
 Or alone like I am?  
-  
+
 Haven't see you since yesterday  
 Can you feel my missing now?  
 How I wish I could tell you I love you,  
 But I can't, 'cause the history hurts me.   
-  
+
 Haven't see you since yesterday  
 And the image of you are killing me.  
 I hope I can hold your hand,  
@@ -1121,7 +1123,7 @@ There is a period that you finally realised life do harm you and it really hurt.
 像个摄影家一样痴迷于定格画面。  
 像个探险家一样探索未知的领域，还  
 像个音乐家一样沉迷于古典的美。  
-  
+
 像个战士一样无畏死亡，却  
 像个诗人一样且吟且泣。  
 像个学者一样追求知识，也  
@@ -1133,26 +1135,26 @@ There is a period that you finally realised life do harm you and it really hurt.
 ----
 2009-10-24  
 几个小时之前，我还在寝室里和室友在一起，他们为我践行，几个小时之后，我来到了这个万里之外的城市……  
-  
+
 寂静的校园的小路  
 昏黄的迷漫水雾的灯光  
 寂寞的路灯静静的守候一隅黑暗  
-  
+
 我带着一顶红色的鸭舌帽  
 微微的低着头  
 故意挡着自己的脸  
-  
+
 我站在你必然经过的路灯下  
 与寂寞的路灯静静守候你的到来  
 希望你可以在即使分开很久之后依然可以辨认我  
-  
+
 你的声音从不远处传来  
 我收紧了灵魂  
 听着你的渐渐靠近的脚步声  
 
 你的声音是如此的熟悉  
 因为我不止一次的在梦中温习  
-  
+
 当你从我身边走过时  
 我甚至可以看的到你耳后零乱的绒发  
 我甚至可以闻的到你身上淡淡的熏衣草香味  
@@ -1160,11 +1162,11 @@ There is a period that you finally realised life do harm you and it really hurt.
 可是  
 即使是如此近的距离  
 你都不曾感受到我的存在  
-  
+
 我默默的背起丢在草丛里包  
 抚摸着寂寞的路灯  
 不忍再看它斑驳的身体  
-  
+
 又经过了几个小时，走在自己的校园里，路灯下，没有人……  
 
 
@@ -1175,42 +1177,42 @@ There is a period that you finally realised life do harm you and it really hurt.
 匆匆一瞥，我抛出不懈的目光  
 盛世角落，我看到一个女孩哭泣  
 繁华背后，肮脏的现实让我不忍细看  
-  
+
 浮躁的快乐终将归于空虚  
 狂欢的结束曲往往是孤独  
 狂欢是因为害怕分离   
 可狂欢后的分离更让人难以接受  
-  
+
 当现在只为等待将来时  
 往昔岁月里的点点滴滴就会闪现在脑海  
 回忆中的一切都比现实美好  
 所以喜欢回忆的人都是理想主义者  
-  
+
 干净的痛苦一定会沉淀  
 沉淀成悠闲  
 付出总该有回报  
 那些或痛苦或美好的回忆就是回报  
-  
+
 总有些东西是你无法摆脱的  
 即使你不想不愿让我进入你的世界  
 但是我知道，在你的回忆中  
 一个不懂事的男孩，你已经无法躲避  
-  
+
 生命就是这样，你无法安排自己的回忆  
 只能接受，然后不经意的想起  
 心中也许会暗暗感慨：  
 我最美好的回忆，怎么会有他突然闪现？  
-  
+
 回忆总是由意外组成  
 你无法为自己创造回忆  
 你总是记起你在躲避的  
 苦思冥想也找不到当初的美好  
-  
+
 三年好短暂，刚想要珍惜你  
 却不得不对着你的背影说再见  
 不在一起的日子，总在幻想  
 未来的岁月里，我的名字会闪现在你的脑海里吗？  
-  
+
 三年好漫长，分离拉长了思念  
 长长的思念，注定会缠绕我的一生  
 谁都没想都居然是这样的结局  
@@ -1235,7 +1237,7 @@ There is a period that you finally realised life do harm you and it really hurt.
 可是你却对这繁华世界与茫茫人海毫不在意，  
 你只能看到她一个人，  
 你感觉你的世界里再什么都没有了。  
-  
+
 我爱你，  
 我想为你写歌，  
 写世界上最动听的情歌，  
@@ -1243,7 +1245,7 @@ There is a period that you finally realised life do harm you and it really hurt.
 于是我在现有的歌曲中寻找，  
 找那个最适合我唱给你听的歌，  
 可是找不到。  
-  
+
 我爱你，  
 在你的世界里，  
 我甘愿做个稻草人，  

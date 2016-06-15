@@ -6,7 +6,9 @@ layout: page
 slug: small-games
 title: 小游戏
 permalink: /blog/small-games/
+group: navigation
 ---
+{% include JB/setup %}
 
 为了美观，请使用Chrome浏览器玩以下游戏
 

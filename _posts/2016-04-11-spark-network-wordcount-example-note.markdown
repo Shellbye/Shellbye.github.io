@@ -29,7 +29,9 @@ tags:
 首先，如果你像我一样，并没有严格按照上面的顺序操作，那么，当你先进行了操作2的时候，
 你会迎来如下错误：
 
-> ERROR ReceiverTracker: Deregistered receiver for stream 0: Restarting receiver with delay 2000ms: Error connecting to localhost:9999 - java.net.ConnectException: Connection refused
+{% highlight bash %}
+ERROR ReceiverTracker: Deregistered receiver for stream 0: Restarting receiver with delay 2000ms: Error connecting to localhost:9999 - java.net.ConnectException: Connection refused
+{% endhighlight %}
 
 这个“问题”我也在网上搜了好久，最后在[这篇博客]{:target="_blank"}里找到原因，那就是打开的顺序也很重要，
 不过这个问题随着你按照操作1进行操作，那么这个问题也就不是问题了。
@@ -37,7 +39,9 @@ tags:
 接下来的问题是，即使当你按照上面的顺序进行了所有操作之后，依然没法按照预期看到输出，而是：
 
 
-> WARN BlockManager: Block input-0-1460374276000 replicated to only 0 peer(s) instead of 1 peers
+{% highlight bash %}
+WARN BlockManager: Block input-0-1460374276000 replicated to only 0 peer(s) instead of 1 peers
+{% endhighlight %}
 
 看到居然不是ERROR，顿时也算是轻松了许多，在万能的[SO]上还是轻松找到了[答案]{:target="_blank"}，
 原来是因为在本地模式运行Spark Streaming时，如果使用了`local`或者`local[1]`这种模式，
@@ -55,4 +59,3 @@ tags:
 [这篇博客]:http://bit1129.iteye.com/blog/2174751
 [答案]:http://stackoverflow.com/questions/28050262/spark-streaming-network-wordcount-py-does-not-print-result
 [这里]:http://spark.apache.org/docs/latest/streaming-programming-guide.html#points-to-remember-1
-

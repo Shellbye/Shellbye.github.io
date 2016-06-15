@@ -6,8 +6,9 @@ layout: page
 slug: direct-era
 title: 导演时代
 permalink: /blog/direct-era/
-wordpress_id: 361
+group: navigation
 ---
+{% include JB/setup %}
 
 遥想本科前两年，过的很多姿多彩，先后参加了两次迎新晚会（2009,2010）和一次话剧大赛（2010），于是留下了以下三个作品：
 
@@ -30,4 +31,3 @@ wordpress_id: 361
 <iframe src="http://player.youku.com/embed/XMjI4MzE0NTA4" height="498" width="510" allowfullscreen="" frameborder="0"></iframe>
 {% endraw %}
 注：这是代表学院参加学校的比赛，最后结果不错，拿到了“最佳男主角”“最具人气奖”和“总分第三名”三个奖项
-

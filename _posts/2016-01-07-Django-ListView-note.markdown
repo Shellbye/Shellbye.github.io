@@ -15,7 +15,9 @@ tags:
 并在`template`中使用了`object_list.first`这样的变量时，
 Django抛出了如下错误：
 
-> Cannot reorder a query once a slice has been taken.
+{% highlight bash %}
+Cannot reorder a query once a slice has been taken.
+{% endhighlight %}
 
 在[Advanced Django ListView]{:target="_blank"}中，我也提到过同样的问题，
 但是两者的原因是不一样的。

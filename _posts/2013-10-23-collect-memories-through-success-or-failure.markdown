@@ -5,7 +5,6 @@ date: 2013-10-23 17:03:56+00:00
 layout: post
 slug: collect-memories-through-success-or-failure
 title: 经历成败，收获回忆
-wordpress_id: 744
 categories:
 - personal_diary
 ---
@@ -21,5 +20,3 @@ categories:
 十年的时间，我们都从当初单纯的小男生变成了一个个成年大叔了，做很多事的事情的时候考虑的东西都多了起来，很少能有只是因为单纯的喜欢而却去做的事了。很多时候，“不得不”几乎成了内心的一句口头禅，其中伴随着很多的责任，与之前的随心所欲已有了很大的差别。所以，在这种时候，能找到一个单纯的喜欢的爱好，和一帮和你一样的队友，不得不说是人生一大幸事。
 
 成败都终将成为美好回忆，结果已不再重要，重要的是我们在一起的时光，当我们一起在球场奋战，一起在球场呐喊助威，一起围坐一桌举杯共饮的时候，输赢已不是我们要谈论的话题，此时此刻，就像那句词一样：金风玉露一相逢，便胜却人间无数。
-
-[![球赛合影](http://baijianguo-mystorage.stor.sinaapp.com/uploads/2013/10/球赛合影.jpg)](http://baijianguo-mystorage.stor.sinaapp.com/uploads/2013/10/球赛合影.jpg)

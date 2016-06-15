@@ -5,13 +5,9 @@ date: 2011-11-14 14:30:29+00:00
 layout: post
 slug: she_just_stands_there
 title: She just stands there
-wordpress_id: 214
 categories:
 - poetry
 ---
-
-**  
-**
 
 She just stands over there
 

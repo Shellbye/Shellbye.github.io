@@ -6,44 +6,46 @@ layout: page
 slug: about-me
 title: 关于我
 permalink: /blog/about-me/
+group: navigation
 ---
+{% include JB/setup %}
 
-My name is Shellbye, I'm a [programmer](https://github.com/Shellbye){:target="_blank"}, 
-[director](/blog/direct-era/){:target="_blank"} and 
+My name is Shellbye, I'm a [programmer](https://github.com/Shellbye){:target="_blank"},
+[director](/blog/direct-era/){:target="_blank"} and
 [poet](/blog/poet/){:target="_blank"}.
 Currently, I'm working on my CS master's degree at [UESTC](http://www.uestc.edu.cn/){:target="_blank"}.
 
 
 Not as other lucky birds, I didn't have the opportunely to access Internet until I was in middle school.
-I started to write blog in 2008 when I graduate from middle school and stopped writing diary. 
-I started at [QQ-zone](http://qzone.qq.com/){:target="_blank"} as most of classmate did. 
-After that, I tried [新浪博客](http://blog.sina.com.cn/){:target="_blank"}, 
-[网易博客](http://blog.163.com/){:target="_blank"} 
-and [Wordpress](https://wordpress.com/){:target="_blank"} successively. 
+I started to write blog in 2008 when I graduate from middle school and stopped writing diary.
+I started at [QQ-zone](http://qzone.qq.com/){:target="_blank"} as most of classmate did.
+After that, I tried [新浪博客](http://blog.sina.com.cn/){:target="_blank"},
+[网易博客](http://blog.163.com/){:target="_blank"}
+and [Wordpress](https://wordpress.com/){:target="_blank"} successively.
 Now I host my [jekyll](http://jekyllrb.com/){:target="_blank"}
 blog in [Github](https://pages.github.com/){:target="_blank"} which is free and fast.
 
 
-I learned C/C++ in college but barely used them except my graduation project. 
-I taught myself PHP/HTML/CSS/JavaScript when I start the first commercial project of my life 
-with the help of [Yii](http://www.yiiframework.com/){:target="_blank"} 
+I learned C/C++ in college but barely used them except my graduation project.
+I taught myself PHP/HTML/CSS/JavaScript when I start the first commercial project of my life
+with the help of [Yii](http://www.yiiframework.com/){:target="_blank"}
 and [XAMPP](https://www.apachefriends.org/index.html){:target="_blank"}.
-Four month later, I started to study [python](https://www.python.org/){:target="_blank"}, 
-and then did another project using [Django](https://www.djangoproject.com/){:target="_blank"} 
-+ [nginx](http://nginx.org/){:target="_blank"} 
+Four month later, I started to study [python](https://www.python.org/){:target="_blank"},
+and then did another project using [Django](https://www.djangoproject.com/){:target="_blank"}
++ [nginx](http://nginx.org/){:target="_blank"}
 + [uWSGI](https://uwsgi-docs.readthedocs.org/en/latest/){:target="_blank"}.
-Soon after the second project, I started to learn Java by doing another project 
-which runs on [WeChat](http://weixin.qq.com/){:target="_blank"} and at the same time, 
-some of my classmate and I started a studio using Django to build website. 
-The studio did not last very long but long enough for me, 
+Soon after the second project, I started to learn Java by doing another project
+which runs on [WeChat](http://weixin.qq.com/){:target="_blank"} and at the same time,
+some of my classmate and I started a studio using Django to build website.
+The studio did not last very long but long enough for me,
 I learned both the program skills and the art of management.
 
-I've used [Scrapy](http://doc.scrapy.org/en/master/index.html){:target="_blank"} 
-+ [Supervisord](http://supervisord.org/){:target="_blank"} to crawl and collect data, 
+I've used [Scrapy](http://doc.scrapy.org/en/master/index.html){:target="_blank"}
++ [Supervisord](http://supervisord.org/){:target="_blank"} to crawl and collect data,
 then store them in [MongoDB](https://www.mongodb.org/){:target="_blank"}.
 
 
-I have use Java for a while, but I like Python the most. 
+I have use Java for a while, but I like Python the most.
 I hope that one day I can write some technical book.
 
 

@@ -19,7 +19,7 @@ tags:
 1.socket file
 在这篇文档讲到socket文件的[时候](http://uwsgi-docs.readthedocs.org/en/latest/tutorials/Django_and_nginx.html#using-unix-sockets-instead-of-ports)，他只是简单的说在mysite_nginx.conf配置文件里修改下面这行：
 
-    
+
     server unix:///path/to/your/mysite/mysite.sock; # for a file socket
     # server 127.0.0.1:8001; # for a web port socket (we'll use this first)
 
@@ -32,6 +32,6 @@ tags:
 因为我没有在虚拟的环境下部署，而是直接在操作系统内部部署，所以mysite_uwsgi.ini文件中的home这个参数就不知道该怎么写，尝试了一下设置，比如设置为我的django项目所在的路径，事实证明不需要，把它注释掉就可以了。
 
 参考资料
-1.http://en.wikipedia.org/wiki/Unix_domain_socket
-2.http://en.wikipedia.org/wiki/Unix_file_types#Socket
-3.http://www.rainydayz.org/beej/bgipc/unixsock.html
+1.http://en.wikipedia.org/wiki/Unix_domain_socket   
+2.http://en.wikipedia.org/wiki/Unix_file_types#Socket  
+3.http://www.rainydayz.org/beej/bgipc/unixsock.html  

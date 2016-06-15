@@ -18,13 +18,13 @@ tags:
 ##1.下载docker-spark  
 我们需要的docker文件一般都是在[Docker Hub]{:target="_blank"}上，它类似Github，
 只是上面存放的都是一些docker文件。我们需要的是sequenceiq/spark这个库，
-具体的下载命令类似git，是  
+具体的下载命令类似git，是
 `docker pull sequenceiq/spark:1.6.0`，
 接下来就是困扰了我很久的地方了，在这个库的[文档]{:target="_blank"}中，
-接下来就是用  
+接下来就是用
 `docker build --rm -t sequenceiq/spark:1.6.0 .`来build了，
 可是我尝试了很多次，每次都会报错
-`unable to prepare context: unable to evaluate symlinks in Dockerfile path: 
+`unable to prepare context: unable to evaluate symlinks in Dockerfile path:
 lstat /Users/username/Dockerfile: no such file or directory`，
 在网上找了很久也一直没有解决这个问题，直到搜到了作者的一个更老的版本的[博客]{:target="_blank"}，
 里面关于build是这样说的，

@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-  {% include head.html %}
-
-  <body class="custom-background">
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-        {% if page.comments %}{% include disqus_comments.html %}{% endif %}
-      </div>
-    </div>
-
-    {% include footer.html %}
-
-  </body>
-
-</html>
+---
+theme :
+  name : hooligan
+---
+{% include JB/setup %}
+{% include themes/hooligan/default.html %}

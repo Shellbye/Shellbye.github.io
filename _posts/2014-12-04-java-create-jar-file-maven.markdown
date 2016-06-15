@@ -5,7 +5,6 @@ date: 2014-12-04 10:02:51+00:00
 layout: post
 slug: java-create-jar-file-maven
 title: java create jar file with maven
-wordpress_id: 1141
 categories:
 - tech_world
 tags:
@@ -18,52 +17,52 @@ tags:
 1.配置文件
 首先肯定是要有pom.xml文件：
 
-    
-    
-    <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-        <modelversion>4.0.0</modelversion>
-    
-        <groupid>com.shellbye.wsc.shulianxunying.zhihuuser</groupid>
-        <artifactid>zhihu</artifactid>
-        <version>1.0-SNAPSHOT</version>
-    
-        <properties>
-            <maven.compiler.source>1.7</maven.compiler.source>
-            <maven.compiler.target>1.7</maven.compiler.target>
-        </properties>
-    
-        <build>
-            <plugins>
-                <plugin>
-                    <groupid>org.apache.maven.plugins</groupid>
-                    <artifactid>maven-shade-plugin</artifactid>
-                    <version>2.3</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                            <configuration>
-                                <transformers>
-                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                        <mainclass>path.to.your.main</mainclass>
-                                    </transformer>
-                                </transformers>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-    
-        <dependencies>
-            <dependency>
-                
-            </dependency>
-        </dependencies>
-    </project>
 
+{% highlight xml %}
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemalocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelversion>4.0.0</modelversion>
+
+    <groupid>com.shellbye.wsc.shulianxunying.zhihuuser</groupid>
+    <artifactid>zhihu</artifactid>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupid>org.apache.maven.plugins</groupid>
+                <artifactid>maven-shade-plugin</artifactid>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainclass>path.to.your.main</mainclass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+
+        </dependency>
+    </dependencies>
+</project>
+{% endhighlight %}
 
 
 2.打包
@@ -71,19 +70,19 @@ tags:
 
 3.执行
 
-    
-    java -jar yourjarfile.jar
-
+{% highlight bash %}
+java -jar yourjarfile.jar
+{% endhighlight %}
 
 
 我在配置的过程中遇到error: generics are not supported in -source 1.3，耽误了很多时间，后来[3]的指导下解决了，解决的方法就是上面xml文件中的
 
-    
-    <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-    </properties>
-
+{% highlight xml %}
+<properties>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+</properties>
+{% endhighlight %}
 
 参考：
 
