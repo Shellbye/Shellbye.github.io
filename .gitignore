@@ -9,3 +9,4 @@ Gemfile.lock
 .idea/
 .sass-cache/
 *~
+_theme_packages
