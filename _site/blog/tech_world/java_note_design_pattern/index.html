@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Java note design_pattern - 
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive.html">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Java note design_pattern 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h3 id="section">设计模式</h3>
+<ol>
+  <li>singleton pattern 单例模式<br />
+1.基础版：</li>
+</ol>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassicSingleton</span> <span class="o">{</span>
+<span class="lineno"> 2</span> 	<span class="kd">private</span> <span class="kd">static</span> <span class="n">ClassicSingleton</span> <span class="n">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="lineno"> 3</span> 	<span class="kd">protected</span> <span class="nf">ClassicSingleton</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno"> 4</span> 		<span class="c1">// Exists only to defeat instantiation.</span>
+<span class="lineno"> 5</span> 	<span class="o">}</span>
+<span class="lineno"> 6</span> 	<span class="kd">public</span> <span class="kd">static</span> <span class="n">ClassicSingleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno"> 7</span> 		<span class="k">if</span><span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno"> 8</span> 			<span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ClassicSingleton</span><span class="o">();</span>
+<span class="lineno"> 9</span> 		<span class="o">}</span>
+<span class="lineno">10</span> 		<span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+<span class="lineno">11</span> 	<span class="o">}</span>
+<span class="lineno">12</span> <span class="o">}</span></code></pre></div>
+
+<p>2.双重检查版：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+<span class="lineno"> 2</span> 	<span class="kd">private</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="n">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="lineno"> 3</span> 	<span class="kd">protected</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno"> 4</span> 		<span class="c1">// Exists only to defeat instantiation.</span>
+<span class="lineno"> 5</span> 	<span class="o">}</span>
+<span class="lineno"> 6</span> 	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno"> 7</span> 		<span class="k">if</span><span class="o">(</span><span class="n">singleton</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno"> 8</span> 			<span class="kd">synchronized</span><span class="o">(</span><span class="n">Singleton</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno"> 9</span> 				<span class="k">if</span><span class="o">(</span><span class="n">singleton</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">10</span> 					<span class="n">singleton</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Singleton</span><span class="o">();</span>
+<span class="lineno">11</span> 				<span class="o">}</span>
+<span class="lineno">12</span> 			<span class="o">}</span>
+<span class="lineno">13</span> 		<span class="o">}</span>
+<span class="lineno">14</span> 		<span class="k">return</span> <span class="n">singleton</span><span class="o">;</span>
+<span class="lineno">15</span> 	<span class="o">}</span>
+<span class="lineno">16</span> <span class="o">}</span></code></pre></div>
+
+<p>3.简洁版：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno">1</span> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleSingleton</span> <span class="o">{</span>
+<span class="lineno">2</span> 	<span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">SimpleSingleton</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SimpleSingleton</span><span class="o">();</span>
+<span class="lineno">3</span> 	<span class="kd">private</span> <span class="nf">SimpleSingleton</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno">4</span> 		<span class="c1">// Exists only to defeat instantiation.</span>
+<span class="lineno">5</span> 	<span class="o">}</span>
+<span class="lineno">6</span> <span class="o">}</span></code></pre></div>
+
+<p>4.枚举版：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno">1</span> <span class="kd">public</span> <span class="kd">enum</span> <span class="n">EnumSingleton</span> <span class="o">{</span>
+<span class="lineno">2</span>     <span class="n">INSTANCE</span><span class="o">;</span>
+<span class="lineno">3</span>     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">someOtherMethod</span><span class="o">()</span> <span class="o">{</span>
+<span class="lineno">4</span>         <span class="c1">//</span>
+<span class="lineno">5</span> 	<span class="o">}</span>
+<span class="lineno">6</span> <span class="o">}</span></code></pre></div>
+
+<p>参考：<br />
+<a href="http://www.javaworld.com/article/2073352/core-java/simply-singleton.html" target="_blank">http://www.javaworld.com/article/2073352/core-java/simply-singleton.html</a><br />
+<a href="http://www.javaworld.com/article/2073352/core-java/simply-singleton.html" target="_blank">http://www.blogjava.net/kenzhh/archive/2013/03/15/357824.html</a></p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java_note_basic/" title="Java note basic">&larr; Previous</a>
+      
+        <a class="btn" href="/archive/index.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/java_note_web/" title="Java note web">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>05 September 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags/index.html#java-ref">java <span>34</span></a></li>
+     
+    	<li><a href="/tags/index.html#job-ref">job <span>15</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2016 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

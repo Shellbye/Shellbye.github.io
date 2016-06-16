@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        重拾数学1－箱线图 - 
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive.html">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    重拾数学1－箱线图 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>来到<a href="http://100tal.com/" target="_blank">新公司</a>实习之后，发现我将要做的工作是我一直以来期待的关于机器学习和人工智能的东西，
+兴奋至于也终于意识到不得不好好补补自己的数学了，于是打算写一个重拾数学的学习笔记，
+尽量做到每天一篇，看看能坚持多久吧。</p>
+
+<p>首先是在<a href="https://www.khanacademy.org/math/probability" target="_blank">KHanACADEMY</a>上遇到的第一个问题，就是<a href="http://www.physics.csbsju.edu/stats/box2.html" target="_blank">box plot</a>, </p>
+
+<blockquote>
+  <p>The box plot (a.k.a. box and whisker diagram) is a standardized way of displaying the 
+distribution of data based on the five number summary: 
+minimum, first quartile, median, third quartile, and maximum.  </p>
+</blockquote>
+
+<p>Box plot中文应该是叫箱线图，主要用来以较少的数据直观的描述数据集的分布情况，其主要用的值有最小值、
+中位数、最大值、第一四分位数和第三四分位数等。</p>
+
+<p>举例：<br />
+请给出一下有序数列的box plot图，4，5，7，7，7，8，10，11，11，13，13，14.</p>
+
+<p>解：<br />
+首先需要找到的五个点以及其对应的寻找方法如下：<br />
+1. 最大值：数列中的最大值<br />
+2. 最小值：数列中的最小值<br />
+3. 中位数：如果数列中数的个数为奇数，则直接取数列长度除以2向上取整的位置所在的数
+（如10，20，30，40，50中，数列长度为5，5/2向上取整为3，所以，中位数为位于第三个位置的数30）；
+如果数列中数的个数为偶数，则取数列长度除以2的位置的数，以及其后面的数，在本例中，即第六和第七位数，
+分别为8和10，然后在求二者的平均数，本例中即为9，所以本例中的数列的中位数即为9.<br />
+4. 第一四分位数：如果数列中数的个数为奇数，则第一四分位数为去掉中位数之后前面剩余的数所组成的数列的中位数，
+如果数列中数的个数为偶数，则第一四分位数为前面一半的数所组成的数列的中位数。<br />
+5. 第三四分位数：如果数列中数的个数为奇数，则第三四分位数为去掉中位数之后后面剩余的数所组成的数列的中位数，
+如果数列中数的个数为偶数，则第三四分位数为后面一半的数所组成的数列的中位数。  </p>
+
+<p>找到以上所需的五个数之后，接下来就是要在数轴上画图的过程了，每个点具体的画法如下所示：<br />
+<img src="http://www.physics.csbsju.edu/stats/simple.box.defs.gif" alt="simple.box.defs" />  </p>
+
+<p>其中的第一四分位数到第三四分位数之间的长方形叫做interquartile range（IQR），IQR内部的线为中位数，
+IQR外面一上一下两条短线表示最大与最小值。</p>
+
+<p>本例中最终的作图结果如下图：<br />
+<img src="/assets/box-plot1.png" alt="box plot" />  </p>
+
+<p>参考：<br />
+<a href="http://www.physics.csbsju.edu/stats/box2.html" target="_blank">1.Box Plot: Display of Distribution</a><br />
+<a href="https://en.wikipedia.org/wiki/Box_plot" target="_blank">2.Box plot - Wikipedia, the free encyclopedia</a><br />
+<a href="http://www.gdstats.gov.cn/tjkw/tjyyc/2003/2003/2/0013.htm" target="_blank">3.BOX PLOT–描述统计的一个简便工具</a>  </p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/Django-ListView-note/" title="Django Pagination note">&larr; Previous</a>
+      
+        <a class="btn" href="/archive/index.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/spark-docker-mac/" title="Use Spark in Docker on Mac">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>08 April 2016</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags/index.html#math-ref">math <span>1</span></a></li>
+     
+    	<li><a href="/tags/index.html#Probability and statistics-ref">Probability and statistics <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2016 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

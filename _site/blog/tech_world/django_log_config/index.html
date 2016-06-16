@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        django log config - 
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive.html">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    django log config 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>记得第一次接触<a href="https://www.djangoproject.com/">django</a>是一年半前，跟着一个博士师兄写了一段时间之后，
+师兄给我布置了一个任务，
+让我给当时正在做的网站添加日志系统，当时接到这个任务时我就感觉做不了，因为虽然写了也有几天了，
+但是基本上都是ctrl+c然后ctrl+v，然后改改表名，改改业务逻辑，对django没有任何的了解，
+基本上只是在写python，而不是django.</p>
+
+<p>折腾了几天之后，果然还是没有折腾出来，于是任务交由一个很NB的师弟去做了，当然就做出来了…囧</p>
+
+<p>上一次再接触django的这个日志功能是大概一年前的样子，对django有了一点基本的认识，
+也看了django官方的一些文档（真是好东西啊），但是试了试，还是没有配好，于是又交给了另一个师弟，囧</p>
+
+<p>今天是突然看到了自己不久前写的一个django_base的小项目，旨在把用django做网站需要用到的一些基本功能都实现了，
+然后在用的时候可以快速开发，免去一些基本的设置，比如登录注册忘记密码啥的。就像你所知道的那样，
+这个小项目一直没有日志功能，对于终将部署到服务器上的网站来说，没有日志功能是一件非常可怕的事（如果你经历过的话），
+于是今天再次尝试了一下django的<a href="https://docs.djangoproject.com/en/1.7/topics/logging/">日志功能</a>, 
+虽然中途也遇到了一些问题，但是终究还是可以使用了，^_^</p>
+
+<p><code>setting.py</code></p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s"> </span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(module)s</span><span class="s"> </span><span class="si">%(process)d</span><span class="s"> </span><span class="si">%(thread)d</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span>
+        <span class="p">},</span>
+        <span class="s">&#39;simple&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s">&#39;filters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;special&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;()&#39;</span><span class="p">:</span> <span class="s">&#39;helper.utils.logging_filter&#39;</span><span class="p">,</span>
+            <span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;null&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s">&#39;class&#39;</span><span class="p">:</span> <span class="s">&#39;logging.NullHandler&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s">&#39;console&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s">&#39;class&#39;</span><span class="p">:</span> <span class="s">&#39;logging.StreamHandler&#39;</span><span class="p">,</span>
+            <span class="s">&#39;formatter&#39;</span><span class="p">:</span> <span class="s">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+        <span class="s">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;ERROR&#39;</span><span class="p">,</span>
+            <span class="s">&#39;class&#39;</span><span class="p">:</span> <span class="s">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+            <span class="s">&#39;include_html&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="c"># set this to True may made the email be suspicious</span>
+        <span class="p">},</span>
+        <span class="s">&#39;file&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s">&#39;class&#39;</span><span class="p">:</span> <span class="s">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;debug.log&#39;</span><span class="p">,</span>
+            <span class="s">&#39;formatter&#39;</span><span class="p">:</span> <span class="s">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;django&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;console&#39;</span><span class="p">],</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;DJANGO_LOG_LEVEL&#39;</span><span class="p">,</span> <span class="s">&#39;INFO&#39;</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s">&#39;django.request&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;file&#39;</span><span class="p">],</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s">&#39;propagate&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s">&#39;accounts.views&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;file&#39;</span><span class="p">],</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s">&#39;propagate&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s">&#39;news&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;mail_admins&#39;</span><span class="p">],</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="s">&#39;INFO&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s">&#39;news.views&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;console&#39;</span><span class="p">],</span>
+            <span class="s">&#39;level&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;DJANGO_LOG_LEVEL&#39;</span><span class="p">,</span> <span class="s">&#39;INFO&#39;</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">}</span></code></pre></div>
+
+<p>使用的话，就是这个样子了：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># import the logging library</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c"># Get an instance of a logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="o">...</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Error: &#39;</span> <span class="o">+</span> <span class="n">e</span><span class="p">)</span></code></pre></div>
+
+<p>其中<code>formatters</code>的里具体的参数的信息和配置可以参考<a href="https://docs.python.org/3/library/logging.html#logrecord-attributes">这里</a></p>
+
+<p>需要特别强调的是<code>mail_admins</code>，这里并不是简单的这样配置了就可以工作的，
+还需要一些<code>settings.py</code>里的其他配置配合才能正常工作，主要有以下几点：</p>
+
+<p>1.<code>ADMINS</code>一定要设置，并且格式如下：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ADMINS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s">&#39;shellbye&#39;</span><span class="p">,</span> <span class="s">&#39;some_other_email@domain.com&#39;</span><span class="p">),</span>
+<span class="p">)</span></code></pre></div>
+
+<p>注意结尾的那个英文逗号( ,)，这个是必须的，否则就不是tuple了。</p>
+
+<p>2.<code>SERVER_EMAIL</code>也需要设置，
+因为django<a href="https://docs.djangoproject.com/en/1.7/ref/settings/#server-email">默认的设置</a>是root@localhost，
+你的邮件服务器很可能没有这个账号，所以你需要设置成你的邮件服务器里存在的一个发信地址，比如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">SERVER_EMAIL</span> <span class="o">=</span> <span class="s">&#39;your_account@example.com&#39;</span></code></pre></div>
+
+<p>在我的项目里，设置好这些就可以发送日志邮件了，也许你的还有其他需要配置的，
+具体的请参考万能的stackoverflow.com里的<a href="http://stackoverflow.com/questions/1414130/django-not-sending-emails-to-admins">这个</a>回答。</p>
+
+<p>3.<code>mail_admins</code>里面的<code>include_html</code>如果设置成<code>True</code>的话，有可能会被当做垃圾邮件。我使用的163的免费邮箱，
+就发生了系统退信。</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java_log4j_config/" title="java log4j config">&larr; Previous</a>
+      
+        <a class="btn" href="/archive/index.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/mongodb_findOne_vs_find/" title="mongodb findOne vs find">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>08 April 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags/index.html#django-ref">django <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2016 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

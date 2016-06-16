@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Java note concurrent - 
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive.html">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Java note concurrent 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h3 id="section">并发</h3>
+<ol>
+  <li>
+    <p>wait() 和 sleep() 方法的差别?<br />
+1) wait() 是在 Object 中定义. 而 sleep() 是在 Thread 中定义.<br />
+2) wait() 会释放锁 lock,	但是 sleep() 不会释放锁.  </p>
+  </li>
+  <li>
+    <p>在java中怎样实现多线程？<br />
+extends Thread<br />
+implement Runnable  </p>
+  </li>
+  <li>
+    <p>java中的非阻塞是怎么实现的(cas)？<br />
+compare and set<br />
+参考：<a href="http://blog.csdn.net/wanghuan203/article/details/43344767" target="_blank">http://blog.csdn.net/wanghuan203/article/details/43344767</a>  </p>
+  </li>
+  <li>
+    <p>乐观锁<br />
+所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。
+乐观锁用到的机制就是CAS，Compare and Swap。  </p>
+  </li>
+  <li>
+    <p>AQS<br />
+AQS是concurrent包中的一系列同步工具的基础实现，其提供了状态位，线程阻塞-唤醒方法，CAS操作。
+AQS负责管理同步器类中的状态，它管理了一个整数状态信息，
+可以通过getState，setState以及compareAndSetState等protected类型方法来进行操作。
+基本原理就是根据状态位来控制线程的入队阻塞、出队唤醒来解决同步问题<br />
+AQS用来支持一大类线程同步工具，如ReentrantLock,CountdownLatch,Semphaore,FutureTask等  </p>
+  </li>
+  <li>
+    <p>框架通过在框架线程中调用应用程序代码将并发性引入到程序中。在代码中将不可避免的访问应用程序状态，
+因此所有访问这些状态的代码路径都必须是线程安全的。  </p>
+  </li>
+  <li>
+    <p>如果当多个线程访问同一个可变的状态变量时没有使用合适的同步，那么程序就会出现错误。有三种方式可以修复这个问题：<br />
+1）不在线程之间共享该状态变量<br />
+2）将状态变量修改为不可变的变量<br />
+3）在访问状态变量时使用同步  </p>
+  </li>
+  <li>
+    <p>当多个线程访问某个类时，不管运行环境采用何种调度方式或者这些线程将如何交替执行，并且在主调代码中不需要任何额外的同步或协同，
+这个类都能表现出正确的行为，那么就称这个类是线程安全的。  </p>
+  </li>
+  <li>
+    <p>无状态对象（不可变对象）一定是线程安全的，比如String  </p>
+  </li>
+  <li>
+    <p>大多数竞态条件的本质，就是基于一种可能失效的观察结果来做出判断或者执行某个计算。
+这种类型的竞态条件称为“先检查后执行”。使用“先检查后执行”的一种常见情况就是延迟初始化。  </p>
+  </li>
+  <li>
+    <p>在实际情况中，应尽可能的使用现有的线程安全对象（AtomicLong）来管理类的状态。
+与非线程安全的对象相比，判断线程安全对象的可能状态及其状态转换情况要更为容易，从而也更容易维护和验证线程安全性。  </p>
+  </li>
+  <li>
+    <p>要保持状态的一致性，就需要在单个原子操作中更新所有相关的状态变量。对于每个包含多个变量的不变性条件，
+其中涉及的所有的变量都要由同一个锁保护。  </p>
+  </li>
+  <li>
+    <p>“重入”意味着获取锁的操作粒度是“线程”，而不是“调用”。  </p>
+  </li>
+  <li>
+    <p>当执行时间较长的计算或者可能无法快速完成的操作（网络I/O等）时，一定不要持有锁。  </p>
+  </li>
+  <li>
+    <p>在没有同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整。
+在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得出正确的结论。  </p>
+  </li>
+  <li>
+    <p>加锁的含义不仅仅局限于互斥行为，还包括内存可见性。
+为了确保所有线程都能看到共享变量的最新值，所有执行读操作或者写操作的线程都必须在同一个锁上同步。  </p>
+  </li>
+  <li>
+    <p>加锁机制既可以确保可见性又可以确保原子性，而volatile变量只能确保可见性。当且仅当满足以下所有条件时，才应该使用volatile变量：<br />
+1）对变量的写入操作不依赖变量的当前值，或者确保只有单个线程更新变量<br />
+2）该变量不会与其他状态变量一起纳入不变性条件中<br />
+3）在访问变量时不需要加锁  </p>
+  </li>
+  <li>
+    <p>不要在构造过程中使this引用逸出  </p>
+  </li>
+  <li>
+    <p>当满足以下条件时，对象才是不可变的：<br />
+1）对象创建以后其状态就不能修改<br />
+2）对象的所有域都是final的<br />
+3）对象是正确创建的（在对象的创建期间，this引用没有逸出）  </p>
+  </li>
+  <li>
+    <p>“除非需要更高的可见性，否则应该将所有的域都声明为私有的”，
+“除非需要某个域是可变的，否则应将其声明为final域”  </p>
+  </li>
+  <li>
+    <p>要安全的发布一个对象，对象的应用以及对象的状态必须同时对其他线程可见。一个正确构造的对象可以通过以下方式来安全的发布：<br />
+1）在静态初始化函数中初始化一个对象引用<br />
+2）将对象的引用保存到volatile类型的域或者AtomicReferance对象中<br />
+3）将对象的引用保存到某个正确的构造对象的final类型域中<br />
+4）将对象的引用保存到一个由锁保护的域中  </p>
+  </li>
+  <li>
+    <p>在没有额外的同步的情况下，任何线程都可以安全的使用被安全发布的事实上的不可变对象  </p>
+  </li>
+  <li>
+    <p>对象的发布需求取决于它的可变性：<br />
+1）不可变对象可以通过任意机制来发布<br />
+2）事实不可变对象必须通过安全方式来发布<br />
+3）可变对象必须通过安全方式来发布，并且必须是线程安全的或者由某个锁保护起来  </p>
+  </li>
+  <li>
+    <p>在并发程序中使用和共享对象时，可以使用一些实用的策略，包括：<br />
+1）线程封闭：线程封闭的对象只能由一个线程拥有，对象被封闭在该线程中，并且只能由这个线程修改<br />
+2）只读共享：在没有额外同步的情况下，共享的只读对象可以由对个线程并发访问，但任何线程都不能修改它。共享的只读对象包括不可变对象和事实不可变对象。<br />
+3）线程安全共享：线程安全的对象在其内部实现同步，因此多个线程可以通过对象的公有接口来进行访问而不需要进一步的同步<br />
+4）保护对象：被保护的对象只能通过持有特定的锁来访问。保护对象包括封装在其他线程安全对象中的对象，以及已发布的并且由某个特定锁保护的对象  </p>
+  </li>
+  <li>
+    <p>在设计线程安全类的过程中，需要包含以下三个基本要素：<br />
+1）找出构成对象状态的所有变量<br />
+2）找出约束状态变量的不变性条件<br />
+3）建立对象状态的并发访问策略  </p>
+  </li>
+  <li>
+    <p>如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。
+要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性与封装性。  </p>
+  </li>
+  <li>
+    <p>将数据封装在对象内部，可以将数据的访问限制在对象的方法上，从而更容易确保线程在访问数据时总能持有正确的锁。  </p>
+  </li>
+  <li>
+    <p>封闭机制更易于构造线程安全的类，因为当封闭类的状态时，在分析类的线程安全性时就无须检查整个程序  </p>
+  </li>
+  <li>
+    <p>如果一个类是由多个独立且线程安全的状态变量组成，并且在所有的操作中都不包含无效状态转换，
+那么可以将线程安全性委托给底层的状态变量  </p>
+  </li>
+  <li>
+    <p>如果一个状态变量是线程安全的，并且没有任何不变性条件约束它的值，
+在变量的操作上也不存在任何不允许的状态转换，那么就可以安全的发布这个变量  </p>
+  </li>
+  <li>
+    <p>同步容器类<br />
+Vector等容器虽然是线程安全的，但是需要客户端加锁，否则会在迭代时抛出ArrayIndexOutOfBoundsException异常<br />
+迭代过程中，如果有其他线程在并发的修改容器，那么，容器的计数就会被修改，
+那么在hasNext()或next()方法将抛出ConcurrentModificationException。
+这种机制成为快速失败（fail－fast）。与之对应的是在容器的副本上进行的迭代。
+<a href="http://javahungry.blogspot.com/2014/04/fail-fast-iterator-vs-fail-safe-iterator-difference-with-example-in-java.html" target="blank">参考</a><br />
+正如封装对象的状态有助于维持不变性条件一样，封装对象的同步机制同样有助于确保实施同步策略。  </p>
+  </li>
+  <li>
+    <p>并发容器<br />
+ConcurrentHashMap（分段锁机制，Locking Striping，size()和isEmpty()方法可能不那么准确）是用来代替同步且基于散列的HashMap；
+CopyOnWriteArrayList用于在遍历操作为主要操作的情况下代替同步的List。
+在新的ConcurrentMap接口中，增加了一些常用的复合操作，如“若没有则添加”、替换和条件删除。
+JAVA 5.0中还添加了Queue和BlockingQueue。<br />
+通过并发容器来代替同步容器，可以极大地提高伸缩性并降低风险  </p>
+  </li>
+  <li>
+    <p>在构建高可靠的应用程序时，有界队列是一种强大的资源管理工具：
+他们能抑制并防止产生过多的工作项，使应用程序在符合过载的情况下变得更加健壮  </p>
+  </li>
+  <li>
+    <p>1）可变状态是至关重要的：所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，就越容易确保线程安全<br />
+2）尽量将域声明为final类型，除非需要它们是可变的<br />
+3）不可变对象一定是线程安全的<br />
+4）封装有助于管理复杂性：将数据封装在对象中，更易于维持不变性条件：将同步机制封装在对象中，更易于遵循同步<br />
+5）用锁保护每个可变对象<br />
+6）当保护同一个不变性条件中的所有变量时，要使用同一个锁<br />
+7）在执行符合操作期间，要持有锁<br />
+8）如果从多个线程中访问同一个可变变量时没有同步机制，那么程序会出现问题<br />
+9）不要故作聪明的推断出不需要使用同步<br />
+10）在设计过程中考虑线程安全，或者在文档中明确的指出它不是线程安全的<br />
+11）将同步策略文档化  </p>
+  </li>
+  <li>
+    <p>每当看到这种形式的代码：new Thread(runnable).start()，
+并且你希望获得一种更灵活的执行策略时，请考虑使用Executor来代替Thread  </p>
+  </li>
+  <li>
+    <p>在JAVA的API或语言规范中，并没有将中断与任何取消语义关联起来，但实际上，
+如果在取消之外的其他操作中使用中断，那么都是不合适的，并且很难支撑起更大的应用  </p>
+  </li>
+  <li>
+    <p>调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了请求中断的消息  </p>
+  </li>
+  <li>
+    <p>通常，中断是实现取消的最合理方式  </p>
+  </li>
+  <li>
+    <p>由于每个线程拥有各自的中断策略，因此除非你知道中断对该线程的含义，否则不应该中断这个线程。  </p>
+  </li>
+  <li>
+    <p>只有实现了线程中断策略的代码才可以屏蔽中断请求租。在常规的任务和库代码中都不应该屏蔽中断请求  </p>
+  </li>
+  <li>
+    <p>当Future.get抛出InterruptedException或TimeoutException时，
+如果你知道不再需要结果，那么就可以调用Future.cancel来取消任务  </p>
+  </li>
+  <li>
+    <p>对于持有线程的服务，只要服务的存在时间大于创建线程的方法的存在时间，那么就应该提供生命周期方法  </p>
+  </li>
+  <li>
+    <p>在运行时间较长的应用程序中，通常会为所有线程的未捕获异常指定同一个异常处理器，并且该处理器至少会将异常信息记录到日志中  </p>
+  </li>
+  <li>
+    <p>此外，守护进程通常不能用来替代应用程序管理程序中各个服务的生命周期  </p>
+  </li>
+  <li>
+    <p>避免使用终结器  </p>
+  </li>
+  <li>
+    <p>每当递交了一个有依赖性的Executor任务时，要清楚地知道可能会出现线程“饥饿”死锁，
+因此需要在代码或配置Executor的配置文件中记录线程池的大小限制或配置限制  </p>
+  </li>
+  <li>
+    <p>对于Executor，newCachedThreadPool工厂方法时一种很好的默认选择，它能提供比固定大小的线程池更好的排队性能。
+当需要限制当前任务的数量以满足资源管理需求时，那么可以选择固定大小的线程池，
+就像在接受网络客户请求的服务器应用程序中，如果不进行限制，那么很容易发生过载问题  </p>
+  </li>
+  <li>
+    <p>Swing的单线程规则是：Swing中的组件以及模型只能在这个事件分发线程中进行创建、修改以及查询  </p>
+  </li>
+  <li>
+    <p>如果一个数据模型必须被多个线程共享，而且由于阻塞、一致性或复杂度等原因而无法实现一个线程安全的模型时，
+可以考虑使用分解模型设计  </p>
+  </li>
+  <li>
+    <p>如果所有线程以固定的顺序来获得锁，那么在程序中就不会出现锁顺序死锁问题  </p>
+  </li>
+  <li>
+    <p>如果在持有锁时调用外部方法，那么将出现活跃性问题。在这个外部方法中可能会获取其他锁（这可能会产生死锁），
+或者阻塞时间过长，导致其他线程无法及时获得当前被持有的锁  </p>
+  </li>
+  <li>
+    <p>在程序中应尽量使用开放调用（调用时不需要持有锁），与那些在持有锁时调用外部方法的程序相比，
+更易于对依赖开放调用的程序进行死锁分析  </p>
+  </li>
+  <li>
+    <p>要避免使用线程优先级，因为这会增加平台依赖性（不同操作系统优先级粒度不一样），并可能导致活跃性问题。
+在大多数并发应用程序中，都可以使用默认的线程优先级  </p>
+  </li>
+  <li>
+    <p>可伸缩性指的是：当增加计算资源时（例如CPU、内存、存储容量或I/O带宽），程序的吞吐量或者处理能力相应的增加  </p>
+  </li>
+  <li>
+    <p>避免不成熟的优化。首先使程序正确，然后在提高运行速度——如果它还不够快的话  </p>
+  </li>
+  <li>
+    <p>在所有并发程序中都包含一些串行部分，如果你认为在你的程序中不存在串行部分，那么可以再仔细检查一遍  </p>
+  </li>
+  <li>
+    <p>不要过度担心非竞争同步带来的开销。这个基本的机制已经非常快了，并且JVM还能进行额外的优化以进一步降低或消除开销。
+因此，我们应该将优化重点放在那些发生锁竞争的地方  </p>
+  </li>
+  <li>
+    <p>在并发程序中，对可伸缩的最主要危险就是独占方式的资源锁  </p>
+  </li>
+  <li>
+    <p>有3种方式可以降低锁的竞争程度：<br />
+1）减少锁的持有时间<br />
+2）降低锁的请求频率<br />
+3）使用带有协调机制的独占锁，这些机制允许更高的并发性  </p>
+  </li>
+  <li>
+    <p>通常，对象分配操作的开销比同步的开销更低  </p>
+  </li>
+  <li>
+    <p>在构建对并发类的安全测试中，需要解决的关键问题在于，要找出那些容易检查的属性，
+这些属性在发送错误的情况下极有可能失败，同时又不会使得错误检查代码人为地限制并发性。
+理想情况是，在测试属性中不需要任何同步机制  </p>
+  </li>
+  <li>
+    <p>这些测试应该放在多处理器的系统上运行，从而进一步测试更多形式的交替运行。
+然而，CPU的数量越多并不一定会使测试越高效。要最大程度的检测出一些对执行顺序敏感的数据竞争，
+那么测试中的线程数量应该多于CPU的数量，这样在任意时刻都会有一些线程在运行，
+而另一些被交换出去，从而可以检查线程间交替行为的可预测性  </p>
+  </li>
+  <li>
+    <p>要编写有效的性能测试程序，就需要告诉优化器不要将基础测试当做无用代码而优化掉。
+这就要求在程序中对每个计算结果都要通过某种方式来使用，这种方式不需要同步或者大量的计算  </p>
+  </li>
+  <li>
+    <p>在一些内置锁(synchronized)无法满足需求的情况下，
+ReentrantLock(1.5中引入的升级版锁机制，实现了Lock接口)可以作为一种高级工具。
+当需要一些高级功能时才应该使用ReentrantLock，这些功能包括：
+可定时的、可轮询的与可中断的锁获取操作，公平队列（是否按照请求的顺序获取锁，或者是恰好在锁释放时请求的线程获取锁。公平的锁通常效率更低），
+以及非块结构的锁(支持更细粒度的锁操作)。否则，还是应该优先使用synchronizaed<br />
+性能是一个不断优化的指标，如果在昨天的测试基准中发现X比Y更快，
+那么在今天就可能已经过时了(ReentrantLock的性能在1.6中与synchronized已经很接近)  </p>
+  </li>
+  <li>
+    <p>每一次wait调用都会隐式的与特定的条件谓词关联起来。
+当调用每个特定条件谓词的wait时，调用者必须已经持有与条件队列相关的锁，
+并且这个锁必须保护着构成条件谓词的状态变量  </p>
+  </li>
+  <li>
+    <p>当使用条件等待时（例如Object.wait或Condition.await）：<br />
+1）通常都有一个条件谓词——包括一些对象状态的测试，线程在执行前必须首先通过这些测试<br />
+2）在调用wait之前测试条件谓词，并且从wait中返回时再次进行测试<br />
+3）在一个循环中调用wait<br />
+4）确保使用与条件队列相关的锁来保护构成条件谓词的各个状态变量<br />
+5）当调用wait、notify或notifyAll等方法时，一定要持有与条件队列相关的锁<br />
+6）在检查条件谓词之后以及开始执行相应的操作之前，不要释放锁  </p>
+  </li>
+  <li>
+    <p>每当在等待一个条件时，一定要确保在条件谓词变为真时通过某种方式发出通知  </p>
+  </li>
+  <li>
+    <p>只有同时满足以下两个条件时，才能用单一的notify而不是notifyAll：<br />
+1）所有等待线程的类型都相同。只有一个条件谓词与条件队列相关，并且每个线程在从wait返回后将执行相同的操作<br />
+2）单进单出。在条件变量上的每次通知，最多只能唤醒一个线程来执行  </p>
+  </li>
+  <li>
+    <p>特别注意：在Condition对象中，与wait、notify和notifyAll方法相对应的分别是await、signal和signlaAll。
+但是，Condition对Object进行了扩展，因而它也包含wait和notify方法。一定要确保使用正确的版本——await和signal  </p>
+  </li>
+  <li>
+    <p>如果在某种算法中，一个线程的失败或挂起不会导致其他线程也失败或挂起，那么这种算法就被称为非阻塞的算法  </p>
+  </li>
+  <li>
+    <p>除了不可变对象以外，使用被另一个线程初始化的对象通常都是不安全的，
+除非对象的发布操作时在使用该对象的线程开始使用之前执行  </p>
+  </li>
+  <li>
+    <p>JMM<br />
+JMM规定了JVM必须遵循一组最小保证，这组保证规定了对变量的写入操作在何时将对于其他线程可见。 JMM在设计时就在可预测性与程序的易于开发性之间进行了权衡，从而在各种主流的处理器体系架构上能够实现高性能的JVM.<br />
+JMM为程序中所有操作定义了一个偏序关系，称为Happens-Before。<br />
+Happens-Before的规则包括：<br />
+1）程序顺序规则：如果程序中操作A在操作B之前，那么在线程中A操作将在B操作之前执行<br />
+2）监视器锁规则：在监视器锁上的解锁操作必须在同一个监视器锁上的加锁操作之前执行<br />
+3）volatile变量规则：对volatile变量的写入操作必须在对该变量的读操作之前执行<br />
+4）线程启动规则：在线程上对Thread.start的调用必须在该线程中执行任何操作之前执行<br />
+5）线程结束规则：线程中的任何操作都必须在其他线程检测到该线程已经结束之前执行，或者从Thread.join中成功返回，或者在调用Thread.isAlive时返回false<br />
+6）中断规则：当一个线程在另一个线程上调用interrupt时，必须在被中断线程检测到interrupt调用之前执行<br />
+7）终结器规则：对象的构造函数必须在启动该对象的终结器之前执行完成<br />
+8）传递性：如果A操作在B操作之前，B操作在C操作之前，那么A也在C前  </p>
+  </li>
+  <li>
+    <p>闭锁<br />
+CountDownLatch<br />
+<code>CountDownLatch</code> works in latch principle, main thread will wait until gate is open. 
+One thread waits for n number of threads specified while creating <code>CountDownLatch</code> in Java.<br />
+<a href="http://tutorials.jenkov.com/java-util-concurrent/countdownlatch.html" target="_blank">http://tutorials.jenkov.com/java-util-concurrent/countdownlatch.html</a><br />
+FutureTask，信号量，栅栏也都是闭锁  </p>
+  </li>
+  <li>
+    <p>为什么GUI是单线程的？<br />
+在多线程的GUI框架中更容易发生死锁问题，其部分原因在于，
+在输入事件的处理过程中与GUI组件的面向对象模型之间会存在错误的交互。
+用户引发的动作，将通过一种类似于“气泡上升”的方式从操作系统传递给应用程序——操作系统首先检测到一次鼠标点击，
+然后通过工具包将其转化为“鼠标点击”事件，该事件最终被转换为一个更高层事件转发给应用程序的监听器。
+另一方面，应用程序引发的动作又会以“气泡下沉”的方式从应用程序返回到操作系统。  </p>
+  </li>
+</ol>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java_note_web/" title="Java note web">&larr; Previous</a>
+      
+        <a class="btn" href="/archive/index.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/java_note_jvm/" title="Java note jvm">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>05 September 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags/index.html#java-ref">java <span>34</span></a></li>
+     
+    	<li><a href="/tags/index.html#job-ref">job <span>15</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2016 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
