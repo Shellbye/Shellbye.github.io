@@ -26,7 +26,7 @@ author :
 production_url : http://shellbye.com
 
 gems: ["jekyll-sitemap"]
-
+excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
 JB :
@@ -64,7 +64,7 @@ JB :
   #   http://s3.amazonaws.com/yoursite/themes/watermelon
   #   /assets
   #
-  ASSET_PATH : /assets
+  ASSET_PATH : false
 
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.

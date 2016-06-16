@@ -5,7 +5,6 @@ date: 2014-07-28 07:35:00+00:00
 layout: post
 slug: httpresponse-%e8%8e%b7%e5%8f%96html%e5%86%85%e5%ae%b9
 title: HttpResponse 获取html内容
-wordpress_id: 978
 categories:
 - tech_world
 tags:
