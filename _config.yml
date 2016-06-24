@@ -88,7 +88,7 @@ JB :
   # Set 'provider' to false to turn analytics off globally.
   #
   analytics :
-    provider : custom
+    provider : google
     google :
         tracking_id : 'UA-63460307-1'
 
