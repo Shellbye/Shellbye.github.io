@@ -76,7 +76,9 @@ for row in cursor:
 
 读文档光是仔细是不行了，要用心，[官方文档]明确的写了，
 
-> You MUST retrieve the entire result set and close() the cursor before additional queries can be peformed on the connection.
+{% highlight bash %}
+You MUST retrieve the entire result set and close() the cursor before additional queries can be peformed on the connection.
+{% endhighlight %}
 
 原来是这个connection被神器占用了，那么好，单独再开一个connection，
 于是代码变成了最终版如下：
