@@ -47,7 +47,7 @@ ASCII码只用7位编码了128个字符，其中33个不可打印的字符和95�
 那么有了上面的解释，最简单的编码方式就是把所有字符一一对应的编码就可以了，
 比如`Python`的如下编码：
 
-{% highlight %}
+{% highlight text %}
 
    P           y           t           h           o           n
 0x50 00 00 00 79 00 00 00 74 00 00 00 68 00 00 00 6f 00 00 00 6e 00 00 00
@@ -68,7 +68,7 @@ Python默认的编码方式是`ASCII`，所以在将`unicode`转为`ASCII`时，
 8表示这种编码使用了8个bit）是比较流行的一个编码方式，
 `utf-8`使用如下的方式来进行编码：
 
-{% highlight %}
+{% highlight text %}
 
 1. 如果`code point` <128, 那么就直接展示
 2. 如果`code point`位于 128 和 `0x7ff`之间,就用两个`byte`来表示，
@@ -79,7 +79,7 @@ Python默认的编码方式是`ASCII`，所以在将`unicode`转为`ASCII`时，
 
 # python2.X
 `unicode`字符串在python中是`unicode`类型的，可以用`isinstance(value, unicode)`
-来查看一个字符串是否是`unicode`。内建函数`[unicode()]`可以把一个对象转为`unicode`字符串，
+来查看一个字符串是否是`unicode`。内建函数[`unicode()`]可以把一个对象转为`unicode`字符串，
 其方法签名如下：
 
 {% highlight python %}
@@ -146,6 +146,38 @@ ordinal not in range(128)
 
 文档中只给出了错误的例子，但是并没有提怎么样才是对的，
 这是就要看看这个[版本的`chr`]了，
+
+{% highlight text %}
+
+Return a string of one character whose ASCII code is the integer i.
+For example, chr(97) returns the string 'a'. This is the inverse of ord().
+The argument must be in the range [0..255], inclusive;
+ValueError will be raised if i is outside that range. See also unichr().
+
+{% endhighlight %}
+
+是不是其实并没有解释什么问题？是的，因为它还是说可以输入0到255的参数，
+但是它没有说明白的是，你可以输入0到255，但是只有0到127才是有意义的，
+其他大于127的值都是返回的不确定的东东，因为[ASCII]只到127，那么，
+怎么样用正确的方式把`code point`为255的字符和`abc`拼接起来呢？
+答案是指定编码：
+
+{% highlight python %}
+
+>>> unicode('abcdef' + chr(255), encoding="latin1")
+abcdefÿ
+
+{% endhighlight %}
+
+或者你可以直接在内部就使用[unichr]而不是[chr]:
+
+{% highlight python %}
+
+>>> unicode('abcdef' + unichr(255))
+abcdefÿ
+
+{% endhighlight %}
+
 
 
 
