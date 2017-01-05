@@ -51,7 +51,7 @@ mysql5.7之后，除了传统的给予二进制的日志的replication之外，
 # 操作步骤
 具体操作步骤在文章最后的参考文章有一些，下面我的笔记来自[官方文档]：
 
-1. [Master Config]
+1. [Master Config]  
 第一步是设置主数据库，具体需要配置的信息比较简单，就是在`my.cnf`文件中，
 修改以下配置（一般就是打开注释即可），
 
@@ -101,7 +101,7 @@ mysql > SHOW MASTER STATUS;
 
 {% highlight %}
 
-binlog_do_db = include_database_name
+binlog_do_db = database_name
 binlog_do_db = include_database_name2
 binlog_ignore_db = include_database_name
 binlog_ignore_db = include_database_name2
@@ -124,7 +124,7 @@ shell> mysqldump -uroot -p database_name table_name > db_tb.sql
 
 至此，主数据库的配置就完成了，接下来就是从数据库的配置了。
 
-2. [Slave Config]
+2. [Slave Config]  
 首先与主数据库一样的配置，就是需要在`my.conf`中进行如下配置，
 其中的`server-id`必须是全局唯一的
 
@@ -132,6 +132,14 @@ shell> mysqldump -uroot -p database_name table_name > db_tb.sql
 
 [mysqld]
 server-id=2
+
+{% endhighlight %}
+
+注意这里需要先创建好slave的数据库，
+
+{% highlight mysql %}
+
+mysql> CREATE DATABASE if not exists database_name CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 {% endhighlight %}
 
@@ -143,8 +151,8 @@ mysql> CHANGE MASTER TO
     ->     MASTER_HOST='master_host_name',
     ->     MASTER_USER='replication_user_name',
     ->     MASTER_PASSWORD='replication_password',
-    ->     MASTER_LOG_FILE='recorded_log_file_name',
-    ->     MASTER_LOG_POS=recorded_log_position;
+    ->     MASTER_LOG_FILE='mysql-bin.000003',
+    ->     MASTER_LOG_POS=73;
 
 {% endhighlight %}
 
