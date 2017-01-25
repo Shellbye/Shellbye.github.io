@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        java 生产者 消费者 以及wait()和notify()分析 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    java 生产者 消费者 以及wait()和notify()分析 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><a href="http://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">生产者消费者</a>
+模型几乎是所有操作系统课程上都会提到的一个模型，它不光可以说明操作系统的信号量机制，
+可以拿来说明多线程的一些工作机制。</p>
+
+<p>下面的代码是我在看<a href="http://javarevisited.blogspot.sg/2012/02/why-wait-notify-and-notifyall-is.html">这个</a>
+Java面试题目时自己搜了搜，然后结合代码中一些<a href="http://www.tutorialspoint.com/javaexamples/thread_procon.htm">参考</a>
+写的一个生产者消费者的模型。</p>
+
+<p>关于下面的代码，有以下几点得提前强调下：</p>
+
+<p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#wait()">wait()</a>方法在官网有如下说明</p>
+
+<pre><code>Causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object
+</code></pre>
+
+<p>由代码的中stackoverflow上的这个<a href="http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java">问题</a>
+下面的回答，已经一些相应的连接可以知道，wait()会在没有任何notify的情况下自己awake，所以在检查状态时，一定要用while
+而不是if，否则会错误的进入，然后导致出错。还有一种情况就是可能有较多的thread在wait，那么当有notifyAll()调用时，
+所有的wait都会awake,这个时候如果大家都真的awake，势必会引发错误，所以正确的做法还是要醒来后继续检查条件。</p>
+
+<p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#notifyAll()">notifyAll()</a>在官网的简介如下</p>
+
+<pre><code>Wakes up all threads that are waiting on this object's monitor.
+</code></pre>
+
+<p>这里的<code>this object's</code>指的当前调用notifyAll()函数的对象，即本例中的Msg的实例。notifyAll()会给所有Msg的正在wait的实例
+发送awake信号，这里就更需要上面的while（而不是if）了，否则就会出错。比如有三个消费者在wait，但是目前只有一个生产者生产了
+一个消息，而它就去notifyAll，那肯定就会出错。</p>
+
+<p>为了更好的表示每个线程的wait和awake，我在每一个wait()后面添加了线程被唤醒时的打印，下面是某次执行的输出：</p>
+
+<pre><code>get wait
+get wait
++++++++[p]++++++++
+get awake
+-------[]-------
+get awake
+get wait
++++++++[p]++++++++
+get awake
+-------[]-------
+get wait
++++++++[p]++++++++
+get awake
+-------[]-------
+get wait
++++++++[p]++++++++
+get awake
+-------[]-------
++++++++[p]++++++++
+-------[]-------
++++++++[p]++++++++
+-------[]-------
++++++++[p]++++++++
++++++++[p, p]++++++++
+-------[p]-------
+</code></pre>
+
+<p>因为故意在main函数中先启动了两个消费者Consumer，所以最初可以看到两个get wait（前两行），
+紧接着生产者生产了一条数据（第三行），并发送了notifyAll消息，于是两个消费者都醒了（第4、6行），
+但是只有一个消费者成功的获取了消息（打印了第五行），另一个消费者醒了发现没东西，遍继续睡觉了（第七行）。
+后面以此类推。</p>
+
+<p>好了，Talk is cheap, 看代码吧。</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">interview</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.lang.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.Override</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * User: shellbye.com@gmail.com</span>
+<span class="cm"> * Date: 2015/3/23</span>
+<span class="cm"> * ref:http://www.programcreek.com/2009/02/notify-and-wait-example/</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WaitAndNotify0</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">Msg</span> <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Msg</span><span class="o">();</span>
+
+        <span class="n">Producer0</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Producer0</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+        <span class="n">Consumer0</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Consumer0</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">c</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Msg</span> <span class="o">{</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">putMsg</span><span class="o">(</span><span class="n">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// changed from if to while by this </span>
+            <span class="c1">// ref:http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;put wait&quot;</span><span class="o">);</span>
+                <span class="n">wait</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;put awake&quot;</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">m</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+            <span class="c1">// when delete oen of the notifyAll() or delete both of them,,</span>
+            <span class="c1">// the program dead with &#39;put wait&#39; and &#39;get wait&#39;</span>
+            <span class="n">notifyAll</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;+++++++&quot;</span> <span class="o">+</span> <span class="n">m</span> <span class="o">+</span> <span class="s">&quot;++++++++&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">getMsg</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;get wait&quot;</span><span class="o">);</span>
+                <span class="n">wait</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;get awake&quot;</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">m</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+            <span class="n">notifyAll</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span> <span class="o">+</span> <span class="n">m</span> <span class="o">+</span> <span class="s">&quot;-------&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Producer0</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+
+    <span class="n">Msg</span> <span class="n">m</span><span class="o">;</span>
+
+    <span class="n">Producer0</span><span class="o">(</span><span class="n">Msg</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sleep</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">));</span>
+                <span class="n">m</span><span class="o">.</span><span class="na">putMsg</span><span class="o">(</span><span class="s">&quot;p&quot;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="kd">class</span> <span class="nc">Consumer0</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+
+    <span class="n">Msg</span> <span class="n">m</span><span class="o">;</span>
+
+    <span class="n">Consumer0</span><span class="o">(</span><span class="n">Msg</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sleep</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">));</span>
+                <span class="n">m</span><span class="o">.</span><span class="na">getMsg</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>一些参考：</p>
+
+<p>[0].<a href="http://javarevisited.blogspot.sg/2012/02/why-wait-notify-and-notifyall-is.html">http://javarevisited.blogspot.sg/2012/02/why-wait-notify-and-notifyall-is.html</a></p>
+
+<p>[1].<a href="http://javarevisited.blogspot.sg/2011/05/wait-notify-and-notifyall-in-java.html">http://javarevisited.blogspot.sg/2011/05/wait-notify-and-notifyall-in-java.html</a></p>
+
+<p>[2].<a href="http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java">http://stackoverflow.com/questions/2536692/a-simple-scenario-using-wait-and-notify-in-java</a></p>
+
+<p>[3].<a href="http://stackoverflow.com/questions/3362303/whats-a-monitor">http://stackoverflow.com/questions/3362303/whats-a-monitor</a></p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java-object-sort/" title="JAVA Object Sort">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/C-struct-padding/" title="C struct padding">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>24 March 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        java login simulation -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    java login simulation 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>前几天用httpclient写了<a href="/blog/tech_world/java-httpclient-post-login/">中华英才的模拟登陆</a>，
+今天又用同样的方法写了知乎的模拟登陆。本来所有的代码都可以复用，但是因为之前的那个类设计的不够好，
+导致代码复用出现不少问题，于是干脆Repeat Myself了，把代码直接copy了过来复用。
+但是依然没有成功，后来debug才发现原来是知乎的一个特殊的cookie导致的，该cookie的name是z_c0，它的值很奇特，
+值中居然包含等号“=”，直接导致我的 <code>updateCookie</code>函数在更新cookie时出现了问题，因为在其内部，
+这个函数是通过分割等号获取cookie内部的各个键值的。
+于是我用了<code>split</code>的另一个重载方法<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String,%20int)">split(String regex, int limit)</a>，
+并将第二个参数传为2（即分割只进行一次，只分割成两个子串即可），便可以成功登录了。
+回过头来想想，其实最初的提取cookie值的方法就不对，不应该直接用等号分割，因为等号太常见了，
+很可能后面的值中也有，所以最佳的解决方法就是<code>split</code>的重载方法<code>split(String regex, int limit)</code>。</p>
+
+<h2 id="section">更新</h2>
+<p>重写了前面的博客中提到的java模拟登陆的HttpUtils类，按照如上所说的方式更新了cookie的获取机制，
+使得该类可以更加通用的用来登陆网站，起码目前的中华英才和知乎都是测试通过了，都可以登录。</p>
+
+<p>好了，Talk is cheap, 看代码吧。</p>
+
+<p>先来工具类 HttpUtils</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">shellbye</span><span class="o">.</span><span class="na">resume</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.http.Header</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.NameValuePair</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.CookieStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.entity.UrlEncodedFormEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpGet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpPost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpRequestBase</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.cookie.Cookie</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.BasicCookieStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.HttpClientBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.cookie.BasicClientCookie</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.message.BasicNameValuePair</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.HTTP</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * User: shellbye.com@gmail.com</span>
+<span class="cm"> * Date: 2015/3/27</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpUtils</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">CookieStore</span> <span class="n">cs</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">BasicCookieStore</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">){</span>
+        <span class="n">HttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">HttpClientBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">HttpGet</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">HttpGet</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">installCookie</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+            <span class="n">HttpResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+            <span class="n">updateCookie</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="nf">getHtml</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getHtml</span><span class="o">(</span><span class="n">HttpResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">StringBuffer</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StringBuffer</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">BufferedReader</span> <span class="n">rd</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">BufferedReader</span><span class="o">(</span>
+                    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getEntity</span><span class="o">().</span><span class="na">getContent</span><span class="o">()));</span>
+
+            <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">installCookie</span><span class="o">(</span><span class="n">HttpRequestBase</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">cookieStr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Cookie</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="na">getCookies</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Cookie</span> <span class="n">cookie</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">cookieStr</span> <span class="o">+=</span> <span class="n">cookie</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;=&quot;</span> <span class="o">+</span> <span class="n">cookie</span><span class="o">.</span><span class="na">getValue</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;;&quot;</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">cookieStr</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&quot;Cookie&quot;</span><span class="o">,</span> <span class="n">cookieStr</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateCookie</span><span class="o">(</span><span class="n">HttpResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Header</span><span class="o">[]</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getHeaders</span><span class="o">(</span><span class="s">&quot;Set-Cookie&quot;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Header</span> <span class="n">h</span> <span class="o">:</span> <span class="n">headers</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+            <span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="s">&quot;Set-Cookie&quot;</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">name</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">String</span><span class="o">[]</span> <span class="n">tempStr</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot;;&quot;</span><span class="o">);</span>
+                <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">str</span> <span class="o">:</span> <span class="n">tempStr</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">String</span><span class="o">[]</span> <span class="n">cookies</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot;=&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">cookies</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span>
+                        <span class="n">cs</span><span class="o">.</span><span class="na">addCookie</span><span class="o">(</span><span class="k">new</span> <span class="nf">BasicClientCookie</span><span class="o">(</span><span class="n">cookies</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="s">&quot;&quot;</span><span class="o">));</span>
+                    <span class="k">else</span>
+                        <span class="n">cs</span><span class="o">.</span><span class="na">addCookie</span><span class="o">(</span><span class="k">new</span> <span class="nf">BasicClientCookie</span><span class="o">(</span><span class="n">cookies</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">cookies</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">installFormData</span><span class="o">(</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">parameter</span><span class="o">,</span> <span class="n">HttpPost</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">NameValuePair</span><span class="o">&gt;</span> <span class="n">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">NameValuePair</span><span class="o">&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">key</span> <span class="o">:</span> <span class="n">parameter</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">formData</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">BasicNameValuePair</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">parameter</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)));</span>
+        <span class="o">}</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">setEntity</span><span class="o">(</span><span class="k">new</span> <span class="nf">UrlEncodedFormEntity</span><span class="o">(</span><span class="n">formData</span><span class="o">,</span> <span class="n">HTTP</span><span class="o">.</span><span class="na">DEF_CONTENT_CHARSET</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">doPost</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">formData</span><span class="o">){</span>
+        <span class="n">HttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">HttpClientBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">HttpPost</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">HttpPost</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+
+        <span class="n">installFormData</span><span class="o">(</span><span class="n">formData</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+
+        <span class="n">installCookie</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">HttpResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+            <span class="n">updateCookie</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="nf">getHtml</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>然后是测试类HttpTest</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">shellbye</span><span class="o">.</span><span class="na">resume</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.jsoup.Jsoup</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.jsoup.nodes.Document</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * User: shellbye.com@gmail.com</span>
+<span class="cm"> * Date: 2015/3/27</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">HttpUtils</span> <span class="n">chinaHr</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">HttpUtils</span><span class="o">();</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">chinaHrFormData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;uname&quot;</span><span class="o">,</span> <span class="s">&quot;your_email@domain.com&quot;</span><span class="o">);</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="s">&quot;can_you_guess&quot;</span><span class="o">);</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;http_referer&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">);</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;action&quot;</span><span class="o">,</span> <span class="s">&quot;login&quot;</span><span class="o">);</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;typeid&quot;</span><span class="o">,</span> <span class="s">&quot;&quot;</span><span class="o">);</span>
+        <span class="n">chinaHrFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;remember&quot;</span><span class="o">,</span> <span class="s">&quot;0&quot;</span><span class="o">);</span>
+        <span class="n">chinaHr</span><span class="o">.</span><span class="na">doPost</span><span class="o">(</span>
+                <span class="s">&quot;http://www.chinahr.com/modules/jsperson/login_ajax.php?noblock=1&quot;</span><span class="o">,</span>
+                <span class="n">chinaHrFormData</span>
+        <span class="o">);</span>
+        <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">chinaHr</span><span class="o">.</span><span class="na">doGet</span><span class="o">(</span><span class="s">&quot;http://www.chinahr.com/modules/jsperson/userinfo_json.php?noblock=1&amp;a=1&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+
+        <span class="n">HttpUtils</span> <span class="n">zhihu</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">HttpUtils</span><span class="o">();</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">zhihuFormData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+        <span class="n">zhihuFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;email&quot;</span><span class="o">,</span> <span class="s">&quot;your_email@domain.com&quot;</span><span class="o">);</span>
+        <span class="n">zhihuFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="s">&quot;can_you_guess&quot;</span><span class="o">);</span>
+        <span class="n">zhihuFormData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;_xsrf&quot;</span><span class="o">,</span> <span class="s">&quot;e499552b0cb6895d694849fd6f8bb01d&quot;</span><span class="o">);</span>
+        <span class="n">zhihu</span><span class="o">.</span><span class="na">doPost</span><span class="o">(</span>
+                <span class="s">&quot;http://www.zhihu.com/login&quot;</span><span class="o">,</span>
+                <span class="n">zhihuFormData</span>
+        <span class="o">);</span>
+        <span class="n">String</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">zhihu</span><span class="o">.</span><span class="na">doGet</span><span class="o">(</span><span class="s">&quot;http://www.zhihu.com/&quot;</span><span class="o">);</span>
+        <span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">Jsoup</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">result2</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">doc</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="s">&quot;.zu-top-nav-userinfo &quot;</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">select</span><span class="o">(</span><span class="s">&quot;.name&quot;</span><span class="o">).</span><span class="na">text</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>由于我已经用<a href="http://jsoup.org/">Jsoup</a>解析了知乎的网页，所以两行输出应该分别是</p>
+
+<pre><code>{"is_login":true,.....//后面省略，但是会包含你的用户名
+知乎用户名
+</code></pre>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/C-struct-padding/" title="C struct padding">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/C-swap/" title="C swap">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>27 March 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

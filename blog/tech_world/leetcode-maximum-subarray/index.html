@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        LeetCode Maximum Subarray -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    LeetCode Maximum Subarray 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>Recently I start to do some algorithm practice and I chose the well-known 
+<a href="https://leetcode.com/problemset/algorithms/">leetcode</a> to start.
+All my practice code are available at my <a href="">github</a>.</p>
+
+<p><a href="https://leetcode.com/problems/maximum-subarray/">Maximum Subarray</a> is the 
+first one that I think need me to do some note for I really have a bad memory.</p>
+
+<blockquote>
+  <ul>
+    <li>Find the contiguous subarray within an array (containing at least one number) 
+which has the largest sum.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>For example, given the array [−2,1,−3,4,−1,2,1,−5,4],
+the contiguous subarray [4,−1,2,1] has the largest sum = 6.</li>
+  </ul>
+</blockquote>
+
+<p>I find this [article] really helpful and here is some understanding of mine.</p>
+
+<p>There are two conclusions,</p>
+
+<ol>
+  <li>
+    <p>For array[1…n], if array[i…j] is the maximum subarray, then for any 
+k(i&lt;=k&lt;=j), the sum of array[i…k] is positive, or array[k+1…j] will 
+be the maximum subarray.</p>
+  </li>
+  <li>
+    <p>If we divide array[1…n] from left to right into several subarray,
+and all the sum of the subarray is negative except the last one. And for
+any subarray array[i…j] and any k(i&lt;=k&lt;=j), the sum of array[i…k] is positive.</p>
+  </li>
+</ol>
+
+<p>What I want to noted is the Conclusion 2. We have such a hypothesis that the 
+maximum subarray is the prefix array of one of the several subarray in Conclusion 2.
+And it isn’t consist of more than one subarray.</p>
+
+<p>Let’s assume the maximum subarray array[p…q] is consist of subarray array[i…j] and 
+array[j+1…k]. According to Conclusion 2, there is an m(i&lt;=m&lt;j) that makes the sum of 
+array[i…m] is the biggest sum of array[i…j]; there is also an n(j+1&lt;=n&lt;k) that 
+makes the sum of array[j+1…n] is the biggest sum of array[j+1…k]. Now we can compare
+like this:</p>
+
+<p>if sum(array[i…m]) &gt; sum(array[j+1…n]) &gt; sum(array[j+1…q]), 
+since sum(array[p…j]) &lt; 0, 
+so sum(array[i…m]) &gt; sum(array[p…j]) + sum(array[j+1…q]) = sum(array[p…q])</p>
+
+<p>else if sum(array[j+1…n]) &gt; sum(array[i…m]), we can conclude to
+sum(array[j+1…n]) &gt; sum(array[p…q]) the same way.</p>
+
+<p>So, the maximum subarray isn’t consist of subarray.</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/supervisord-startsecs/" title="supervisord startsecs">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/java-set-implementations/" title="java set implementations">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>10 March 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+     
+    	<li><a href="/tags.html#algorithms-ref">algorithms <span>7</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
