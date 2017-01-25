@@ -14,7 +14,7 @@ tags:
 # 场景描述  
 在官方的[replication]描述中，replication的优点有如下几个方面：
 
-{% highlight %}
+{% highlight text %}
 Advantages of replication in MySQL include:
 
 - Scale-out solutions -
@@ -55,7 +55,7 @@ mysql5.7之后，除了传统的给予二进制的日志的replication之外，
 第一步是设置主数据库，具体需要配置的信息比较简单，就是在`my.cnf`文件中，
 修改以下配置（一般就是打开注释即可），
 
-{% highlight %}
+{% highlight text %}
 
 server-id = 1
 log_bin = /var/log/mysql/mysql-bin.log
@@ -65,7 +65,7 @@ log_bin = /var/log/mysql/mysql-bin.log
 由于从数据库需要用户名和密码去链接主数据库，而且用于复制的用户名和密码是[明文存储]的，
 所以需要在主数据库中新建专用的用户，新建的用户需要`REPLICATION SLAVE`权限:
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> CREATE USER 'repl'@'%.mydomain.com' IDENTIFIED BY 'slavepass';
 mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.mydomain.com';
@@ -74,7 +74,7 @@ mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.mydomain.com';
 
 为了让从数据库知道从哪里开始执行二进制的日志，需要先获取主数据中目前的二进制文件的[位置]，
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> FLUSH TABLES WITH READ LOCK;
 
@@ -83,7 +83,7 @@ mysql> FLUSH TABLES WITH READ LOCK;
 注意，这里需要保持这个窗口打开（session open），否则`READ LOCK`就会失效，
 然后新开一个窗口（也许你需要[tmux]），
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql > SHOW MASTER STATUS;
 +------------------+----------+--------------+------------------+
@@ -99,7 +99,7 @@ mysql > SHOW MASTER STATUS;
 如果你只需要复制某一个或一些database，而不是整个数据库，
 或者在复制中需要忽略某一个或一些database，那么在`my.cnf`中有以下配置项：
 
-{% highlight %}
+{% highlight text %}
 
 binlog_do_db = database_name
 binlog_do_db = include_database_name2
@@ -128,7 +128,7 @@ shell> mysqldump -uroot -p database_name table_name > db_tb.sql
 首先与主数据库一样的配置，就是需要在`my.conf`中进行如下配置，
 其中的`server-id`必须是全局唯一的
 
-{% highlight %}
+{% highlight text %}
 
 [mysqld]
 server-id=2
@@ -137,7 +137,7 @@ server-id=2
 
 注意这里需要先创建好slave的数据库，
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> CREATE DATABASE if not exists database_name CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -145,7 +145,7 @@ mysql> CREATE DATABASE if not exists database_name CHARACTER SET utf8mb4 COLLATE
 
 然后在mysql中执行以下sql语句配置主数据库：
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> CHANGE MASTER TO
     ->     MASTER_HOST='master_host_name',
@@ -159,7 +159,7 @@ mysql> CHANGE MASTER TO
 然后根据是否有已存在的数据来觉得是否需要先导入刚才导出的sql文件，
 最后执行
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> START SLAVE;
 
@@ -167,7 +167,7 @@ mysql> START SLAVE;
 
 就搞定了。此时可以执行
 
-{% highlight mysql %}
+{% highlight sql %}
 
 mysql> SHOW SLAVE STATUS\G
 
@@ -181,7 +181,7 @@ mysql> SHOW SLAVE STATUS\G
 
 官方推荐的做法比较简单，就是选中一个已经存在的slave，关闭掉其服务，
 
-{% highlight mysql %}
+{% highlight sql %}
 
 shell> mysqladmin shutdown
 
@@ -189,7 +189,7 @@ shell> mysqladmin shutdown
 
 然后拷贝整个slave的数据文件夹，然后修改新的slave的`my.cnf`
 
-{% highlight %}
+{% highlight text %}
 
 [mysqld]
 server-id=3
@@ -202,7 +202,7 @@ server-id=3
 # Read Only
 
 mysql支持[read_only]，在`my.cnf`中设置
-{% highlight %}
+{% highlight text %}
 
 read_only=1
 
