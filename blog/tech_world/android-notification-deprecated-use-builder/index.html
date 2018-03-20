@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Android Notification deprecated use Builder -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Android Notification deprecated use Builder 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>最近看了点安卓的入门级读物，<a href="http://book.douban.com/subject/25942191/" target="_blank">第一行代码</a> ，
+感觉这本书不错，是2014年7月出的，我最近读已经发现不少deprecated的方法了，技术进步真是快啊。</p>
+
+<p>我是在看到第八章的8.1.1节中，遇到下面的代码时</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno">1</span> <span class="n">NotificationManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="o">(</span><span class="n">NotificationManager</span><span class="o">)</span>
+<span class="lineno">2</span>         <span class="n">getSystemService</span><span class="o">(</span><span class="n">NOTIFICATION_SERVICE</span><span class="o">);</span>
+<span class="lineno">3</span> <span class="n">Notification</span> <span class="n">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Notification</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span>
+<span class="lineno">4</span>         <span class="n">ic_launcher</span><span class="o">,</span> <span class="s">&quot;This is ticker text&quot;</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+<span class="lineno">5</span> <span class="n">notification</span><span class="o">.</span><span class="na">setLatestEventInfo</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">&quot;This is content title&quot;</span><span class="o">,</span>
+<span class="lineno">6</span>         <span class="s">&quot;This is content text&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="lineno">7</span> <span class="n">manager</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">notification</span><span class="o">);</span></code></pre></figure>
+
+<p>其中第三行的<code>new Notification</code>和第五行的<code>notification.setLatestEventInfo</code>都是deprecated的，
+看了下源码的提示，说是让用<code>Builder</code>,(<code>Use {@link Builder} instead.</code>)</p>
+
+<p>可是要怎么用却没有说，于是Google了一下之后还是来到了<a href="http://stackoverflow.com/questions/6391870/how-exactly-to-use-notification-builder#answer-8869647" target="_blank">stackoverflow</a>,</p>
+
+<p>结合书中的例子和这个回答，解决方案如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="lineno"> 1</span> <span class="n">Notification</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Notification</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">ThirdActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+<span class="lineno"> 2</span> <span class="n">builder</span><span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_launcher</span><span class="o">)</span>
+<span class="lineno"> 3</span>         <span class="o">.</span><span class="na">setTicker</span><span class="o">(</span><span class="s">&quot;This is ticker text2&quot;</span><span class="o">)</span>
+<span class="lineno"> 4</span>         <span class="o">.</span><span class="na">setWhen</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">())</span>
+<span class="lineno"> 5</span>         <span class="o">.</span><span class="na">setAutoCancel</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+<span class="lineno"> 6</span>         <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="s">&quot;This is content title2&quot;</span><span class="o">)</span>
+<span class="lineno"> 7</span>         <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="s">&quot;This is content text2&quot;</span><span class="o">);</span>
+<span class="lineno"> 8</span> <span class="n">Notification</span> <span class="n">n</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="n">manager</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">n</span><span class="o">);</span></code></pre></figure>
+
+<p>需要注意的是上面的最后一行，在Android Studio中有个提示，就是它支持的最低API版本是16，
+所以可能需要修改app目录下的build.gradle，将其中的minSdkVersion改为16.</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/how_to_set_timeout_using_http_request_and_httpclient/" title="How to set timeout using HttpRequest and httpclient">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/httpclient-fluent/" title="HttpClient fluent">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>27 May 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#android-ref">android <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

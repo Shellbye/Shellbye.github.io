@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        JAVA 图像渐变暗化 graphics fillRect -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    JAVA 图像渐变暗化 graphics fillRect 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>前后折腾了大约有将近一天的工夫，终于完成了图像整体暗化（分分钟）和图像渐变暗化（近一天）的功能，时候才发现其实不应该急着写代码，仔仔细细地读文档是非常有必要的，可以少走很多的弯路。</p>
+
+<p>大部分时间的浪费都是因为对Graphics中的方法的fillRect参数理解错误，在java文档中，是这样写的</p>
+
+<pre><code>public abstract void fillRect(int x,
+            int y,
+            int width,
+            int height)
+</code></pre>
+
+<p>于是我以为height就是要填充长方形区域的右下角的顶点位置，于是出来的图整个下半部分都是几乎全黑。后来自己用imageHelper.darkerImageBy()才发现原来用错了，在仔细读官方文档，看到是这样解释参数的：</p>
+
+<blockquote>
+  <p>Parameters:<br />
+<code>x</code> - the <em>x</em> coordinate of the rectangle to be drawn.<br />
+<code>y</code> - the <em>y</em> coordinate of the rectangle to be drawn.<br />
+<code>width</code> - the width of the rectangle to be drawn.<br />
+<code>height</code> - the height of the rectangle to be drawn.</p>
+</blockquote>
+
+<p>也就是height并不是右下角点的纵坐标，而是长方形的高度，囧，改了之后瞬间出来了效果。</p>
+
+<p>整体的处理是参考了stackoverflow上的<a href="http://stackoverflow.com/questions/12980780/how-to-change-the-brightness-of-an-image#answer-12982164">这个回答</a>。</p>
+
+<p>下面是全部的实现代码</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">javax.imageio.ImageIO</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.image.BufferedImage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * User: shellbye.com@gmail.com</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ImageHelper</span> <span class="o">{</span>
+    <span class="n">BufferedImage</span> <span class="n">img</span><span class="o">;</span>
+    <span class="n">Graphics</span> <span class="n">graphics</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">orginalFileName</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">orginalFileExt</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">fileSaveToTemp</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">percentage</span> <span class="o">=</span> <span class="mf">0.5f</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">ImageHelper</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">ImageHelper</span><span class="o">(</span><span class="n">File</span> <span class="n">inputImage</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">init</span><span class="o">(</span><span class="n">inputImage</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">File</span> <span class="n">image</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">ImageIO</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">image</span><span class="o">);</span>
+        <span class="n">orginalFileName</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">orginalFileName</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot;\\.&quot;</span><span class="o">);</span>
+        <span class="n">orginalFileExt</span> <span class="o">=</span> <span class="n">temp</span><span class="o">[</span><span class="n">temp</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="n">graphics</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">createGraphics</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getImage</span><span class="o">(</span><span class="n">String</span> <span class="n">imageDir</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">File</span> <span class="n">inputImage</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">imageDir</span><span class="o">);</span>
+        <span class="n">init</span><span class="o">(</span><span class="n">inputImage</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">darkerImageBy</span><span class="o">(</span><span class="kt">float</span> <span class="n">percentage</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">percentage</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">percentage</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">brightness</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">256</span> <span class="o">*</span> <span class="n">percentage</span><span class="o">);</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="k">new</span> <span class="nf">Color</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">brightness</span><span class="o">));</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="na">fillRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">img</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">img</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">darkerImage2By</span><span class="o">(</span><span class="kt">float</span> <span class="n">percentage</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">percentage</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">percentage</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">brightness</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">256</span> <span class="o">*</span> <span class="n">percentage</span><span class="o">);</span>
+
+        <span class="c1">// 图像切割粒度，每fineness行划分为一个小块</span>
+        <span class="kt">int</span> <span class="n">fineness</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">degree</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="n">fineness</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">lastHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">degree</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">tempBrightness</span> <span class="o">=</span> <span class="n">brightness</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">tempHeight</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">degree</span><span class="o">;</span>
+            <span class="n">graphics</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="k">new</span> <span class="nf">Color</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tempBrightness</span><span class="o">));</span>
+            <span class="n">graphics</span><span class="o">.</span><span class="na">fillRect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">lastHeight</span><span class="o">,</span> <span class="n">img</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">img</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">/</span> <span class="n">degree</span><span class="o">);</span>
+            <span class="n">lastHeight</span> <span class="o">=</span> <span class="n">tempHeight</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveImageTo</span><span class="o">(</span><span class="n">String</span> <span class="n">saveToDir</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">saveToDir</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="n">orginalFileExt</span><span class="o">);</span>
+        <span class="n">ImageIO</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">img</span><span class="o">,</span> <span class="n">orginalFileExt</span><span class="o">,</span> <span class="n">file</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="n">ImageHelper</span> <span class="n">imageHelper</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ImageHelper</span><span class="o">();</span>
+        <span class="n">imageHelper</span><span class="o">.</span><span class="na">getImage</span><span class="o">(</span><span class="s">&quot;C://Users/Administrator/Desktop/1.png&quot;</span><span class="o">);</span>
+<span class="c1">//        imageHelper.darkerImageBy(0.50f);</span>
+        <span class="n">imageHelper</span><span class="o">.</span><span class="na">darkerImage2By</span><span class="o">(</span><span class="mf">0.80f</span><span class="o">);</span>
+        <span class="n">imageHelper</span><span class="o">.</span><span class="na">saveImageTo</span><span class="o">(</span><span class="s">&quot;C://Users/Administrator/Desktop/&quot;</span><span class="o">);</span>
+
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/python-triple-operator/" title="Python 三目运算  triple operator">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/django-south-databaseerror-table-southtut_knight-already-exists/" title="Django South DatabaseError: table "southtut_knight" already exists">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    var disqus_identifier = '864 http://shellbye.com/?p=864';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>16 April 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

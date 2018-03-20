@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Elasticsearch wildcard 笔记 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Elasticsearch wildcard 笔记 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>仍然使用<a href="http://www.shellbye.com/blog/%E6%8A%80%E6%9C%AF%E4%B8%96%E7%95%8C/elasticsearch-rescore-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E5%88%86/">上一篇文章</a>的user.json数据，假如要搜索名字包含jack的人，则最先想到的应该就是wildcard,大概会这么写：
+使用chrome的postman构造请求：
+1.原始请求
+url地址：http://localhost:9200/shellbye/user/_search
+请求方法：post
+参数（raw）：</p>
+
+<pre><code>{
+  "query": {
+    "wildcard": {
+      "name": "jack"
+    }
+  }
+}
+</code></pre>
+
+<p>返回结果：</p>
+
+<pre><code>{
+    "took": 3,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+
+<p>你会发现jackson这个应该也是要返回却没有返回，这个感觉不符合我对wildcard的理解哦，是不是呢？要返回所有包含（不仅仅是匹配）jack的user应该怎么做呢？那就是使用通配符“<em>”和“?”。
+2.带通配符“</em>”的请求：
+url地址：http://localhost:9200/shellbye/user/_search
+请求方法：post
+参数（raw）：</p>
+
+<pre><code>{
+  "query": {
+    "wildcard": {
+      "name": "*jack*"
+    }
+  }
+}
+</code></pre>
+
+<p>返回结果：</p>
+
+<pre><code>{
+    "took": 8,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 4,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "4",
+                "_score": 1,
+                "_source": {
+                    "name": "jackson jackson",
+                    "age": 33,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "3",
+                "_score": 1,
+                "_source": {
+                    "name": "jackson",
+                    "age": 32,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+
+<p>这下就所有包含jack的user就都返回了，但是官方文档也说了，不建议在wildcard的开头加通配符。所以如果不是必须要，最好就不要在开头加通配符。
+3.带通配符“?”的请求：
+url地址：http://localhost:9200/shellbye/user/_search
+请求方法：post
+参数（raw）：</p>
+
+<pre><code>{
+  "query": {
+    "wildcard": {
+      "name": "jac?"
+    }
+  }
+}
+</code></pre>
+
+<p>返回结果：</p>
+
+<pre><code>{
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "1",
+                "_score": 1,
+                "_source": {
+                    "name": "jack",
+                    "age": 30,
+                    "addr": "Sichuang"
+                }
+            },
+            {
+                "_index": "shellbye",
+                "_type": "user",
+                "_id": "2",
+                "_score": 1,
+                "_source": {
+                    "name": "jack jack",
+                    "age": 31,
+                    "addr": "Sichuang"
+                }
+            }
+        ]
+    }
+}
+</code></pre>
+
+<p>注：“*”通配任何个（一个或多个）字符，“?”通配一个字符。</p>
+
+<p>参考资料：
+[1].[http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/elasticsearch-rescore-e8-87-aa-e5-ae-9a-e4-b9-89-e8-af-84-e5-88-86/" title="Elasticsearch rescore 自定义评分">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/scrapy-cralw-images-note/" title="scrapy cralw images note">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    var disqus_identifier = '1120 http://shellbye.com/?p=1120';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>19 November 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#elasticsearch-ref">elasticsearch <span>3</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2017 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
