@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Elasticsearch JAVA api CRUD  -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Elasticsearch JAVA api CRUD  
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>参考<a href="http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/index.html">官方文档</a>，将Elasticsearch的java版本的增删改查记录如下：</p>
+
+<p>pom.xml文件片段:</p>
+
+<p>注：这里lucene和Elasticsearch的版本号一定要配对</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupid&gt;</span>org.apache.lucene<span class="nt">&lt;/groupid&gt;</span>
+    <span class="nt">&lt;artifactid&gt;</span>lucene-core<span class="nt">&lt;/artifactid&gt;</span>
+    <span class="nt">&lt;version&gt;</span>4.10.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupid&gt;</span>org.apache.lucene<span class="nt">&lt;/groupid&gt;</span>
+    <span class="nt">&lt;artifactid&gt;</span>lucene-queryparser<span class="nt">&lt;/artifactid&gt;</span>
+    <span class="nt">&lt;version&gt;</span>4.10.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupid&gt;</span>org.apache.lucene<span class="nt">&lt;/groupid&gt;</span>
+    <span class="nt">&lt;artifactid&gt;</span>lucene-analyzers-common<span class="nt">&lt;/artifactid&gt;</span>
+    <span class="nt">&lt;version&gt;</span>4.10.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupid&gt;</span>org.elasticsearch<span class="nt">&lt;/groupid&gt;</span>
+    <span class="nt">&lt;artifactid&gt;</span>elasticsearch<span class="nt">&lt;/artifactid&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre></figure>
+
+<p>java文件</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">Elasticsearch</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.elasticsearch.action.delete.DeleteResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.action.get.GetResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.action.index.IndexResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.action.search.SearchResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.client.Client</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.client.transport.TransportClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.common.settings.ImmutableSettings</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.common.settings.Settings</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.common.transport.InetSocketTransportAddress</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.common.xcontent.XContentBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.elasticsearch.node.Node</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.elasticsearch.node.NodeBuilder.nodeBuilder</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.elasticsearch.common.xcontent.XContentFactory.*</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Created by shellbye on 11/17/14.</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FirstTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;====start=====&quot;</span><span class="o">);</span>
+
+        <span class="c1">// on startup</span>
+        <span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransportClient</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">addTransportAddress</span><span class="o">(</span><span class="k">new</span> <span class="n">InetSocketTransportAddress</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">,</span> <span class="mi">9300</span><span class="o">));</span>
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// create json</span>
+<span class="c1">//        Map&lt;String, Object&gt; objectHashMap = new HashMap&lt;String, Object&gt;();</span>
+<span class="c1">//        objectHashMap.put(&quot;user&quot;, &quot;shellbye2&quot;);</span>
+<span class="c1">//        objectHashMap.put(&quot;postDate&quot;, &quot;2014-11-17&quot;);</span>
+<span class="c1">//        objectHashMap.put(&quot;message&quot;, &quot;yes2&quot;);</span>
+
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// index ok</span>
+<span class="c1">//        IndexResponse indexResponse = client.prepareIndex(&quot;twitter&quot;, &quot;tweet&quot;)</span>
+<span class="c1">//                .setSource(objectHashMap)</span>
+<span class="c1">//                .execute()</span>
+<span class="c1">//                .actionGet();</span>
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// get ok</span>
+<span class="c1">//        GetResponse getResponse = client.prepareGet(&quot;twitter&quot;, &quot;tweet&quot;, &quot;1&quot;)</span>
+<span class="c1">//                .execute()</span>
+<span class="c1">//                .actionGet();</span>
+<span class="c1">//        System.out.println(getResponse.getSourceAsString());</span>
+
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// delete ok</span>
+<span class="c1">//        DeleteResponse deleteResponse = client.prepareDelete(&quot;twitter&quot;, &quot;tweet&quot;, &quot;AUm98kB9uyGar4QgbtbY&quot;)</span>
+<span class="c1">//                .execute()</span>
+<span class="c1">//                .actionGet();</span>
+
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// search ok</span>
+        <span class="n">SearchResponse</span> <span class="n">searchResponse</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">prepareSearch</span><span class="o">().</span><span class="na">execute</span><span class="o">().</span><span class="na">actionGet</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">searchResponse</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+<span class="c1">//======================================================================================================================</span>
+        <span class="c1">// on shutdown</span>
+        <span class="n">client</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;====end=====&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/ubuntu-ruby-uninstall/" title="ubuntu ruby uninstall">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/elasticsearch-rescore-e8-87-aa-e5-ae-9a-e4-b9-89-e8-af-84-e5-88-86/" title="Elasticsearch rescore 自定义评分">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    var disqus_identifier = '1108 http://shellbye.com/?p=1108';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>17 November 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#elasticsearch-ref">elasticsearch <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+     
+    	<li><a href="/tags.html#lucene-ref">lucene <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

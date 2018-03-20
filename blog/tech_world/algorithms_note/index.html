@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Algorithms note -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Algorithms note 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <ol>
+  <li>
+    <p>单链表<br />
+1)插入：<br />
+在p和p-&gt;next中插入s<br />
+a)<code>s-&gt;next = p-&gt;next;</code><br />
+b)<code>p-&gt;next = s;</code><br />
+2)删除：
+<code>p-&gt;next = p-&gt;next-&gt;next;</code></p>
+  </li>
+  <li>
+    <p>双链表<br />
+1)插入<br />
+在p和p-&gt;next中插入s<br />
+a)<code>s-prior = p;</code>
+b)<code>s-next = p-&gt;next;</code>
+c)<code>p-&gt;next-prior = p;</code>
+d)<code>p-next = s;</code><br />
+2)删除<br />
+a)<code>p-&gt;prior-&gt;next = p-&gt;next;</code>
+b)<code>p-&gt;next-&gt;prior = p-prior;</code></p>
+  </li>
+  <li>
+    <p>逆波兰算法<br />
+1）中缀表达式转后缀表达式：从左到右遍历表达式中的数字与符号，如果是数字，就输出到后缀表达式；如果是符号，则比较该符号与栈顶符号的优先级，若该符号是右括号或优先级不高于栈顶符号，则栈顶符号出栈并进入后缀表达式，直到当前符号优先级大于栈顶符号或栈空，然后当前符号进栈。<br />
+2）后缀表达式运算：  从左到右遍历表达式，遇到数字就进栈，遇到符号则弹出栈中数字进行运算（后弹－符号－先弹），并将结果压栈。</p>
+  </li>
+  <li>
+    <p>树<br />
+1）结点的层次从根开始，根在第一层<br />
+2）树的存储结构：<br />
+a.双亲表示法：只知道当前结点的双亲（两个字段：data+parent）<br />
+b.孩子表示法：只知道当前结点的孩子（N个字段：data[+how many child]+child1+child2+child3+……）或两种结点（孩子结点：child+next；表头结点：data+firstchild）<br />
+c.孩子兄弟表示法：只知道该结点的第一个孩子和右兄弟（三个字段：data+firstchild+rightsib，把树变成二叉树）</p>
+  </li>
+  <li>
+    <p>二叉树<br />
+1)特点：每个结点最多两颗子树，左子树和右子树是有顺序的<br />
+2)满二叉树：a.所有分支结点都有左、右子树；b.所有叶子结点都在同一层<br />
+3)完全二叉树：a.叶子只能出现在最下面两层；b.最下层的叶子连续集中于左边；c.同样结点的二叉树，完全二叉树深度最小</p>
+  </li>
+  <li>
+    <p>二叉树的性质<br />
+1)在二叉树的第i层，最多有(2的(i－1))次方的结点（根结点是第1层）<br />
+2)深度为k的二叉树，最多有((2的k次方)－1)个结点(根结点深度为1，所以需要减1)<br />
+3)任意二叉树，叶子结点数为n0，度为2的结点数为n2，则n0 ＝ n2 ＋ 1（证明：总结点数等于度为0，1，2结点数之和：n＝n0+n1+n2；总链接数等于总结点数减一，因为根结点无入度：n－1=n1＋2＊n2，两个公式合并即证）<br />
+4)n个结点的完全二叉树的深度为 ((以2为底n的对数向下取整)＋1)<br />
+5)n个结点的完全二叉树，任一结点i，如果i&gt;1，则其双亲是i/2向下取整；如果其有子结点，则左孩子是2i，右孩子是2i＋1</p>
+  </li>
+  <li>
+    <p>哈夫曼树：<br />
+1)构建时由下往上，小小成大<br />
+2)编码时由上往下，左右分开<br />
+3)解码从前向后解析，匹配就OK</p>
+  </li>
+  <li>
+    <p>最小生成树：<br />
+1)Prim算法：从某点开始，每次选该点所在图的紧临最小边。复杂度O(n2次方)，n为点数<br />
+2)Kruskal算法：从所有边中，每次选最小的未选中的边。复杂度O(eloge), e为边数</p>
+  </li>
+  <li>
+    <p>最短路径算法：<br />
+1)Dijkstra算法：求两点间最短路径<br />
+2)Floyd算法：所有点互相间最短路径</p>
+  </li>
+  <li>
+    <p>查找<br />
+1)顺序查找(O(n))<br />
+2)二分查找(Olog(n))<br />
+3)多路查找树：其每一个结点的孩子数可以多于两个，且每一个结点处可以存储多个元素。由于它是查找树，所有元素之间存在某种特定的排序关系<br />
+4)2-3树：是这样一颗多路查找树：其中的每一个结点都具有两个孩子（我们称之为2结点）或三个孩子（称之为三结点）。一个二结点包含一个元素和两个孩子（或没有孩子），左孩子小于该结点值，该结点值小于右孩子。一个三结点包含一小一大两个元素和三个孩子（或没有孩子），左孩子小于小值，右孩子大于大值，中间孩子介于两者之间。<br />
+5)二叉排序树：又称二叉查找树。它或者是一颗空树，或者满足如下性质：a.若它的左子树不空，则左子树上所有的结点值都小于根结点的值；b.若它的右子树不空，则右子树上左右的结点值都大于根结点的值；c.它的左右子树也分别为二叉排序树<br />
+6)平衡二叉树（AVL）：也是二叉排序树，但是任意结点左右子树的高度差不大于1<br />
+注：引入2-3树是为了保证所有的查找都能在lgN次比较内结束，也是为了保证查找树的平衡性。</p>
+  </li>
+  <li>
+    <p>B树<br />
+B树是一种平衡的多路查找树，2-3树是B树的特例。结点最大的孩子数目称为B树的阶，因此，2-3树是3阶B树。一个m阶B树具有如下属性<br />
+1)如果根结点不是叶结点，则其至少有两颗子树<br />
+2)每一个非根的分支结点都有k－1个元素和k个孩子，每一个叶子结点n都有k－1个元素。其中k大于m的一半向上取整，且小于m。<br />
+3)所有叶子结点都位于同一层<br />
+4)所有分支结点规则与2-3树相同，且每一个分支结点有一个值n用来表示该结点关键字的个数<br />
+5)B+树其实已经不是严格的树了，它在B树的基础上把同一层的结点都链接起来。因此它很适合范围的查找，比如18-22岁的人的查找，先从上往下找到18，然后从左往右找到22.<br />
+6)红黑树：红黑二叉查找树背后的基本思想是用标准的二叉查找树和一些额外的信息来表示2-3树。</p>
+  </li>
+  <li>
+    <p>排序<br />
+1)堆是具有下列性质的完全二叉树（少一部分右边叶子结点的满二叉树）：每个结点的值都大于等于左右孩子结点的值（大顶堆）；或者小于等于（小顶堆）<br />
+2)堆和二叉排序树的差别：堆是完全二叉树，且堆是结点大于左右子树，而二叉排序树是大于左边，小于右边</p>
+  </li>
+  <li>
+    <p>MySQL Hash索引和B-Tree索引的区别<br />
+1）MySQL Hash索引仅仅能满足”=”,”IN”和”&lt;=&gt;”查询，不能使用范围查询<br />
+2）MySQL Hash索引无法被用来避免数据的排序操作。<br />
+3）MySQL Hash索引不能利用部分索引键查询<br />
+4）MySQL Hash索引在任何时候都不能避免表扫描<br />
+5）MySQL Hash索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高<br />
+<a href="http://database.51cto.com/art/201010/229525.htm" target="_blank">MySQL哈希索引</a><br />
+<a href="http://bfc99.blog.51cto.com/265386/1340344" target="_blank">B tree 索引	</a><br />
+<a href="http://www.cnblogs.com/hustcat/archive/2009/10/28/1591648.html" target="blank">B tree 索引</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/vking_wang/article/details/14166593" target="_blank">HashMap的实现</a></p>
+  </li>
+  <li>
+    <p>Top K<br />
+参考：<a href="http://blog.csdn.net/jj8582/article/details/6890521" target="_blank">http://blog.csdn.net/jj8582/article/details/6890521</a></p>
+  </li>
+  <li>
+    <p>大数相除<br />
+不用BigInteger</p>
+  </li>
+</ol>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/git_note/" title="Git note">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/thinking_in_java_note/" title="Thinking in Java note">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>08 September 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#algorithms-ref">algorithms <span>7</span></a></li>
+     
+    	<li><a href="/tags.html#data structure-ref">data structure <span>7</span></a></li>
+     
+    	<li><a href="/tags.html#job-ref">job <span>15</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

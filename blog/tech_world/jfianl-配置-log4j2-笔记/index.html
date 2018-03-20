@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        jfianl 配置 log4j2 笔记 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    jfianl 配置 log4j2 笔记 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>首先是pom.xml文件添加如下依赖(其他包管理方式参考<a href="http://logging.apache.org/log4j/2.x/maven-artifacts.html">这里</a>)：</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;
+    &lt;version&gt;2.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+    &lt;version&gt;2.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>然后是log4j2的配置文件log4j2.xml(其他文件格式参考<a href="http://logging.apache.org/log4j/2.x/manual/configuration.html#AutomaticConfiguration">这里</a>)如下：</p>
+
+<pre><code>&lt;configuration status="error"&gt;
+    &lt;appenders&gt;
+        &lt;console name="Console" target="SYSTEM_OUT"&gt;
+            &lt;patternlayout&gt;
+                &lt;pattern&gt;%d %p %logger{36} %msg%n&lt;/pattern&gt;
+            &lt;/patternlayout&gt;
+        &lt;/console&gt;
+        
+        &lt;file name="File" filename="../webapps/your_project.log"&gt;
+            &lt;patternlayout&gt;
+                &lt;pattern&gt;%date %p %logger{36} %line %method %msg%n&lt;/pattern&gt;
+            &lt;/patternlayout&gt;
+        &lt;/file&gt;
+    &lt;/appenders&gt;
+    &lt;loggers&gt;
+        &lt;logger name="admin" level="info"&gt;
+            &lt;appenderref ref="File"&gt;&lt;/appenderref&gt;
+        &lt;/logger&gt;
+        &lt;root level="error"&gt;
+            &lt;appenderref ref="Console"&gt;&lt;/appenderref&gt;
+        &lt;/root&gt;
+    &lt;/loggers&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>这里需要注意
+1.在Appenders里的File元素中，其属性fileName如果不是从根目录开始的话就是从tomcat/bin/开始的，所以配置的时候我就选择了如上配置方式。
+2.根据我的测试结果，这个log4j2.xml文件在jfianl项目中只有放到src/resources下面才会起作用。可能这个是可以配置的，但是我这里就把这个文件放到这里了。
+3.PatternLayout里面的Pattern的每个参数的意思可以参考这里的<a href="http://logging.apache.org/log4j/2.0/manual/layouts.html#Patterns">官方文档</a>。</p>
+
+<p>接着就可以在controller或者其他需要日志功能的地方使用了，如下：</p>
+
+<pre><code>Logger logger = LogManager.getLogger("admin");
+logger.error("this is a test!");
+</code></pre>
+
+<p>参考文档
+1.<a href="http://logging.apache.org/log4j/2.x/">http://logging.apache.org/log4j/2.x/</a></p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/ubuntu-e6-b7-bb-e5-8a-a0-e9-9a-8f-e7-b3-bb-e7-bb-9f-e5-90-af-e5-8a-a8-ef-bc-88boot-ef-bc-89-e7-a8-8b-e5-ba-8f/" title="Ubuntu 添加随系统启动（boot）程序">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/log4j2-filter-e7-ac-94-e8-ae-b0/" title="log4j2 filter 笔记">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    var disqus_identifier = '1073 http://shellbye.com/?p=1073';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>22 October 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#jfianl-ref">jfianl <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#log4j2-ref">log4j2 <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

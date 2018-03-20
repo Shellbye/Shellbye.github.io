@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        mongodb findOne vs find -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    mongodb findOne vs find 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>在使用mongodb时，常遇到这样一种场景，就是你需要查看一个数据是否在数据库中，
+那么这个时候你的选择就是find或者findOne了。今天，结合一些实验以及网上查阅的一些资料，
+我准备详细的记录下这两个方法的差别和使用场景。</p>
+
+<p>1.<a href="http://api.mongodb.org/java/current/com/mongodb/DBCollection.html#find-com.mongodb.DBObject-"><code>public DBCursor find( DBObject ref )</code></a>
+<code>find</code>函数内部实现比较简单，就是新建了一个<code>DBCursor</code>对象，源码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span>    <span class="cm">/**</span>
+<span class="cm">     * Queries for an object in this collection.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param ref A document outlining the search query</span>
+<span class="cm">     * @return an iterator over the results</span>
+<span class="cm">     * @mongodb.driver.manual tutorial/query-documents/ Query</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="n">DBCursor</span> <span class="nf">find</span><span class="o">(</span> <span class="n">DBObject</span> <span class="n">ref</span> <span class="o">){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">DBCursor</span><span class="o">(</span> <span class="k">this</span><span class="o">,</span> <span class="n">ref</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">getReadPreference</span><span class="o">());</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p>2.<a href="http://api.mongodb.org/java/current/com/mongodb/DBCollection.html#findOne-com.mongodb.DBObject-"><code>public DBObject findOne( DBObject o )</code></a>
+而在findOne内部，函数经历两次跳转后，最终的实现逻辑其实还是在内部调用了<code>find</code>函数，
+找到所有符合条件的，然后返回第一个，源码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span>    <span class="cm">/**</span>
+<span class="cm">     * Get a single document from collection.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param o           the selection criteria using query operators.</span>
+<span class="cm">     * @param fields      specifies which projection MongoDB will return from the documents in the result set.</span>
+<span class="cm">     * @param orderBy     A document whose fields specify the attributes on which to sort the result set.</span>
+<span class="cm">     * @param readPref    {@code ReadPreference} to be used for this operation</span>
+<span class="cm">     * @param maxTime     the maximum time that the server will allow this operation to execute before killing it</span>
+<span class="cm">     * @param maxTimeUnit the unit that maxTime is specified in</span>
+<span class="cm">     * @return A document that satisfies the query specified as the argument to this method.</span>
+<span class="cm">     * @mongodb.driver.manual tutorial/query-documents/ Query</span>
+<span class="cm">     * @since 2.12.0</span>
+<span class="cm">     */</span>
+    <span class="n">DBObject</span> <span class="nf">findOne</span><span class="o">(</span><span class="n">DBObject</span> <span class="n">o</span><span class="o">,</span> <span class="n">DBObject</span> <span class="n">fields</span><span class="o">,</span> <span class="n">DBObject</span> <span class="n">orderBy</span><span class="o">,</span> <span class="n">ReadPreference</span> <span class="n">readPref</span><span class="o">,</span>
+                     <span class="kt">long</span> <span class="n">maxTime</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">maxTimeUnit</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">QueryOpBuilder</span> <span class="n">queryOpBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QueryOpBuilder</span><span class="o">().</span><span class="na">addQuery</span><span class="o">(</span><span class="n">o</span><span class="o">).</span><span class="na">addOrderBy</span><span class="o">(</span><span class="n">orderBy</span><span class="o">)</span>
+                                                            <span class="o">.</span><span class="na">addMaxTimeMS</span><span class="o">(</span><span class="n">MILLISECONDS</span><span class="o">.</span><span class="na">convert</span><span class="o">(</span><span class="n">maxTime</span><span class="o">,</span> <span class="n">maxTimeUnit</span><span class="o">));</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">getDB</span><span class="o">().</span><span class="na">getMongo</span><span class="o">().</span><span class="na">isMongosConnection</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">queryOpBuilder</span><span class="o">.</span><span class="na">addReadPreference</span><span class="o">(</span><span class="n">readPref</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">DBObject</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">queryOpBuilder</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">fields</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">getOptions</span><span class="o">(),</span> <span class="n">readPref</span><span class="o">,</span> <span class="n">getDecoder</span><span class="o">());</span>
+        
+        <span class="n">DBObject</span> <span class="n">obj</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()</span> <span class="o">?</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">()</span> <span class="o">:</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span> <span class="n">obj</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="n">fields</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fields</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">){</span>
+            <span class="n">obj</span><span class="o">.</span><span class="na">markAsPartialObject</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">;</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p>所以从理论的角度看，如果只是检查符合某条件的对象是否存在，还是建议使用<code>find().limit(1)</code>. 
+那么接下来就从实践的角度来看一下。</p>
+
+<p>下面是我测试写的一段代码，其中的col_name中包含大于300万的记录，</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kn">package</span> <span class="nn">mongoDb</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.mongodb.*</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * User: shellbye.com@gmail.com</span>
+<span class="cm"> * Date: 2015/4/8</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FindPerformance</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">MongoClient</span> <span class="n">mongoClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MongoClient</span><span class="o">(</span><span class="s">&quot;localhost&quot;</span><span class="o">,</span> <span class="mi">27017</span><span class="o">);</span>
+        <span class="n">DB</span> <span class="n">db</span> <span class="o">=</span> <span class="n">mongoClient</span><span class="o">.</span><span class="na">getDB</span><span class="o">(</span><span class="s">&quot;db_name&quot;</span><span class="o">);</span>
+        <span class="n">DBCollection</span> <span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="na">getCollection</span><span class="o">(</span><span class="s">&quot;col_name&quot;</span><span class="o">);</span><span class="c1">// over 3 million document</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">testName</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="c1">// add ten test name in testName</span>
+
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">testUrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// fields with index</span>
+        <span class="c1">// add ten test url in testUrl</span>
+
+        <span class="n">Long</span> <span class="n">total_0</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
+        <span class="n">Long</span> <span class="n">total_1</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
+        <span class="n">Long</span> <span class="n">total_2</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
+        <span class="n">Long</span> <span class="n">total_3</span> <span class="o">=</span> <span class="mi">0</span><span class="n">L</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">Long</span> <span class="n">before0</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="n">DBCursor</span> <span class="n">cursor0</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicDBObject</span><span class="o">().</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="n">testName</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">))).</span><span class="na">limit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cursor0</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="n">Long</span> <span class="n">result0</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">before0</span><span class="o">;</span>
+            <span class="n">total_0</span> <span class="o">+=</span> <span class="n">result0</span><span class="o">;</span>
+
+
+            <span class="n">Long</span> <span class="n">before1</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="n">DBObject</span> <span class="n">dbObject1</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">findOne</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicDBObject</span><span class="o">().</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="n">testName</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">dbObject1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="n">Long</span> <span class="n">result1</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">before1</span><span class="o">;</span>
+            <span class="n">total_1</span> <span class="o">+=</span> <span class="n">result1</span><span class="o">;</span>
+
+
+
+            <span class="n">Long</span> <span class="n">before2</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="n">DBCursor</span> <span class="n">cursor2</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicDBObject</span><span class="o">().</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;url_name&quot;</span><span class="o">,</span> <span class="n">testUrl</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">))).</span><span class="na">limit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cursor2</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="n">Long</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">before2</span><span class="o">;</span>
+            <span class="n">total_2</span> <span class="o">+=</span> <span class="n">result2</span><span class="o">;</span>
+
+
+            <span class="n">Long</span> <span class="n">before3</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="n">DBObject</span> <span class="n">dbObject3</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">findOne</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicDBObject</span><span class="o">().</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;url_name&quot;</span><span class="o">,</span> <span class="n">testUrl</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">dbObject3</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="n">Long</span> <span class="n">result3</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">before3</span><span class="o">;</span>
+            <span class="n">total_3</span> <span class="o">+=</span> <span class="n">result3</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">total_0</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">total_1</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">total_2</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">total_3</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>程序输出如下：</p>
+
+<pre><code>79
+47
+48
+50
+</code></pre>
+
+<p>可以看到在没有索引的情况下，<code>findOne</code>的性能要好于<code>find</code>,如果使用索引，则差别不大了。
+事实证明，实践和理论推测还是有一点点距离的。</p>
+
+<p>如果注释(comment)掉那8行包含<code>if</code>和<code>j++</code>的语句，程序的输出如下：</p>
+
+<pre><code>2
+85
+0
+58
+</code></pre>
+
+<p>Refs:</p>
+
+<p>1.<a href="https://blog.serverdensity.com/checking-if-a-document-exists-mongodb-slow-findone-vs-find/">https://blog.serverdensity.com/checking-if-a-document-exists-mongodb-slow-findone-vs-find/</a></p>
+
+<p>2.<a href="http://dba.stackexchange.com/questions/7573/difference-between-mongodbs-find-and-findone-calls">http://dba.stackexchange.com/questions/7573/difference-between-mongodbs-find-and-findone-calls</a></p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/django_log_config/" title="django log config">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/how_to_set_timeout_using_http_request_and_httpclient/" title="How to set timeout using HttpRequest and httpclient">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>09 April 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags.html#mongodb-ref">mongodb <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#java-ref">java <span>34</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
