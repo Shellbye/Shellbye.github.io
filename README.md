@@ -6,4 +6,4 @@ Shellbye.github.io
 
 我也有一个自己的微信公众号（写代码的李白），时不时更新一下，没啥内容。
 
-以后新的更新都在[issue](https://github.com/Shellbye/Shellbye.github.io/issues){:target="_blank"}里面了，更方便。
+以后新的更新都在[issue](https://github.com/Shellbye/Shellbye.github.io/issues)里面了，更方便。
