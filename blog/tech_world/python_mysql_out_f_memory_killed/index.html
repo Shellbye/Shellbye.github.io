@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Python been kill for out of memory when using mysql -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Python been kill for out of memory when using mysql 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h1 id="场景描述">场景描述</h1>
+<p>在一个很大的mysql数据表中，将所有的数据全部读出来，
+然后一条一条处理，将处理后的数据再一条一条的写入另一个表中，
+大概的代码逻辑如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">MySQLdb</span>
+
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">DB_HOST</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">DB_USER</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB_NAME</span><span class="p">,</span>
+                       <span class="n">passwd</span><span class="o">=</span><span class="n">DB_PASSWORD</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf8"</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"select * from very_big_table;"</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="c"># do something about the row</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"insert into another_table"</span><span class="p">);</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></code></pre></figure>
+
+<h1 id="问题出现">问题出现</h1>
+<p>整体的逻辑是比较简单的，mysql中的数据量也不是很大，不到百万而已，
+但是对每一条数据做处理时，因为要进行一些图像操作，所以可以内存消耗比较大吧，
+总之计划是四五天执行完毕的，结果第三天就被操作系统<code class="highlighter-rouge">Killed</code>了，
+在查看系统日志（<code class="highlighter-rouge">/var/log/syslog</code>）时，发现以下段落，看样子是内存耗尽了：</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ubuntu kernel: <span class="o">[</span>12600693.883297] mysqld invoked oom-killer: <span class="nv">gfp_mask</span><span class="o">=</span>0x24201ca, <span class="nv">order</span><span class="o">=</span>0, <span class="nv">oom_score_adj</span><span class="o">=</span>0
+...
+...
+ubuntu kernel: <span class="o">[</span>12600693.883935] Out of memory: Kill process 89623 <span class="o">(</span>python<span class="o">)</span> score 930 or sacrifice child</code></pre></figure>
+
+<p>重启了一下程序，发现起初内存占用并不多，但是会随着时间的推移慢慢增长，
+看样子，是有内存使用不当的问题了。</p>
+
+<h1 id="解决过程">解决过程</h1>
+<p>经过一阵Google，发现了这个<a href="http://stackoverflow.com/questions/18193825/python-how-to-use-a-generator-to-avoid-sql-memory-issue">SO</a>和这个<a href="http://stackoverflow.com/questions/1808150/how-to-efficiently-use-mysqldb-sscursor">SO1</a>,知道了原来还有<code class="highlighter-rouge">SSCursor</code>这种神器，
+于是火速将代码重构成了这样：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">MySQLdb</span>
+<span class="kn">import</span> <span class="nn">MySQLdb.cursors</span> <span class="k">as</span> <span class="n">cursors</span>
+
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">DB_HOST</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">DB_USER</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB_NAME</span><span class="p">,</span>
+                       <span class="n">passwd</span><span class="o">=</span><span class="n">DB_PASSWORD</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf8"</span><span class="err">，</span>
+                       <span class="n">cursorclass</span><span class="o">=</span><span class="n">cursors</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"select * from very_big_table;"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+    <span class="c"># do something about the row</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"insert into another_table"</span><span class="p">);</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></code></pre></figure>
+
+<p>然后执行，Bang!!!，出错了，</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="sb">`</span>_mysql_exceptions.ProgrammingError: <span class="o">(</span>2014, <span class="s2">"Commands out of sync; you can't run this command now"</span><span class="o">)</span><span class="sb">`</span></code></pre></figure>
+
+<p>读文档光是仔细是不行了，要用心，<a href="http://mysql-python.sourceforge.net/MySQLdb-1.2.2/public/MySQLdb.cursors.CursorUseResultMixIn-class.html">官方文档</a>明确的写了，</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">You MUST retrieve the entire result <span class="nb">set </span>and close<span class="o">()</span> the cursor before additional queries can be peformed on the connection.</code></pre></figure>
+
+<p>原来是这个connection被神器占用了，那么好，单独再开一个connection，
+于是代码变成了最终版如下：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">MySQLdb</span>
+<span class="kn">import</span> <span class="nn">MySQLdb.cursors</span> <span class="k">as</span> <span class="n">cursors</span>
+
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">DB_HOST</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">DB_USER</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB_NAME</span><span class="p">,</span>
+                       <span class="n">passwd</span><span class="o">=</span><span class="n">DB_PASSWORD</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf8"</span><span class="err">，</span>
+                       <span class="n">cursorclass</span><span class="o">=</span><span class="n">cursors</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">)</span>
+<span class="n">write_conn</span> <span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">DB_HOST</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">DB_USER</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB_NAME</span><span class="p">,</span>
+                             <span class="n">passwd</span><span class="o">=</span><span class="n">DB_PASSWORD</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">"utf8"</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">write_cursor</span> <span class="o">=</span> <span class="n">write_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"select * from very_big_table;"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+    <span class="c"># do something about the row</span>
+    <span class="n">write_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"insert into another_table"</span><span class="p">);</span>
+    <span class="n">write_conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></code></pre></figure>
+
+<p>世界从此不会内存溢出，赞！</p>
+
+<p>这里有我在我最爱的<a href="http://stackoverflow.com/questions/1811173/why-does-my-python-script-randomly-get-killed/#answer-41176365">stackoverflow.com</a>上的回答，
+可以点击查看哦^<em>^.</em></p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/reading-source-code-of-howdoi/" title="阅读源代码之开篇`Howdoi`">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/mysql_master_slave_replication/" title="mysql master slave replication 主从备份">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>16 December 2016</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#python-ref">python <span>2</span></a></li>
+     
+    	<li><a href="/tags#mysql-ref">mysql <span>3</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

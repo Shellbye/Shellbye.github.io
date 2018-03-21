@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        LinkedIn API Message -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    LinkedIn API Message 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>因为项目需要，写了一些linkedin的接口，今天在写私信的接口的时候遇到了一些问题，折腾了很久终于解决了。</p>
+
+<p>1.读文档也不能盲人摸象 比如在写linkedin私信接口时，如果光是看<a href="https://developer.linkedin.com/documents/messaging-between-connections-api">这个文档</a>，那么你就悲剧了，因为它给出的信息很少。你明显可以感觉到它少了很多信息。于是乎，你就要往根目录上寻找了。比如<a href="https://developer.linkedin.com/documents/writing-linkedin-apis">这篇文档</a>，就给出了一个所有接口公共的部分，这个是需要注意的一点地方。</p>
+
+<p>2.尽信书不如无书 上面提到的第一份文档，里面给出了需要传入参数的一个json格式，如下：</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipients"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/people/~"</span><span class="p">,</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"person"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/people/abcdefg"</span><span class="p">,</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You did it."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test from wwww.shellbye.com!"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>为了防止有什么拼写错误（或者就是比较懒而已），相信大家大多和我一样，会直接从这里copy出来json数据，然后修改，不好意思，这次你完蛋了，因为上面给出的json格式是有错误的，你可以自己在<a href="http://www.bejson.com/">这个网站</a>上测试，这里json数据的两个”_path”所在行都有错误，都多了结尾的逗号“,”，导致当你把这份json传回去时，linkedin会告诉你bad request，无语。。。 注：经过测试发现”/people/~”存在的意义就是把发给用户abcdefg的私信给发送者本人也发一份，所以我的demo代码里就去掉了那一个person。 以下是剪短的代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java">    
+<span class="kn">import</span> <span class="nn">org.scribe.model.OAuthRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.scribe.model.Response</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.scribe.model.Verb</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Verb</span> <span class="n">type</span> <span class="o">=</span> <span class="n">Verb</span><span class="o">.</span><span class="na">POST</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.linkedin.com/v1/people/~/mailbox"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">token</span> <span class="o">=</span> <span class="s">"thisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusuallythisisthethetokenfromlinkedinwhichisverylongusually"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">params</span> <span class="o">=</span> <span class="s">"{\n"</span> <span class="o">+</span>
+                <span class="s">"  \"recipients\": {\n"</span> <span class="o">+</span>
+                <span class="s">"    \"values\": [\n"</span> <span class="o">+</span>
+                <span class="s">"    {\n"</span> <span class="o">+</span>
+                <span class="s">"      \"person\": {\n"</span> <span class="o">+</span>
+                <span class="s">"        \"_path\": \"/people/d3oL9OfED3\"\n"</span> <span class="o">+</span>
+                <span class="s">"       }\n"</span> <span class="o">+</span>
+                <span class="s">"    }]\n"</span> <span class="o">+</span>
+                <span class="s">"  },\n"</span> <span class="o">+</span>
+                <span class="s">"  \"subject\": \"This is a test.\",\n"</span> <span class="o">+</span>
+                <span class="s">"  \"body\": \"This is a test from www.shellbye.com!\"\n"</span> <span class="o">+</span>
+                <span class="s">"}"</span><span class="o">;</span>
+        <span class="n">OAuthRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OAuthRequest</span><span class="o">(</span><span class="n">type</span><span class="o">,</span> <span class="n">url</span><span class="o">);</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">addQuerystringParameter</span><span class="o">(</span><span class="s">"oauth2_access_token"</span><span class="o">,</span> <span class="n">token</span><span class="o">);</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"Content-Type"</span><span class="o">,</span><span class="s">"application/json"</span><span class="o">);</span><span class="c1">//因为参数的传递方式有xml和json两种，所以这一行的作用是告诉linkedin你传来的是json的数据格式</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">addPayload</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+        <span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">code</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getCode</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">code</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>maven文件pom.xml</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;project</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xsi:schemalocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;modelversion&gt;</span>4.0.0<span class="nt">&lt;/modelversion&gt;</span>
+<span class="nt">&lt;artifactid&gt;</span>linkedInMailBox<span class="nt">&lt;/artifactid&gt;</span>
+<span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+<span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
+
+
+<span class="nt">&lt;dependencies&gt;</span>
+	<span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupid&gt;</span>org.scribe<span class="nt">&lt;/groupid&gt;</span>
+        <span class="nt">&lt;artifactid&gt;</span>scribe<span class="nt">&lt;/artifactid&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.3.5<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;build&gt;</span>
+	<span class="nt">&lt;defaultgoal&gt;</span>compile<span class="nt">&lt;/defaultgoal&gt;</span>
+    <span class="nt">&lt;finalname&gt;</span>test<span class="nt">&lt;/finalname&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupid&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupid&gt;</span>
+            <span class="nt">&lt;artifactid&gt;</span>maven-war-plugin<span class="nt">&lt;/artifactid&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span></code></pre></figure>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/android-r-cannot-be-resolved/" title="Android R cannot be resolved">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/tomcat-spring-mimemessagehelper-encode/" title="tomcat + spring MimeMessageHelper encode">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>07 July 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#API-ref">API <span>1</span></a></li>
+     
+    	<li><a href="/tags#LinkedIn-ref">LinkedIn <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

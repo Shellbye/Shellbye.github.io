@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        java explore note -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    java explore note 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <blockquote>
+  <p>下面是在读InfoQ的迷你书的一些笔记，原书见这里：
+<a href="http://www.infoq.com/cn/minibooks/java-explore" target="_blank">http://www.infoq.com/cn/minibooks/java-explore</a></p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Java 类的加载<br />
+Java类的加载是由类加载器来完成的。
+一般来说,类加载器分成两类:启动类加载器(bootstrap)和用户自定义的类加载器(user-defined)。
+两者的区别在于启动类 加载器是由JVM的原生代码实现的,
+而用户自定义的类加载器都继承自Java中 的 java.lang.ClassLoader类<br />
+类加载器需要完成的最终功能是定义一个Java类,即把Java字节代码转换成JVM中的 java.lang.Class类的对象<br />
+类加载器的一个重要用途是在JVM中为相同名称的Java类创建隔离空间。
+在JVM中, 判断两个类是否相同,不仅是根据该类的 二进制名称 ,还需要根据两个类的定义类 加载器。
+只有两者完全一样,才认为两个类的是相同的</p>
+  </li>
+  <li>
+    <p>Java 类的链接<br />
+Java类的链接指的是将Java类的二进制代码合并到JVM的运行状态之中的过程<br />
+类的链接包括验证、准备和解析等几个步骤。<br />
+1.验证是用来确保Java类的二进制表示在结构上是完全正确的。如果验证过程出现错误 的话,会抛出 java.lang.VerifyError错误。<br />
+2.准备过程则是创建Java类中的静态域,并将 这些域的值设为默认值。准备过程并不会执行代码。<br />
+在一个Java类中会包含对其它 类或接口的形式引用,包括它的父类、所实现的接口、方法的形式参数和返回值的 Java类等。<br />
+3.解析的过程就是确保这些被引用的类能被正确的找到。解析的过程可能 会导致其它的 Java类被加载。</p>
+  </li>
+  <li>
+    <p>Java 类的初始化<br />
+当一个 Java 类第一次被真正使用到的时候,JVM 会进行该类的初始化操作。
+初始化 过程的主要操作是执行静态代码块和初始化静态域</p>
+  </li>
+  <li>
+    <p>可见性<br />
+在多线程程序中,如果不使用一定的同步机制,就不能保证一个线程所写入的值对另 外一个线程是可见的。
+造成这种情况的原因可能有下面几个:<br />
+1.CPU 内部的缓存:现在的 CPU 一般都拥有层次结构的几级缓存。
+CPU 直接操作 的是缓存中的数据,并在需要的时候把缓存中的数据与主存进行同步。
+因此在 某些时刻,缓存中的数据与主存内的数据可能是不一致的。
+某个线程所执行的 写入操作的新值可能当前还保存在 CPU 的缓存中,
+还没有被写回到主存中。这 个时候,另外一个线程的读取操作读取的就还是主存中的旧值。<br />
+2.CPU 的指令执行顺序:在某些时候,CPU 可能改变指令的执行顺序。
+这有可能 导致一个线程过早的看到另外一个线程的写入操作完成之后的新值。<br />
+3.编译器代码重排:出于性能优化的目的,编译器可能在编译的时候对生成的目 标代码进行重新排列。</p>
+  </li>
+  <li>
+    <p>类型系统<br />
+通过继承机制而产生的类型体系结构，根据 Liskov替换原则 ,子类是可以替换父类的。
+当需要Object类的引用的 时候,如果传入一个String对象是没有任何问题的。
+但是反过来的话,即用父类的引 用替换子类引用 的时候,就需要进行强制类型转换<br />
+引入泛型之后的类型系统增加了两个维度:一个是类型参数自身的继承体系结构, 
+另外一个是泛型类或接口自身的继承体系结构。
+第一个指的是对于 List<String>和 List<object>这样的情况,
+类型参数 String 是继承自 Object 的。
+而第二种指的是 List 接口继承自 Collection 接口。
+对于这个类型系统,有如下的一些规则:  
+1.相同类型参数的泛型类的关系取决于泛型类自身的继承体系结构。
+即 List<String> 是 Collection<String> 的 子 类 型 , 
+List<String> 可 以 替 换 Collection<String>。
+这种情况也适用于带有上下界的类型声明  
+2.当泛型类的类型声明中使用了通配符的时候,其子类型可以在两个维度上分别 展开。
+如对 Collection&lt;? extends Number&gt;来说,
+其子类型可以在 Collection 这个 维度上展开,即 List&lt;? extends Number&gt;和 Set&lt;? extends Number&gt;等;
+也可以在 Number 这个层次上展开,即 Collection<Double>和 Collection<Integer>等。
+如此 循环下去,ArrayList<Long>和 HashSet<Double>等也都算是 Collection&lt;? extends Number&gt;的子类型</Double></Long></Integer></Double></String></String></String></String></object></String></p>
+  </li>
+  <li>
+    <p>由于类型擦除机制,类型参 数并不能用来创建对象或是作为静态变量的类型</p>
+  </li>
+</ol>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/TCP-IP-Illustrated-note/" title="TCP/IP 详解 笔记">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/django-static-url/" title="django static_url">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>12 October 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#java-ref">java <span>33</span></a></li>
+     
+    	<li><a href="/tags#note-ref">note <span>1</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

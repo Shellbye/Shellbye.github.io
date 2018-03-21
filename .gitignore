@@ -1,5 +1,5 @@
-_site
-.sass-cache
+source/_site
+source/.sass-cache
 .DS_Store
 *.sublime-project
 *.sublime-workspace
@@ -7,6 +7,6 @@ codekit-config.json
 node_modules
 Gemfile.lock
 .idea/
-.sass-cache/
+source/.sass-cache/
 *~
 # _theme_packages

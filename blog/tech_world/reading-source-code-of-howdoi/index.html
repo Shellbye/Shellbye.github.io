@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        阅读源代码之开篇`Howdoi` -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    阅读源代码之开篇`Howdoi` 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h1 id="引言">引言</h1>
+<p>为了提高自己的可读性和美观程度，我在网站找了一些相关的文章开始学习起来，
+读完<a href="http://docs.python-guide.org/en/latest/writing/style/">这篇</a>代码风格的文章之后，我觉得我要学习一些Pythonic的开源项目，
+读源码这个事情一直想要开始，却一直没有正儿八经开始，只有在遇到重大bug
+时，才偶尔（不得不）读一部分。现在，为了使得自己的代码能力能够上一个台阶，
+我决定是时候开始大规模的读源码了。^_^</p>
+
+<p>根据<a href="http://docs.python-guide.org/en/latest/writing/reading/">Reading Great Code</a>的推荐，我准备开始阅读学习<a href="https://github.com/gleitz/howdoi">howdoi</a>，
+好吧，其实是发现它只有一个文件，而且才区区270行，所以还是从软柿子开始捏吧。</p>
+
+<p>首先，howdoi是这样一个工具，它让你在命令行界面下完成一些编程问题简单的搜索，
+比如官方举例的格式化日期以及tar的参数查询等。</p>
+
+<h1 id="安装">安装</h1>
+<p>安装简单到令人发指，为了稍微增加点复杂度，我建议还是使用<code class="highlighter-rouge">virturalenv</code>
+<code class="highlighter-rouge">virtualenv ~/.virtualenvs/howdoi</code><br />
+<code class="highlighter-rouge">source ~/.virtualenvs/howdoi/bin/activate</code><br />
+<code class="highlighter-rouge">pip install howdoi</code></p>
+
+<h1 id="使用">使用</h1>
+<p>我简单尝试了一下，很不幸，这个工具“原生”的不支持中国大陆的用户
+(国内用户可以尝试使用我修改的基于Bing.com的<a href="https://github.com/Shellbye/howdoi">版本</a>)，
+因为它内置的使用了Google去搜索，如下<a href="https://github.com/gleitz/howdoi/blob/master/howdoi/howdoi.py#L47-L52">SEARCH_URL</a>的设置：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'HOWDOI_DISABLE_SSL'</span><span class="p">):</span>  <span class="c"># Set http instead of https</span>
+    <span class="n">SEARCH_URL</span> <span class="o">=</span> <span class="s">'http://www.google.com/search?q=site:{0}</span><span class="si">%20</span><span class="s">{1}'</span>
+    <span class="n">VERIFY_SSL_CERTIFICATE</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">SEARCH_URL</span> <span class="o">=</span> <span class="s">'https://www.google.com/search?q=site:{0}</span><span class="si">%20</span><span class="s">{1}'</span>
+    <span class="n">VERIFY_SSL_CERTIFICATE</span> <span class="o">=</span> <span class="bp">True</span></code></pre></figure>
+
+<p>不过没关系，相信绝大多数程序员都会<a href="https://github.com/shadowsocks">科学上网</a>，只是一般的科学上网都是浏览器，
+怎么让Terminal也变科学呢？感兴趣的用户可以<a href="https://github.com/shadowsocks/shadowsocks/wiki/Using-Shadowsocks-with-Command-Line-Tools">戳这里</a>获得科学知识。</p>
+
+<p>一切就绪，那么让我们试试它的效果如何：</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>proxychains4 howdoi find file
+<span class="nb">grep</span> <span class="nt">-rnw</span> <span class="s1">'/path/to/somewhere/'</span> <span class="nt">-e</span> <span class="s2">"pattern"</span></code></pre></figure>
+
+<p>哇，好厉害，怎么做到的呢？下面我们一一来分析一下。</p>
+
+<h1 id="分析">分析</h1>
+
+<h3 id="1-无参数运行">1. 无参数运行</h3>
+<p>在没有任何参数的情况下单独运行<code class="highlighter-rouge">howdoi</code>会输出help信息，</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>proxychains4 howdoi
+usage: howdoi <span class="o">[</span><span class="nt">-h</span><span class="o">]</span> <span class="o">[</span><span class="nt">-p</span> POS] <span class="o">[</span><span class="nt">-a</span><span class="o">]</span> <span class="o">[</span><span class="nt">-l</span><span class="o">]</span> <span class="o">[</span><span class="nt">-c</span><span class="o">]</span> <span class="o">[</span><span class="nt">-n</span> NUM_ANSWERS] <span class="o">[</span><span class="nt">-C</span><span class="o">]</span> <span class="o">[</span><span class="nt">-v</span><span class="o">]</span>
+              <span class="o">[</span>QUERY <span class="o">[</span>QUERY ...]]
+
+instant coding answers via the <span class="nb">command </span>line
+
+positional arguments:
+  QUERY                 the question to answer
+
+optional arguments:
+  <span class="nt">-h</span>, <span class="nt">--help</span>            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  <span class="nt">-p</span> POS, <span class="nt">--pos</span> POS     <span class="k">select </span>answer <span class="k">in </span>specified position <span class="o">(</span>default: 1<span class="o">)</span>
+  <span class="nt">-a</span>, <span class="nt">--all</span>             display the full text of the answer
+  <span class="nt">-l</span>, <span class="nt">--link</span>            display only the answer link
+  <span class="nt">-c</span>, <span class="nt">--color</span>           <span class="nb">enable </span>colorized output
+  <span class="nt">-n</span> NUM_ANSWERS, <span class="nt">--num-answers</span> NUM_ANSWERS
+                        number of answers to <span class="k">return</span>
+  <span class="nt">-C</span>, <span class="nt">--clear-cache</span>     clear the cache
+  <span class="nt">-v</span>, <span class="nt">--version</span>         displays the current version of howdoi</code></pre></figure>
+
+<p>像大多数程序一样，没有参数运行<code class="highlighter-rouge">howdoi</code>会输出帮助信息，其过程是首先程序入口在<a href="https://github.com/gleitz/howdoi/blob/master/howdoi/howdoi.py#L270">最下面</a>：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">command_line_runner</span><span class="p">()</span></code></pre></figure>
+
+<p>然后在<code class="highlighter-rouge">command_line_runner()</code>中，首先通过<code class="highlighter-rouge">get_parser</code>获取参数相关的信息，
+其中的<a href="https://docs.python.org/2/howto/argparse.html">argparse</a>是Python标准库中用来处理命令行参数的一个包，
+由于我们此时的输入没有查询参数（query），所以
+程序进入<code class="highlighter-rouge">if not args['query']</code>中并打印了帮助信息，如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">[</span><span class="s">'query'</span><span class="p">]:</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+    <span class="k">return</span></code></pre></figure>
+
+<h3 id="2-基本搜索">2. 基本搜索</h3>
+<p>下面我们尝试一下基本的搜索，输入的参数即示例中的<code class="highlighter-rouge">format date bash</code>,
+这一次，执行越过了刚才的参数为空的检查，进入了下面的缓存检查，
+由于我们没有禁止缓存，所以就进入了<code class="highlighter-rouge">_enable_cache</code>:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">_enable_cache</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">)</span>
+    <span class="n">requests_cache</span><span class="o">.</span><span class="n">install_cache</span><span class="p">(</span><span class="n">CACHE_FILE</span><span class="p">)</span></code></pre></figure>
+
+<p>在<code class="highlighter-rouge">_enable_cache</code>中，通过使用<a href="https://pypi.python.org/pypi/requests-cache">requests-cache</a>为相同的请求做了缓存，
+可以加速相似的请求的返回。</p>
+
+<p>最后程序进入<code class="highlighter-rouge">howdoi</code>，准备开始真正的工作。在<code class="highlighter-rouge">howdoi</code>中，
+首先把查询参数拼接了起来，然后进入<code class="highlighter-rouge">_get_instructions</code>中，
+在<code class="highlighter-rouge">_get_instructions</code>中，又进入到<code class="highlighter-rouge">_get_links</code>去获取答案的连接，
+其中<code class="highlighter-rouge">_get_result</code>发起网络请求，获取返回结果；
+然后用<a href="https://pythonhosted.org/pyquery/">pyquery</a>对得到的网页进行解析，从其中提取出Google搜索结果列表页的网页连接，
+然后将结果返回到<code class="highlighter-rouge">_get_instructions</code>中的links，
+如果Google的搜索结果中没有任何网页，那么<code class="highlighter-rouge">_get_instructions</code>将会返回False，
+此时就会在命令行打印<code class="highlighter-rouge">Sorry, couldn't find any help with that topic</code>，
+如<a href="https://github.com/gleitz/howdoi/blob/master/howdoi/howdoi.py#L216">216</a>所示：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">howdoi</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">args</span><span class="p">[</span><span class="s">'query'</span><span class="p">]</span> <span class="o">=</span> <span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">'query'</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'?'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_get_instructions</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="ow">or</span> <span class="s">'Sorry, couldn</span><span class="se">\'</span><span class="s">t find any help with that topic</span><span class="se">\n</span><span class="s">'</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">ConnectionError</span><span class="p">,</span> <span class="n">SSLError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">'Failed to establish network connection</span><span class="se">\n</span><span class="s">'</span></code></pre></figure>
+
+<p>当然，在正常的情况下，Google还是会返回一些结果的，程序开始收集答案。
+在确定了用户通过参数传入的需要的答案的数量（<code class="highlighter-rouge">args['num_answers']</code>）
+以及解析起始答案的位置之后，
+程序进入<code class="highlighter-rouge">_get_answer</code>中去寻找答案，并将答案按照固定格式打印到Terminal中：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">append_header</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s">'num_answers'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span>
+<span class="n">initial_position</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s">'pos'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">answer_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">'num_answers'</span><span class="p">]):</span>
+    <span class="n">current_position</span> <span class="o">=</span> <span class="n">answer_number</span> <span class="o">+</span> <span class="n">initial_position</span>
+    <span class="n">args</span><span class="p">[</span><span class="s">'pos'</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_position</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">_get_answer</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">links</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">answer</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">if</span> <span class="n">append_header</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">ANSWER_HEADER</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_position</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">+=</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span>
+    <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+<span class="k">return</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span></code></pre></figure>
+
+<p>在<code class="highlighter-rouge">_get_answer</code>中，通过<code class="highlighter-rouge">_get_questions</code>过滤了连接，
+只保留了那些<a href="http://stackoverflow.com/">stackoverflow.com</a>中的问题，接着获取用户指定的位置的问题的连接，
+如果用户只是需要连接本身，就只返回连接，否则就去抓取连接对应的网络中的内容。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'link'</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">link</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">_get_result</span><span class="p">(</span><span class="n">link</span> <span class="o">+</span> <span class="s">'?answertab=votes'</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">pq</span><span class="p">(</span><span class="n">page</span><span class="p">)</span></code></pre></figure>
+
+<p>在解析问题页面时，首先当然是要处理排在第一位的回答，
+其中的<code class="highlighter-rouge">instructions</code>表示是否包含代码片段，
+<code class="highlighter-rouge">args['tags']</code>则表示该问题所标记的标签，
+紧接着，如果没有找到代码，并且用户没有输入<code class="highlighter-rouge">all</code>标记参数，
+则返回第一个答案的所有文本信息，如果用户标注了<code class="highlighter-rouge">all</code>，
+则依次处理第一个答案下面的所有文本，遇到普通文本直接打印，
+遇到代码，则使用<code class="highlighter-rouge">_format_output</code>格式化后打印。</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">first_answer</span> <span class="o">=</span> <span class="n">html</span><span class="p">(</span><span class="s">'.answer'</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">instructions</span> <span class="o">=</span> <span class="n">first_answer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'pre'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">first_answer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'code'</span><span class="p">)</span>
+<span class="n">args</span><span class="p">[</span><span class="s">'tags'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">html</span><span class="p">(</span><span class="s">'.post-tag'</span><span class="p">)]</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">instructions</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="p">[</span><span class="s">'all'</span><span class="p">]:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">first_answer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'.post-text'</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">args</span><span class="p">[</span><span class="s">'all'</span><span class="p">]:</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">html_tag</span> <span class="ow">in</span> <span class="n">first_answer</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s">'.post-text &gt; *'</span><span class="p">):</span>
+        <span class="n">current_text</span> <span class="o">=</span> <span class="n">html_tag</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">html_tag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'pre'</span><span class="p">,</span> <span class="s">'code'</span><span class="p">]:</span>
+                <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_format_output</span><span class="p">(</span><span class="n">current_text</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_text</span><span class="p">)</span>
+    <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">---</span><span class="se">\n</span><span class="s">Answer from {0}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_format_output</span><span class="p">(</span><span class="n">instructions</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">args</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">NO_ANSWER_MSG</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">return</span> <span class="n">text</span></code></pre></figure>
+
+<p>就这样，一个标准的查询流程就完成了。</p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/speed_up_django_admin_changelist_by_cache/" title="Speed up Django admin by cache">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/python_mysql_out_f_memory_killed/" title="Python been kill for out of memory when using mysql">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>10 December 2016</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#Python-ref">Python <span>14</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

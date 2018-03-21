@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Advanced Django ListView -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Advanced Django ListView 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>之前学习Djang时写过一个入门版本的关于ListView的<a href="/blog/tech_world/django_ListView_DetailView_basic/" target="_blank">笔记</a>，
+但是其中的东西都笔记基础，没法进行高级的定制，所以有了这篇笔记，
+纪录下自己最新的一些心得。</p>
+
+<p>###1.添加返回数据</p>
+
+<p>接<a href="/blog/tech_world/django_ListView_DetailView_basic/" target="_blank">上一篇</a>笔记，假如现在你要在新闻的列表页中集中显示所有的新闻类别，
+要怎么做呢？因为你把很多的逻辑都托管给Django了，所以这个时候，新添加的逻辑也是要依赖于Django的，
+比如你要新添加的数据，就要用到<a href="https://docs.djangoproject.com/en/1.9/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_context_data" target="_blank"><code class="highlighter-rouge">get_context_data</code></a>这个函数了，
+官网中关于<code class="highlighter-rouge">get_context_data</code>的介绍是：</p>
+
+<blockquote>
+  <p>Returns context data for displaying the list of objects.</p>
+</blockquote>
+
+<p>这是一个字典，其中默认已经包含了四个对象，一个是返回的对象列表和三个关于分页的对象。
+现在我们要在其中添加东西，那就就自己实现一遍这个函数就可以了，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="c"># 先通过调用父类的方法获取到原始的context对象，其中包含上面提到的四个对象</span>
+	<span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">NewsList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+	<span class="c"># 在其中添加我们想要添加的对象，这样context就有五个对象了</span>
+	<span class="n">context</span><span class="p">[</span><span class="s">'category_list'</span><span class="p">]</span> <span class="o">=</span> <span class="n">NewsCategory</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+	<span class="k">return</span> <span class="n">context</span></code></pre></figure>
+
+<p>然后在<code class="highlighter-rouge">templates</code>中，我们就可以直接使用<code class="highlighter-rouge">category_list</code>这个对象了，像这样：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">category_list</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{{</span><span class="n">c</span><span class="o">.</span><span class="n">title</span><span class="p">}}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span></code></pre></figure>
+
+<p>###2.自定义返回对象集<br />
+在<a href="/blog/tech_world/django_ListView_DetailView_basic/" target="_blank">上一篇</a>笔记中，我们是直接获取的所有的新闻，
+现在假设我们要添加一个搜索功能，按照新闻标题进行搜索，然后只返回那些命中搜索的新闻，
+这就需要过滤返回的结果集了，基于上面的内容，我们最容易想到的就是在<code class="highlighter-rouge">get_context_data</code>中，
+对其中的<code class="highlighter-rouge">object_list</code>进行过滤，比如在<code class="highlighter-rouge">return</code>语句前添加如下一行：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">context</span><span class="p">[</span><span class="s">'news_list'</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">'news_list'</span><span class="p">]</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">title__contains</span><span class="o">=</span><span class="s">'search_text'</span><span class="p">)</span></code></pre></figure>
+
+<p>这样的写法，当有分页功能时（大多数情况下是有的），就会出现如下错误：</p>
+
+<blockquote>
+  <p>AssertionError at Cannot filter a query once a slice has been taken.</p>
+</blockquote>
+
+<p>官网的解释在<a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets">这里</a>，说白了就是一旦分页了，也就是<code class="highlighter-rouge">slice</code>了之后，这个查询就在数据库里执行过了，
+所以这个时候就没法继续去<code class="highlighter-rouge">filter</code>了。所以这并不是一个优雅的解决方案，优雅的方案是使用正确的函数，
+这里正确的函数就是<a href="https://docs.djangoproject.com/en/1.9/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_queryset" target="_blank"><code class="highlighter-rouge">get_queryset</code></a>这个函数了，比如：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">if</span> <span class="s">'q'</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">News</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">title__contains</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">[</span><span class="s">'q'</span><span class="p">])</span>
+	<span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NewsList</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_queryset</span><span class="p">()</span></code></pre></figure>
+
+<p>了解一个框架的最佳方式就是要懂其常用函数的功能，那么写一个框架的最佳方式，
+就是函数名一定要见名知意，不然找正确的函数就比较痛苦了。</p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/pure-js-implements-getJSON-with-header-X-Requested-With/" title="Pure js implements getJSON with X-Requested-With header">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/2015-summary/" title="2015年终总结">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>29 December 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#Django-ref">Django <span>17</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        C struct padding -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    C struct padding 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>常有这样的面试题，给出如下struct，并问test占多少字节</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">example0</span>  <span class="p">{</span>  
+    <span class="kt">char</span>   <span class="n">x1</span><span class="p">;</span>  
+    <span class="kt">short</span>  <span class="n">x2</span><span class="p">;</span>  
+    <span class="kt">float</span>  <span class="n">x3</span><span class="p">;</span>  
+    <span class="kt">char</span>   <span class="n">x4</span><span class="p">;</span>  
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">example0</span> <span class="n">test</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span></code></pre></figure>
+
+<p>这是一种比较常见的面试题，今天看了不少资料，结合前任的分析，做一个小笔记。</p>
+
+<p>首先<a href="http://www.cnblogs.com/motadou/archive/2009/01/17/1558438.html">这篇文章</a>中的一些概念介绍的比较清楚，
+结构体的对齐包含以下两层含义：</p>
+
+<p>1.结构体内各个数据成员内存对齐（data alignment）</p>
+
+<p>2.结构体总长度填充（data structure padding）</p>
+
+<p>数据成员内存对齐指的是在内存中存放数据时，要在以字长的整数倍为起始位置，因为这样有利于CPU高效的读写内存。
+现代CPU在读写内存时都是以字为单位进行读写，32为机器上一次读写4个字节，现在假设要读取一个int数据x=1234（4字节），
+假设x在内存存储如下：</p>
+
+<p><img src="/assets/align.jpg" alt="align" /></p>
+
+<p>即x是内存对齐的，那么CPU在读它的时候，直接读取一次，只读0–3这四个字节就可以了，但是如果x在内存中这样存储：</p>
+
+<p><img src="/assets/not_align.jpg" alt="not_align" /></p>
+
+<p>那么，同样是读取x，这一次CPU不得不读两次，第一次0–3这个字节，第二次4–7，时间上的开销无形之中多了一倍。</p>
+
+<p>关于结构体总长度填充，<a href="http://stackoverflow.com/questions/11906486/size-of-struct-containing-double-field">这个</a>问答上说的
+可能比较靠谱，即是为了结构数组中的每一个都能在开始的时候内存对齐，否则不论你内部对齐的多么牛逼，万一开始就在一个不对齐的
+地方，那么内部的对齐也就没有意义了。我感觉这里之所以不得不在末尾填充，就是因为数组在内存中连续存储的。</p>
+
+<p>介绍完概念，就该介绍方法了。<a href="http://blog.csdn.net/yuucyf/article/details/7872502">这篇博客</a>在对齐的方法上给了我不少启发，
+当然，想要获得结构体的总长度，首先需要知道各个基本类型的长度，下面的程序在我本机（64位windows）上调通并且执行结果在注释中：</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include&lt;stdio.h&gt;
+</span><span class="c1">//#pragma  pack(2)
+//这里注释掉的这句就是人工干预对齐模式，而不是编译器自动处理
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(char) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(char*) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(short) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">short</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(int) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(int*) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(float) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(long) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(unsigned long) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(long long) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(double) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(double*) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(long double) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">long</span> <span class="kt">double</span><span class="p">));</span>
+    
+
+    <span class="n">system</span><span class="p">(</span><span class="s">"pause"</span><span class="p">);</span>
+    <span class="cm">/* output
+    sizeof(char) = 1
+    sizeof(char*) = 4
+    sizeof(short) = 2
+    sizeof(int) = 4
+    sizeof(int*) = 4
+    sizeof(float) = 4
+    sizeof(long) = 4
+    sizeof(unsigned long) = 4
+    sizeof(long long) = 8
+    sizeof(double) = 8
+    sizeof(double*) = 4
+    sizeof(long double) = 12
+    */</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>接着就是下面的不同的结构体的计算了，在下面的程序中，用-表示用无用字符填充，即占位，| 则表示是当前类型占用，是实际使用的字节</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include&lt;stdio.h&gt;
+</span>
+<span class="k">struct</span> <span class="n">example0</span>  <span class="p">{</span>  
+    <span class="kt">char</span>   <span class="n">x1</span><span class="p">;</span>  
+    <span class="kt">short</span>  <span class="n">x2</span><span class="p">;</span>  
+    <span class="kt">float</span>  <span class="n">x3</span><span class="p">;</span>  
+    <span class="kt">char</span>   <span class="n">x4</span><span class="p">;</span>  
+<span class="p">};</span>  
+
+<span class="k">struct</span> <span class="n">example1</span>  
+<span class="p">{</span>  
+    <span class="kt">short</span> <span class="n">a</span><span class="p">;</span>  
+    <span class="kt">long</span> <span class="n">b</span><span class="p">;</span>  
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">naturalalign</span>  
+<span class="p">{</span>  
+    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>  
+    <span class="kt">short</span> <span class="n">b</span><span class="p">;</span>  
+    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>  
+<span class="p">};</span> 
+
+<span class="k">struct</span> <span class="n">naturalalign2</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">example2</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>   
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">c</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">example3</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">example4</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// ref:http://www.cnblogs.com/motadou/archive/2009/01/17/1558438.html
+</span>    <span class="c1">// ref:http://blog.csdn.net/yuucyf/article/details/7872502
+</span>    <span class="c1">// - means fulfilled by useless byte
+</span>    <span class="c1">// | means in use.
+</span>    <span class="k">struct</span> <span class="n">example0</span> <span class="n">e0</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct example0  {  
+        char   x1;  
+        short  x2;  
+        float  x3;  
+        char   x4;  
+    };  
+    
+    0      x1
+    1      -
+    2      x2
+    3      |
+    4      x3
+    5      |
+    6      |
+    7      |
+    8      x4
+    9      -
+    10     -
+    11     -
+    12     
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(e0)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">e0</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">example1</span> <span class="n">e1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct example1  
+    {  
+        short a;  
+        long b;  
+    };
+    
+    0      a
+    1      |
+    2      -
+    3      -
+    4      b
+    5      |
+    6      |
+    7      |
+    8      
+    9      
+    10     
+    11     
+    12     
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(e1)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">e1</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">naturalalign</span> <span class="n">na</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct naturalalign  
+    {  
+        char a;  
+        short b;  
+        char c;  
+    }; 
+    
+    0      a
+    1      |
+    2      b
+    3      |
+    4      c
+    5      |
+    6
+    7
+    8      
+    9      
+    10     
+    11     
+    12     
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(na)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">na</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">naturalalign2</span> <span class="n">na2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct naturalalign2
+    {
+        char a;
+        int b;
+        char c;
+    };
+    
+    0      a
+    1      |
+    2      -
+    3      -
+    4      b
+    5      |
+    6      |
+    7      |
+    8      |
+    9      c
+    10     -
+    11     -
+    12     -
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(na2)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">na2</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">example2</span> <span class="n">e2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct example2{
+        char a;   
+        int b;
+        float c;
+        double d;
+    };
+    0      a
+    1      -
+    2      -
+    3      -
+    4      b
+    5      |
+    6      |
+    7      |
+    8      c
+    9      |
+    10     |
+    11     |
+    12     -
+    13     -
+    14     -
+    15     -
+    16     d
+    17     |
+    18     |
+    19     |
+    20     |
+    21     |
+    22     |
+    23     |
+    24
+    
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(e2)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">e2</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">example3</span> <span class="n">e3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct example3{
+        char a;
+        double b;
+    };
+    0       a   
+    1       -
+    2       -
+    3       -
+    4       -
+    5       -
+    6       -
+    7       -
+    8       b
+    9       |
+    10      |
+    11      |
+    12      |
+    13      |
+    14      |
+    15      |
+    16      -
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(e3)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">e3</span><span class="p">));</span>
+    
+    <span class="k">struct</span> <span class="n">example4</span> <span class="n">e4</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+    <span class="cm">/*
+    struct example4{
+        char a;
+        double b;
+        int c;
+    }
+    0       a   
+    1       -
+    2       -
+    3       -
+    4       -
+    5       -
+    6       -
+    7       -
+    8       b
+    9       |
+    10      |
+    11      |
+    12      |
+    13      |
+    14      |
+    15      |
+    16      -
+    17      c
+    18      |
+    19      |
+    20      |
+    21      -
+    22      -
+    23      -
+    24      
+    
+    */</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"sizeof(e4)=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">e4</span><span class="p">));</span>
+    <span class="cm">/* output
+    sizeof(e0)=12
+    sizeof(e1)=8
+    sizeof(na)=6
+    sizeof(na2)=12
+    sizeof(e2)=24
+    sizeof(e3)=16
+    sizeof(e4)=24
+    */</span>
+    <span class="n">system</span><span class="p">(</span><span class="s">"pause"</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java-producer-consumer-wait-notify/" title="java 生产者 消费者 以及wait()和notify()分析">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/java-login-simulation/" title="java login simulation">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>26 March 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#C-ref">C <span>2</span></a></li>
+     
+    	<li><a href="/tags#data structure-ref">data structure <span>7</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

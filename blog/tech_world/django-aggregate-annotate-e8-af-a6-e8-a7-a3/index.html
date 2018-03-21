@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Django aggregate annotate 详解 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Django aggregate annotate 详解 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>Django的<a href="https://docs.djangoproject.com/en/dev/ref/models/querysets/">数据库API</a>可谓是相当的详细，几乎可以涵盖任意的数据库查询需求，可惜在很长一段时间内，我只会一些非常简单的诸如get,filter,exclude等比较简单也比较直接的查询，再加上自己数据库底子不是很好，遇到复杂的查询操作时常常不得不使用for，很多for……后来通过看别人的代码，接触到了<a href="https://docs.djangoproject.com/en/dev/topics/db/aggregation/">aggregate</a>和annotate这两个函数，发现是在Django中比较常用的而且也貌似比较好用的，可惜一直搞得不是很多，今天打算好好研究下，做个笔记。</p>
+
+<p>1.aggregate（英文原意：a sum total of many heterogenous things taken together，中文释义：合计；集合体；总计）</p>
+
+<p>假设我现在有如下的model：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  
+<span class="k">class</span> <span class="nc">ProjectDetail</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">financing_amount</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code></pre></figure>
+
+<p>现在，我要从数据库里取出所有的ProjectDetail，然后计算他们的financing_amount的总和，该怎么算呢？如果是原来，我需要用如下方式：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  
+<span class="n">projects</span> <span class="o">=</span> <span class="n">ProjectDetail</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">financing_amount</span></code></pre></figure>
+
+<p>这个是肯定可以实现要求的功能的，但是且不说代码冗长，性能上也没有直接在数据库里操作来的快，如果使用aggregate函数，代码则变成了这样：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">total</span> <span class="o">=</span> <span class="n">ProjectDetail</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">Sum</span><span class="p">(</span><span class="s">'financing_amount'</span><span class="p">))</span></code></pre></figure>
+
+<p>通过在<a href="http://www.shellbye.com/blog/%E6%8A%80%E6%9C%AF%E4%B8%96%E7%95%8C/django-f-expression/">上一篇文章</a>中介绍的方法，可以查看到sql语句如下：</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="nv">"project_projectdetail"</span><span class="p">.</span><span class="nv">"financing_amount"</span><span class="p">)</span> <span class="k">AS</span> <span class="nv">"financing_amount__sum"</span> <span class="k">FROM</span> <span class="nv">"project_projectdetail"</span></code></pre></figure>
+
+<p>于是乎，不仅仅代码更加简洁了，性能也提升了，哇，生活真美好啊！</p>
+
+<p>这里只是简单的使用了一下Sum这个aggregate函数，还有很多函数参见<a href="https://docs.djangoproject.com/en/dev/ref/models/querysets/#id5">这里</a>。</p>
+
+<p>2.annotate（英文原意：add explanatory notes to or supply with critical comments，中文释义：注释；给…作注释或评注）</p>
+
+<p>假设有如下model：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">ProjectDetail</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">financing_amount</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">project_man</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s">'Man'</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Man</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span></code></pre></figure>
+
+<p>现在，我要计算系统里所有的ProjectDetail中，他们各自有多少个project_man，该怎么算呢？如果按照最简单原始除暴的写法，大概是这样的：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">        
+<span class="n">projects</span> <span class="o">=</span> <span class="n">ProjectDetail</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="n">p_man_count</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">:</span>
+    <span class="n">man_count</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">project_man</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">'project'</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+        <span class="s">'man_count'</span><span class="p">:</span> <span class="n">man_count</span>
+    <span class="p">}</span>
+    <span class="n">p_man_count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code></pre></figure>
+
+<p>之所以需要p_man_count这个东西，是因为你算出来的值需要个地方存储，可以看出来这个功能虽然很简单，但是代码却还是写了不少，同样，我们来看看用annotate会怎么样：</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">   
+<span class="n">man_count</span> <span class="o">=</span> <span class="n">ProjectDetail</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">Sum</span><span class="p">(</span><span class="s">'project_spokesman'</span><span class="p">))</span></code></pre></figure>
+
+<p>通过在<a href="http://www.shellbye.com/blog/%E6%8A%80%E6%9C%AF%E4%B8%96%E7%95%8C/django-f-expression/">上一篇文章</a>中介绍的方法，可以查看到sql语句如下：</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql">  
+<span class="k">SELECT</span> <span class="nv">"project_projectdetail"</span><span class="p">.</span><span class="nv">"financing_amount"</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="nv">"project_projectdetail_project_man"</span><span class="p">.</span><span class="nv">"man_id"</span><span class="p">)</span> <span class="k">AS</span> <span class="nv">"project_man__sum"</span> <span class="k">FROM</span> <span class="nv">"project_projectdetail"</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="nv">"project_projectdetail_project_man"</span> <span class="k">ON</span> <span class="p">(</span><span class="nv">"project_projectdetail"</span><span class="p">.</span><span class="nv">"id"</span> <span class="o">=</span> <span class="nv">"project_projectdetail_project_man"</span><span class="p">.</span><span class="nv">"projectdetail_id"</span><span class="p">)</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="nv">"project_projectdetail"</span><span class="p">.</span><span class="nv">"financing_amount"</span>
+ </code></pre></figure>
+
+<p>3.总结：
+概括起来将，aggregate是只选择你感兴趣的，返回是一个字典，annotate是在返回原理的queryset的基础之上，在加上你额外需要的字段。</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/django-f-expression/" title="Django F expression 实例">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/android-r-cannot-be-resolved/" title="Android R cannot be resolved">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>02 June 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#Django-ref">Django <span>17</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
