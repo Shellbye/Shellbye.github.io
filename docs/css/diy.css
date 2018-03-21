@@ -1,0 +1,6 @@
+body.custom-background {
+    background-image: url('../assets/programming-wallpaper-1280x9606.jpg');
+    background-repeat: repeat-x;
+    background-position: top center;
+    background-attachment: fixed;
+}

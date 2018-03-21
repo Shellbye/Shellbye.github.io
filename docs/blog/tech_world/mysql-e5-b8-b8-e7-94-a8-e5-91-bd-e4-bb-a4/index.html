@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        MySQL 常用命令 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    MySQL 常用命令 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>本地操作的选择是比较多的，我个人比较喜欢<a href="http://www.navicat.com/">navicat</a>，但是一旦面对服务器上的数据库，有时候也是不得不使用命令行的。</p>
+
+<p>1.登录数据库</p>
+
+<p>无密码登录：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mysql
+</code></pre></div></div>
+
+<p>用户名密码登陆：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mysql -u username -p
+</code></pre></div></div>
+
+<p>回车后输入密码即可</p>
+
+<p>2.查看所有数据库</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; show databases;
+</code></pre></div></div>
+
+<p>需要注意最后的分号，我曾经就因为没有加分号折腾了很久。</p>
+
+<p>3.选择要使用的数据库
+假设要选择mysql这个数据库（MySQL里默认有的）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; use mysql;
+</code></pre></div></div>
+
+<p>4.<a href="http://dev.mysql.com/doc/refman/4.1/en/delete.html">删除数据库表记录</a>
+假设要删除user表中id为6的记录</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; delete from user where id = 6;
+</code></pre></div></div>
+
+<p>5.<a href="http://dev.mysql.com/doc/refman/5.6/en/insert.html">插入数据库表记录</a>
+假设要在表user中添加一条记录</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; INSERT INTO user(`name`,`password`) VALUES("shellbye","you_will_never_guess");
+</code></pre></div></div>
+
+<p>6.<a href="http://dev.mysql.com/doc/refman/5.0/en/update.html">更新数据库表记录</a>
+假设要更新表user中id为9的用户的名字</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; UPDATE user set name="shellbye2" where id=9;
+</code></pre></div></div>
+
+<p>7.执行sql文件
+登录并选择数据库后：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; source path/to/your/file.sql
+</code></pre></div></div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -u yourusername -p yourpassword yourdatabase &lt; file.sql
+</code></pre></div></div>
+
+<p>8.在新建表的时候指明编码
+假设新建表user，并使用utf-8编码</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; CREATE DATABASE user CHARACTER SET utf8 COLLATE utf8_general_ci;
+</code></pre></div></div>
+
+<p>9.删除数据库
+假设删除数据库my_test_db</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql&gt; drop database my_test_db;
+</code></pre></div></div>
+
+<p>10.数据库终极解决方案
+请点击<a href="http://www.adminer.org/en/">这里</a></p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/e3-80-8apython-e9-ab-98-e7-ba-a7-e7-bc-96-e7-a8-8b-e3-80-8b-e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-ef-bc-881-ef-bc-89/" title="《Python 高级编程》读书笔记（1）">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/xampp-phpstorm-xdebug-e9-85-8d-e7-bd-ae-e5-8f-82-e6-95-b0/" title="XAMPP PhpStorm Xdebug 配置参数">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    var disqus_identifier = '1030 http://shellbye.github.com/?p=1030';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>16 September 2014</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#MySQL-ref">MySQL <span>4</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

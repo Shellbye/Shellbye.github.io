@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        How to set timeout using HttpRequest and httpclient -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    How to set timeout using HttpRequest and httpclient 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>最近一直在用爬虫抓取智联招聘的简历信息，虽然智联招聘有验证码等诸多防御措施，
+但是还是阻挡不了我的魔爪啊，嘿嘿。</p>
+
+<p>这次是在我基本完成所有代码之后，开始大范围测试时遇到的一个问题，
+就是Http请求超时，这样说这个问题其实不对，因为我的问题不是超时怎么了，
+而是程序不知道超时了，一直在那里等啊等的，殊不知它辛辛苦苦发送的包，
+可能就这样被智联招聘的服务器轻易的丢弃了（这个场景好熟悉？）。</p>
+
+<p>所以需要告诉程序，当这个请求过了一定时间段还没有任何返回，
+就放弃它！（是的，放弃是真正的勇气，也是真正的智慧）</p>
+
+<p>放弃也要讲究方式，
+在万能的<a href="http://stackoverflow.com/questions/6764035/apache-httpclient-timeout#answer-29592232">stackoverflow.com</a>的帮助下，
+解决方法记录如下。</p>
+
+<p>正常的socket程序可能是这个样子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">shellbye</span><span class="o">.</span><span class="na">zhilian</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpGet</span><span class="o">;</span>
+
+<span class="cm">/**
+ * User: shellbye.com@gmail.com
+ * Date: 2015/4/18
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+        <span class="n">HttpClient</span> <span class="n">httpclient</span> <span class="o">=</span> <span class="n">HttpClientBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">HttpGet</span> <span class="n">codePost</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpGet</span><span class="o">(</span><span class="s">"http://shellbye.com"</span><span class="o">);</span>
+        <span class="n">HttpResponse</span> <span class="n">codeResponse</span> <span class="o">=</span> <span class="n">httpclient</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">codePost</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">codeResponse</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>程序的输出如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HttpResponseProxy{HTTP/1.1 200 OK [Server: ........
+</code></pre></div></div>
+
+<p>当然，如果你像我一样在写爬虫，服务器可能就像我上面描述的那样，
+不会给你回复，但是上面的程序会傻乎乎的一直等，永远不会执行完毕。
+所以改进版本的程序是这个样子的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">shellbye</span><span class="o">.</span><span class="na">zhilian</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.config.RequestConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpGet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.HttpClientBuilder</span><span class="o">;</span>
+
+<span class="cm">/**
+ * User: shellbye.com@gmail.com
+ * Date: 2015/4/18
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+        <span class="n">HttpClient</span> <span class="n">httpclient</span> <span class="o">=</span> <span class="n">HttpClientBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">HttpGet</span> <span class="n">codePost</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpGet</span><span class="o">(</span><span class="s">"http://shellbye.com"</span><span class="o">);</span>
+        <span class="n">RequestConfig</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span>  <span class="o">=</span> <span class="n">RequestConfig</span><span class="o">.</span><span class="na">custom</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">setConnectionRequestTimeout</span><span class="o">(</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">setConnectTimeout</span><span class="o">(</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">setSocketTimeout</span><span class="o">(</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
+        <span class="n">RequestConfig</span> <span class="n">requestConfig</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">codePost</span><span class="o">.</span><span class="na">setConfig</span><span class="o">(</span><span class="n">requestConfig</span><span class="o">);</span>
+        <span class="n">HttpResponse</span> <span class="n">codeResponse</span> <span class="o">=</span> <span class="n">httpclient</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">codePost</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">codeResponse</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>如上代码，除了使用默认配置外，你可以自己定制(custom)你的http请求。
+上面的三个timeout，我的理解如下（不太确定前两个的差别）：</p>
+
+<p>1.ConnectionRequestTimeout: 经历多久之后，这次请求被视为过期
+2.ConnectTimeout: 等待与服务器建立连接的时间
+3.SocketTimeout: 与服务器的连接建立了，等待服务器发送数据的时间</p>
+
+<p>其他我能找到的一些参考在<a href="http://mail-archives.apache.org/mod_mbox/hc-httpclient-users/201310.mbox/%3C1382118427.15734.YahooMailNeo@web142804.mail.bf1.yahoo.com%3E">这里</a>，
+和<a href="http://stackoverflow.com/questions/20271017/connection-and-connection-request-timeout">这里</a></p>
+
+<p>程序写好了，那么问题来了，怎么测试？
+怎么样人工的模拟一个超时的请求呢？
+直接请求一个超慢的网站？不一定永远管用哦，
+还是在万能的<a href="http://stackoverflow.com/questions/100841/artificially-create-a-connection-timeout-error#answer-904609">stackoverflow.com</a>上，
+找到了一个优雅的解决方案，就是用一个服务路由的IP地址。
+所以最终的测试代码就是把上面我的博客地址所在行改成：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpGet</span> <span class="n">codePost</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpGet</span><span class="o">(</span><span class="s">"http://10.255.255.1"</span><span class="o">);</span></code></pre></figure>
+
+<p>然后你就会看到你“期待”的超时错误！</p>
+
+<p>写完本文之后发现一篇看起来不错的文章，
+在<a href="http://www.baeldung.com/httpclient-timeout">这里</a>，有兴趣的同学可以看下，我没仔细看，不过感觉比较有用。</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/mongodb-findOne-vs-find/" title="mongodb findOne vs find">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/android-notification-deprecated-use-builder/" title="Android Notification deprecated use Builder">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>18 April 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#java-ref">java <span>33</span></a></li>
+     
+    	<li><a href="/tags#http-ref">http <span>3</span></a></li>
+     
+    	<li><a href="/tags#socket-ref">socket <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

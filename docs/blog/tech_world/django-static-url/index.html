@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        django static_url -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    django static_url 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>好久没有接触Django开发了,虽然之前用过很久,但是因为Python的工作机会不是很多,
+于是找工作期间主要复习Java,Django和Python都放下太久了.有意思的是,
+尽管我找工作期间一直在复习Java,可是最后签约的<a href="http://www.100tal.com/" target="_blank">好未来</a>却恰恰需要的是我的Python+Django技能.
+这不,又开始重新拾起Django,第一天就遇到一个问题.</p>
+
+<p>为了加载静态文件,Django的默认<code class="highlighter-rouge">settings.py</code>里已经预设了如下配置:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># Static files (CSS, JavaScript, Images)</span>
+<span class="c"># https://docs.djangoproject.com/en/1.8/howto/static-files/</span>
+
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s">'/static/'</span></code></pre></figure>
+
+<p>然后我的项目根目录的<code class="highlighter-rouge">templates</code>里面,有如下的html语句(<code class="highlighter-rouge">base.html</code>):</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% load staticfiles %}
+<span class="c">&lt;!-- 其他html语句 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="err"> </span><span class="s">"{% static "</span><span class="na">jquery-1</span><span class="err">.</span><span class="na">11</span><span class="err">.</span><span class="na">3</span><span class="err">.</span><span class="na">js</span><span class="err">"</span> <span class="err">%}"</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">jquery-1.11.3.js</code>这个文件是在<code class="highlighter-rouge">static</code>目录中,
+但是直接在浏览器访问<code class="highlighter-rouge">http://127.0.0.1:8000/static/jquery-1.11.3.js</code>,
+却总是404,最后查看<a href="https://docs.djangoproject.com/en/1.8/howto/static-files/" target="_blank">官方文档</a>,才意识到原来是自己没有设置<code class="highlighter-rouge">STATICFILES_DIRS</code>,
+倒置Django不知道哪里去找静态文件,所以404,于是在<code class="highlighter-rouge">settings.py</code>里加了如下语句就可以正常工作了:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s">"static"</span><span class="p">),</span>
+<span class="p">)</span></code></pre></figure>
+
+<p>那么,问题是,为啥官方文档没有直接把<code class="highlighter-rouge">STATICFILES_DIRS</code>设置好呢?仔细看了下官方文档,
+发现其实这个<code class="highlighter-rouge">static</code>目录并不是为整个项目服务的,即根目录的<code class="highlighter-rouge">templates</code>是无法自动识别
+<code class="highlighter-rouge">static</code>目录的,这个目录其实是为单独的app服务的,即该目录是应该放在app目录下,
+与<code class="highlighter-rouge">migrations</code>和目录级别的<code class="highlighter-rouge">templates</code>服务的,在这种情况下,就不需要<code class="highlighter-rouge">STATICFILES_DIRS</code>这个设置了.
+那么,<code class="highlighter-rouge">STATICFILES_DIRS</code>是为什么设置的呢?官网如是说:</p>
+
+<blockquote>
+  <p>Your project will probably also have static assets that aren’t tied to a particular app.</p>
+</blockquote>
+
+<p>即不是服务与单独的app的,而是类似<code class="highlighter-rouge">jquery</code>这种是服务于整个项目的静态文件,才需要用到.</p>
+
+<p>那么,如果我设置了<code class="highlighter-rouge">STATICFILES_DIRS</code>为某目录,比如<code class="highlighter-rouge">static01</code>,其中有img.jpg,
+又在app的<code class="highlighter-rouge">static</code>目录下也有img.jpg,那么,会加载哪个文件呢?</p>
+
+<p>根据<a href="https://docs.djangoproject.com/en/1.8/ref/settings/#std:setting-STATICFILES_FINDERS" target="_blank"><code class="highlighter-rouge">STATICFILES_FINDERS</code></a>的默认设置,是会优先从<code class="highlighter-rouge">STATICFILES_DIRS</code>中寻找的.</p>
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/java-explore-note/" title="java explore note">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/django_listview_detailview_basic/" title="Django ListView DetailView Basic">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>17 November 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#django-ref">django <span>2</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

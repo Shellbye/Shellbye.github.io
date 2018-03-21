@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        Merge and Quick sort 归并排序与快速排序 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    Merge and Quick sort 归并排序与快速排序 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h3 id="归并排序">归并排序</h3>
+<p>归并排序与其他简单排序的不同之处在于它用到了分治思想。即把一个大的问题分解为一个个小的问题。
+通过求解小问题来解决大问题。在归并排序中，分治体现在它是先把一个个小的序列排好，
+然后在将这些排好的小序列合并起来。归并的代码也用到了一个辅助辅助函数，
+基本上高级的排序方法都会有自己的辅助函数。具体代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">MergeSort</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">high</span> <span class="o">&lt;=</span> <span class="n">low</span><span class="o">)</span>
+		<span class="k">return</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+	<span class="n">MergeSort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">mid</span><span class="o">);</span>
+	<span class="n">MergeSort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+	<span class="n">merge</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">mid</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">merge</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">mid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span><span class="o">[]</span> <span class="n">aux</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">low</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">low</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="n">aux</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">low</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">mid</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// 左边用完</span>
+			<span class="n">list</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">aux</span><span class="o">[</span><span class="n">j</span><span class="o">++]);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// 右边用完</span>
+			<span class="n">list</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">aux</span><span class="o">[</span><span class="n">i</span><span class="o">++]);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">aux</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">aux</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+			<span class="c1">// j对应的较小,先放j,然后j后移</span>
+			<span class="n">list</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">aux</span><span class="o">[</span><span class="n">j</span><span class="o">++]);</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+			<span class="n">list</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">aux</span><span class="o">[</span><span class="n">i</span><span class="o">++]);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>首先需要注意等是在<code class="highlighter-rouge">merge</code>中，对list进行备份时，并不是全部备份，而是从low到high的一个局部备份。
+然后在for循环里面，i和j都是累加，i是从low开始往mid走，j是从mid+1开始往high走，
+它们的终止条件都是小于目的位置。然后每次放置完哪个，哪个就要向后移动。<br />
+还有就是递归的程序需要注意的一点就是退出条件，在归并排序中，就是<code class="highlighter-rouge">MergeSort</code>中的前两行代码。</p>
+
+<h3 id="快速排序">快速排序</h3>
+<p>一个排序算法得有多快才能让它的名字就叫做快速排序呢？
+可以参考这篇文章来看看<a href="http://mindhacks.cn/2008/06/13/why-is-quicksort-so-quick/" target="blank">快排为什么那样快</a>。
+快排也是分治的算法，与归并不同的是，快排是先分割，然后排序。而归并是先排序，然后归并，提现在代码上就是sort方法的位置：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">QuickSort</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">low</span> <span class="o">&gt;=</span> <span class="n">high</span><span class="o">)</span>
+		<span class="k">return</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+	<span class="n">QuickSort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+	<span class="n">QuickSort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="kt">int</span> <span class="n">low</span><span class="o">,</span> <span class="kt">int</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">low</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">high</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">low</span><span class="o">);</span>
+	<span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">while</span> <span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(++</span><span class="n">i</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">high</span><span class="o">)</span>
+				<span class="k">break</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">while</span> <span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(--</span><span class="n">j</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">low</span><span class="o">)</span>
+				<span class="k">break</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="o">)</span>
+			<span class="k">break</span><span class="o">;</span>
+		<span class="n">exchange</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="n">exchange</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+	<span class="k">return</span> <span class="n">j</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>快排需要注意有内层的两个<code class="highlighter-rouge">while</code>循环和进入partition之后的<code class="highlighter-rouge">high + 1</code>，这里之所以需要加一，
+是因为在内层的两个循环之中，是先减一之后才进行的比较。
+快排的重点是<code class="highlighter-rouge">partition</code>函数，在内部的两个<code class="highlighter-rouge">while</code>循环中，是分别从前往后找比<code class="highlighter-rouge">value</code>大的，
+和从后往前找比<code class="highlighter-rouge">value</code>小的，然后交换他们。之前在数据结构课上，每一个<code class="highlighter-rouge">while</code>循环之后，
+都要<code class="highlighter-rouge">exchang</code>，但是这种方法显然没有上面的代码的简洁且高效，因为它只有一次交换操作。
+现在回过头来想，教科书里的两次交换真的没有意义多此一举。</p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/insert_sort/" title="Insert sort 插入排序">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/tech_world/heap_sort/" title="Heap sort 堆排序">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>13 September 2015</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#algorithms-ref">algorithms <span>7</span></a></li>
+     
+    	<li><a href="/tags#data structure-ref">data structure <span>7</span></a></li>
+     
+    	<li><a href="/tags#job-ref">job <span>14</span></a></li>
+     
+    	<li><a href="/tags#sort-ref">sort <span>6</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+

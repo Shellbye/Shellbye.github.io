@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      
+        mysql master slave replication 主从备份 -
+      
+      六系小白
+    </title>
+    
+    <meta name="author" content="shellbye">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/hooligan/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/hooligan/css-social-buttons/css/zocial.stripped.css">
+    <link href="/assets/themes/hooligan/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/darkstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/hooligan/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link rel="shortcut icon" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/favicon.png">
+    <!-- fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+  </head>
+
+  <body>
+    <div id="page-wrap">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">六系小白</a>
+
+            <div class="nav-collapse">
+              <ul class="nav">
+                
+                
+                
+
+
+  
+    
+      
+      	
+      	<li><a href="/archive/">历史记录</a></li>
+      	
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/categories/">分类</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/direct-era/">导演时代</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/poet/">小白的诗</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/small-games/">小游戏</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags/">标签</a></li>
+      	
+      
+    
+  
+    
+  
+    
+  
+
+
+
+              </ul>
+              <ul class="nav pull-right social visible-desktop">
+                <li class="divider-vertical"></li>
+                
+                <li>
+                  <a href="https://github.com/shellbye" class="zocial github icon" target="_blank">
+                    <span class="hidden-desktop">Github</span>
+                  </a>
+                </li>
+                
+                
+                
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="content">
+          
+
+<div class="page-header">
+  <h1>
+    mysql master slave replication 主从备份 
+    
+  </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h1 id="场景描述">场景描述</h1>
+<p>在官方的<a href="http://dev.mysql.com/doc/refman/5.7/en/replication.html">replication</a>描述中，replication的优点有如下几个方面：</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Advantages of replication in MySQL include:
+
+- Scale-out solutions -
+spreading the load among multiple slaves to improve performance.
+In this environment, all writes and updates must take place on the master server.
+Reads, however, may take place on one or more slaves.
+This model can improve the performance of writes
+(since the master is dedicated to updates),
+while dramatically increasing read speed across an increasing number of slaves.
+
+- Data security - because data is replicated to the slave,
+and the slave can pause the replication process,
+it is possible to run backup services on the slave without corrupting
+the corresponding master data.
+
+- Analytics - live data can be created on the master,
+while the analysis of the information can take place on
+the slave without affecting the performance of the master.
+
+- Long-distance data distribution -
+you can use replication to create a local copy of data for a remote site to use,
+without permanent access to the master.</code></pre></figure>
+
+<p>概括起来就是：可扩展性，数据安全，便捷分析，便于分发。</p>
+
+<p>在我们团队目前的场景中，暂时需要的其实只有“便于分发”，
+但是其顺带的其他特性也是“the more the better”。</p>
+
+<p>mysql5.7之后，除了传统的给予二进制的日志的replication之外，
+还支持基于global transaction identifiers (<a href="http://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html">GTIDs</a>)的复制。</p>
+
+<h1 id="操作步骤">操作步骤</h1>
+<p>具体操作步骤在文章最后的参考文章有一些，下面我的笔记来自<a href="http://dev.mysql.com/doc/refman/5.7/en/replication-howto.html">官方文档</a>：</p>
+
+<ol>
+  <li><a href="http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html">Master Config</a><br />
+第一步是设置主数据库，具体需要配置的信息比较简单，就是在<code class="highlighter-rouge">my.cnf</code>文件中，
+修改以下配置（一般就是打开注释即可），</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">server-id = 1
+log_bin = /var/log/mysql/mysql-bin.log</code></pre></figure>
+
+<p>由于从数据库需要用户名和密码去链接主数据库，而且用于复制的用户名和密码是<a href="http://dev.mysql.com/doc/refman/5.7/en/slave-logs-status.html">明文存储</a>的，
+所以需要在主数据库中新建专用的用户，新建的用户需要<code class="highlighter-rouge">REPLICATION SLAVE</code>权限:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">'repl'</span><span class="o">@</span><span class="s1">'%.mydomain.com'</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">'slavepass'</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span> <span class="k">GRANT</span> <span class="n">REPLICATION</span> <span class="n">SLAVE</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">'repl'</span><span class="o">@</span><span class="s1">'%.mydomain.com'</span><span class="p">;</span></code></pre></figure>
+
+<p>为了让从数据库知道从哪里开始执行二进制的日志，需要先获取主数据中目前的二进制文件的<a href="http://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterstatus.html">位置</a>，</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">FLUSH</span> <span class="n">TABLES</span> <span class="k">WITH</span> <span class="k">READ</span> <span class="k">LOCK</span><span class="p">;</span></code></pre></figure>
+
+<p>注意，这里需要保持这个窗口打开（session open），否则<code class="highlighter-rouge">READ LOCK</code>就会失效，
+然后新开一个窗口（也许你需要<a href="https://tmux.github.io/">tmux</a>），</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span> <span class="o">&gt;</span> <span class="k">SHOW</span> <span class="n">MASTER</span> <span class="n">STATUS</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">------------------+----------+--------------+------------------+</span>
+<span class="o">|</span> <span class="n">File</span>             <span class="o">|</span> <span class="k">Position</span> <span class="o">|</span> <span class="n">Binlog_Do_DB</span> <span class="o">|</span> <span class="n">Binlog_Ignore_DB</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">------------------+----------+--------------+------------------+</span>
+<span class="o">|</span> <span class="n">mysql</span><span class="o">-</span><span class="n">bin</span><span class="p">.</span><span class="mi">000003</span> <span class="o">|</span> <span class="mi">73</span>       <span class="o">|</span> <span class="n">test</span>         <span class="o">|</span> <span class="n">manual</span><span class="p">,</span><span class="n">mysql</span>     <span class="o">|</span>
+<span class="o">+</span><span class="c1">------------------+----------+--------------+------------------+</span></code></pre></figure>
+
+<p>这里需要记录<code class="highlighter-rouge">File</code>和<code class="highlighter-rouge">Position</code>，稍后在slave的配置中会用到。</p>
+
+<p>如果你只需要复制某一个或一些database，而不是整个数据库，
+或者在复制中需要忽略某一个或一些database，那么在<code class="highlighter-rouge">my.cnf</code>中有以下配置项：</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">binlog_do_db = database_name
+binlog_do_db = include_database_name2
+binlog_ignore_db = include_database_name
+binlog_ignore_db = include_database_name2
+ # 通过不断添加即可实现多个database的配置</code></pre></figure>
+
+<p>如果你的主数据库中没有数据，那么主数据库的配置工作到此为止，
+可以进入从数据库的配置工作了。但是如果你的主数据库中此时已经有了大量的数据，
+那么接下来就需要为你的数据库进行一次快照了。</p>
+
+<p>mysql的快照一般都是通过<code class="highlighter-rouge">[mysqldump]</code>来实现的，具体的例子有以下几种：</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">shell&gt; mysqldump <span class="nt">-uroot</span> <span class="nt">-p</span> database_name <span class="o">&gt;</span> db.sql
+shell&gt; mysqldump <span class="nt">-uroot</span> <span class="nt">-p</span> database_name table_name <span class="o">&gt;</span> db_tb.sql</code></pre></figure>
+
+<p>至此，主数据库的配置就完成了，接下来就是从数据库的配置了。</p>
+
+<ol>
+  <li><a href="http://dev.mysql.com/doc/refman/5.7/en/replication-setup-slaves.html">Slave Config</a><br />
+首先与主数据库一样的配置，就是需要在<code class="highlighter-rouge">my.conf</code>中进行如下配置，
+其中的<code class="highlighter-rouge">server-id</code>必须是全局唯一的</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[mysqld]
+server-id=2</code></pre></figure>
+
+<p>注意这里需要先创建好slave的数据库，</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">database_name</span> <span class="n">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8mb4</span> <span class="k">COLLATE</span> <span class="n">utf8mb4_unicode_ci</span><span class="p">;</span></code></pre></figure>
+
+<p>然后在mysql中执行以下sql语句配置主数据库：</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">CHANGE</span> <span class="n">MASTER</span> <span class="k">TO</span>
+    <span class="o">-&gt;</span>     <span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">'master_host_name'</span><span class="p">,</span>
+    <span class="o">-&gt;</span>     <span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">'replication_user_name'</span><span class="p">,</span>
+    <span class="o">-&gt;</span>     <span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">'replication_password'</span><span class="p">,</span>
+    <span class="o">-&gt;</span>     <span class="n">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">'mysql-bin.000003'</span><span class="p">,</span>
+    <span class="o">-&gt;</span>     <span class="n">MASTER_LOG_POS</span><span class="o">=</span><span class="mi">73</span><span class="p">;</span></code></pre></figure>
+
+<p>然后根据是否有已存在的数据来觉得是否需要先导入刚才导出的sql文件，
+最后执行</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">START</span> <span class="n">SLAVE</span><span class="p">;</span></code></pre></figure>
+
+<p>就搞定了。此时可以执行</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">SHOW</span> <span class="n">SLAVE</span> <span class="n">STATUS</span><span class="err">\</span><span class="k">G</span></code></pre></figure>
+
+<p>来查看从数据库的状态信息。</p>
+
+<ol>
+  <li><a href="http://dev.mysql.com/doc/refman/5.7/en/replication-howto-additionalslaves.html">Add slave</a>
+通过以上的操作，至此就可以完成主从数据库的从无到有，如果是需要继续添加slave，
+则需要继续下去。</li>
+</ol>
+
+<p>官方推荐的做法比较简单，就是选中一个已经存在的slave，关闭掉其服务，</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">shell</span><span class="o">&gt;</span> <span class="n">mysqladmin</span> <span class="n">shutdown</span></code></pre></figure>
+
+<p>然后拷贝整个slave的数据文件夹，然后修改新的slave的<code class="highlighter-rouge">my.cnf</code></p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[mysqld]
+server-id=3</code></pre></figure>
+
+<p>至此，全部的相关配置工作就全部结束了。但是，因为我们的从数据库一般都是只读的，
+所以如果你愿意的话，还有最后一步：</p>
+
+<h1 id="read-only">Read Only</h1>
+
+<p>mysql支持<a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_read_only">read_only</a>，在<code class="highlighter-rouge">my.cnf</code>中设置</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">read_only=1</code></pre></figure>
+
+<p>就可以防止普通用户的写操作，但是这样并不能防止具有<code class="highlighter-rouge">SUPER privilege</code>的用户的写操作，
+MySQL5.7添加了一个新的配置项<a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_super_read_only">super_read_only</a>，顾名思义，
+就是这样设置了之后，连具有<code class="highlighter-rouge">SUPER privilege</code>的用户也只能read了！</p>
+
+<h1 id="参考文章">参考文章</h1>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql">https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql</a>
+<a href="https://www.toptal.com/mysql/mysql-master-slave-replication-tutorial">https://www.toptal.com/mysql/mysql-master-slave-replication-tutorial</a></p>
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/blog/tech_world/python_mysql_out_f_memory_killed/" title="Python been kill for out of memory when using mysql">&larr; Previous</a>
+      
+        <a class="btn" href="/archive">Archive</a>
+      
+        <a class="btn next" href="/blog/personal_diary/2016_a_year_to_remember/" title="2016 终将被铭记的一年">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'shellbye'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>21 December 2016</span></div>
+           
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        
+        <span class="category">
+          tech_world
+        </span>
+        
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
+
+
+  
+     
+    	<li><a href="/tags#mysql-ref">mysql <span>3</span></a></li>
+    
+  
+
+
+
+        </ul>
+      </section>
+             
+  </div>
+</div>
+
+
+        </div>
+      </div> <!-- /container -->
+
+      <div class="footer-push"></div>
+    </div><!--/.page-wrap -->
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2018 shellbye
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://github.com/dhulihan/hooligan" target="_blank">The Hooligan Theme</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/themes/hooligan/js/jquery.min.js"><\/script>')</script>
+    <script src="/assets/themes/hooligan/bootstrap/js/bootstrap.min.js"></script>
+
+    
+
+
+
+  </body>
+</html>
+
