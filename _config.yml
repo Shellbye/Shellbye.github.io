@@ -23,7 +23,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://shellbye.github.com
+production_url : http://shellbye.github.io
 
 gems: ["jekyll-sitemap"]
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
