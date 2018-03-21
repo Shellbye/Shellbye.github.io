@@ -6,9 +6,16 @@ tagline: Welcome to my blog
 {% include JB/setup %}
 
 # Note
-这个博客的更新截止到2017年初，后面就没有用这个平台继续写东西了。
-我开了一个自己的微信公众号（写代码的李白），有一点点自己写的内容。
-不过以后更多的更新都在这里了：[Here](https://github.com/Shellbye/Shellbye.github.io/issues)
+## 这个博客的更新截止到2017年初，后面就没有用这个平台继续写东西了。
+## 我开了一个自己的微信公众号（写代码的李白），有一点点自己写的内容。
+## 不过以后更多的更新都在这里了：[Here](https://github.com/Shellbye/Shellbye.github.io/issues){:target="_blank"}
+
+-
+-
+-
+-
+-
+-
 
 欢迎来到我的博客，我的名字是白建国，叫我大白（或小白）都可以，我是一名程序员，
 目前在[北京世纪好未来教育科技有限公司](http://www.100tal.com/){:target="_blank"}工作，
