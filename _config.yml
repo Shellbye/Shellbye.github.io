@@ -3,7 +3,7 @@
 permalink: /blog/:categories/:title/
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
+#highlighter: pygments
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
@@ -23,7 +23,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://shellbye.com
+production_url : http://shellbye.github.com
 
 gems: ["jekyll-sitemap"]
 excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
@@ -69,28 +69,28 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive.html
-  categories_path : /categories.html
-  tags_path : /tags.html
+  archive_path: /archive
+  categories_path : /categories
+  tags_path : /tags
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
   # Set 'provider' to false to turn commenting off globally.
   #
-  comments :
-    provider : disqus
-    disqus :
-      short_name : shellbye
+#  comments :
+#    provider : disqus
+#    disqus :
+#      short_name : shellbye
 
 
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
   #
-  analytics :
-    provider : custom
-    google :
-        tracking_id : 'UA-63460307-1'
+#  analytics :
+#    provider : custom
+#    google :
+#        tracking_id : 'UA-63460307-1'
 
 
   # Settings for sharing helper.
@@ -98,8 +98,8 @@ JB :
   # Set 'provider' to the sharing provider you want to use.
   # Set 'provider' to false to turn sharing off globally.
   #
-  sharing :
-    provider : false
+#  sharing :
+#    provider : false
 
   # Settings for all other include helpers can be defined by creating
   # a hash with key named for the given helper. ex:
