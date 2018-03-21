@@ -1,0 +1,15 @@
+---
+author: shellbye
+comments: true
+date: 2013-08-15 00:42:17+00:00
+layout: post
+slug: envelope
+title: 信封
+wordpress_id: 281
+categories:
+- poetry
+---
+
+有时候我不想被拆开  
+因为我想保守一个秘密  
+
