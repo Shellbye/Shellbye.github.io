@@ -3,7 +3,7 @@
 permalink: /blog/:categories/:title/
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-#highlighter: pygments
+highlighter: pygments
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
@@ -69,28 +69,28 @@ JB :
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
   #
-  archive_path: /archive
-  categories_path : /categories
-  tags_path : /tags
+  archive_path: /archive.html
+  categories_path : /categories.html
+  tags_path : /tags.html
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
   # Set 'provider' to false to turn commenting off globally.
   #
-#  comments :
-#    provider : disqus
-#    disqus :
-#      short_name : shellbye
+  comments :
+    provider : disqus
+    disqus :
+      short_name : shellbye
 
 
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
   #
-#  analytics :
-#    provider : custom
-#    google :
-#        tracking_id : 'UA-63460307-1'
+  analytics :
+    provider : custom
+    google :
+        tracking_id : 'UA-63460307-1'
 
 
   # Settings for sharing helper.
@@ -98,8 +98,8 @@ JB :
   # Set 'provider' to the sharing provider you want to use.
   # Set 'provider' to false to turn sharing off globally.
   #
-#  sharing :
-#    provider : false
+  sharing :
+    provider : false
 
   # Settings for all other include helpers can be defined by creating
   # a hash with key named for the given helper. ex:
@@ -111,26 +111,3 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-plugins:
-  - jekyll-mentions
-  - jemoji
-  - jekyll-redirect-from
-  - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-coffeescript
-  - jekyll-gist
-  - jekyll-github-metadata
-  - jekyll-paginate
-  - jekyll-relative-links
-  - jekyll-optional-front-matter
-  - jekyll-readme-index
-  - jekyll-default-layout
-  - jekyll-titles-from-headings
-  - jekyll-feed
-  - jekyll-redirect-from
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-avatar
-  - jemoji
-  - jekyll-mentions
-  - jekyll-include-cache
